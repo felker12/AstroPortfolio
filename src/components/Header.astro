@@ -1,0 +1,124 @@
+<header class="header">
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/" class="logo-link">Kevin "Anthony" Felker</a>
+        </div>
+
+        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+        <label for="menu-toggle" class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </label>
+
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/skills">Skills</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<style>
+    .header {
+        background: #333;
+        color: white;
+        font-family: sans-serif;
+    }
+
+    .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .logo {
+        flex: 1;
+        font-size: 1.1rem;
+    }
+
+    .logo-link {
+        color: white;
+        text-decoration: none;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .hamburger {
+        display: none;
+        cursor: pointer;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .bar {
+        width: 25px;
+        height: 3px;
+        background: white;
+        transition: 0.3s;
+    }
+
+    /* Desktop */
+    .nav-links {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        gap: 20px;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        .hamburger {
+            display: flex;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.4s ease-in-out;
+        }
+
+        .nav-links li {
+            padding: 10px 20px;
+        }
+
+        .menu-toggle:checked ~ .nav-links {
+            max-height: 300px; /* Set higher than the total height of links */
+            opacity: 1;
+            padding: 15px 0;
+        }
+
+        /* Hamburger animation */
+        .menu-toggle:checked + .hamburger .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .menu-toggle:checked + .hamburger .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle:checked + .hamburger .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+    }
+</style>
