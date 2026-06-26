@@ -2,64 +2,76 @@
 import Layout from '@layouts/Layout.astro';
 import Footer from '@components/Footer.astro';
 
-// Structured projects array with your newly added GitHub repositories
+//Structured projects array
 const projects = [
   {
     title: "Portfolio Generator",
     subtitle: "Full-Stack Document Automation Platform",
     tags: ["C#", "React", "TypeScript", ".NET Aspire", "Minimal API", "Azure", "GitHub Actions"],
-    description: "A full-stack application that parses standard Microsoft Word (.docx) resumes and compiles them automatically into production-ready, multi-page portfolio websites.",
+    description:
+      "A full-stack application that converts structured resume data (.docx format) into multi-page portfolio websites with selectable themes and preview capabilities.",
     features: [
-      "Built high-performance RESTful API endpoints using ASP.NET Minimal API for document schema parsing and zip file payload delivery.",
-      "Engineered an isolation rendering engine using React and TypeScript to safely preview generated themes via an internal iframe canvas.",
-      "Architected microservice orchestration utilizing .NET Aspire to streamline cloud deployment readiness and local multi-project routing.",
-      "Integrated automated CI/CD workflows with GitHub Actions to build frontend modules, compile the .NET core project, and target Azure App Service instances."
+      "Built RESTful API endpoints using ASP.NET Core Minimal API to handle document parsing and structured data transformation.",
+      "Developed React + TypeScript frontend with multi-step upload workflow and live preview rendering using iframe-based isolation.",
+      "Implemented theme system supporting multiple CSS layouts for generated portfolio output.",
+      "Configured GitHub Actions CI/CD pipeline to automate build, deployment, and Azure App Service publishing.",
+      "Utilized .NET Aspire for local orchestration and cloud-ready service structure."
     ],
     links: {
       github: "https://github.com/felker12/PortfolioSiteCreator",
-      demo: "#" // Replace with live link when active
+      demo: "#"
     }
   },
+
   {
     title: "Time Punch Management System",
-    subtitle: "Enterprise Workforce Tracking Application",
+    subtitle: "Workforce Attendance Tracking Application",
     tags: ["C#", "React", "TypeScript", "ASP.NET Core", ".NET Aspire", "SQL Server", "Azure"],
-    description: "A secure, enterprise-grade attendance tracking ecosystem providing role-based administration dashboards and audit logs for workforce optimization.",
+    description:
+      "A full-stack employee time tracking system with authentication, role-based access control, and administrative reporting features.",
     features: [
-      "Designed secure user authentication layers and granular role-based access tokens (RBAC) handling cross-origin employee clock-in/out workflows.",
-      "Engineered clean database schemas inside SQL Server utilizing explicit entity relationships, indexing, and strict relational constraints.",
-      "Constructed custom admin tools to compile live attendance reports, track time validation discrepancies, and output management dashboards.",
-      "Automated complete environmental builds to Azure App Service hosting platforms leveraging multi-stage continuous integrations."
+      "Designed REST API for employee clock-in/clock-out and attendance tracking workflows using ASP.NET Core.",
+      "Implemented role-based authentication and authorization for employee and admin access levels.",
+      "Modeled SQL Server database schema with relational structure for users, shifts, and time entries.",
+      "Developed React dashboard interfaces for employee time tracking and administrative reporting.",
+      "Integrated CI/CD workflows using GitHub Actions and deployed to Azure App Service."
     ],
     links: {
       github: "https://github.com/felker12/TimePunchSite",
       demo: null
     }
   },
+
   {
     title: "Modular 2D RPG Engine",
-    subtitle: "High-Performance Architecture Project",
+    subtitle: "Game Engine Architecture Project",
     tags: ["C#", "MonoGame", "xUnit.net", "XML", "WinForms"],
-    description: "A decoupled, data-driven 2D game engine encompassing over 10,000 lines of original source code built to optimize modular game state execution frameworks.",
+    description:
+      "A modular 2D game engine built in C# with separated systems for rendering, input handling, and game logic, focused on scalability and maintainability.",
     features: [
-      "Architected clean system separation isolating render context states, user input listeners, internal state controllers, and physics calculators.",
-      "Constructed a companion desktop mapping and item compiler utility in WinForms, decreasing custom entity content creation overhead by roughly 30%.",
-      "Engineered flexible save-state serializations via structured XML serialization schemas ensuring robust file layout integrity.",
-      "Authored a robust automated test layer using xUnit to validate regression security throughout highly iterative memory handling layers."
+      "Designed modular architecture separating rendering, input processing, and game state management.",
+      "Built reusable systems for animation, combat, and tile-based map handling.",
+      "Created WinForms-based tool for content creation and asset management workflows.",
+      "Implemented XML-based serialization system for game state and asset persistence.",
+      "Added unit tests using xUnit to validate core engine functionality and prevent regressions."
     ],
     links: {
       github: "https://github.com/felker12/SkeletonsAdventure",
       demo: null
     }
   },
+
   {
     title: "Legacy Personal Portfolio",
-    subtitle: "DevOps Workflow Retrofitting",
+    subtitle: "CI/CD & Deployment Automation Project",
     tags: ["C#", "ASP.NET Framework 4.8", "Azure", "GitHub Actions"],
-    description: "A legacy systems automation project focusing on configuring modern containerless continuous deployment pipelines for framework-dependent software suites.",
+    description:
+      "A legacy ASP.NET Framework portfolio application enhanced with modern CI/CD workflows and automated deployment pipelines.",
     features: [
-      "Retrofitted an established .NET Framework codebase into fully automated workflow structures utilizing remote environment runners.",
-      "Programmed deployment sequences targeting scalable cloud pipelines without breaking server-side framework assumptions."
+      "Configured GitHub Actions pipeline for automated build and deployment workflows.",
+      "Deployed application to Azure App Service with continuous delivery integration.",
+      "Maintained and updated legacy ASP.NET Framework application structure.",
+      "Managed hosting configuration and deployment validation processes."
     ],
     links: {
       github: "https://github.com/felker12/PortfolioWebsite",
@@ -105,19 +117,19 @@ const projects = [
                         </div>
 
                         <!-- Core Project Narrative -->
-                        <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                        <p class="text-slate-300 text-md leading-relaxed mb-6">
                             {project.description}
                         </p>
 
                         <!-- Engineering Key Highlights Bullet Points -->
                         <div class="border-t border-slate-800/60 pt-5 mt-2 mb-8">
-                            <h3 class="text-xs font-semibold text-slate-400 tracking-wider uppercase mb-3 flex items-center gap-1.5">
+                            <h3 class="text-md font-semibold text-slate-400 tracking-wider uppercase mb-3 flex items-center gap-1.5">
                                 <span class="w-1 h-3 bg-cyan-500 rounded-sm"></span> Architectural Highlights
                             </h3>
                             <ul class="space-y-2.5 text-xs text-slate-400 list-none pl-0">
                                 {project.features.map((feature) => (
                                     <li class="flex items-start gap-2.5 leading-relaxed">
-                                        <span class="text-cyan-500 text-sm leading-none mt-0.5">▪</span>
+                                        <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
                                         <span>{feature}</span>
                                     </li>
                                 ))}
