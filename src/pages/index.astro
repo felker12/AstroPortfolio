@@ -1,7 +1,78 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@layouts/Layout.astro'; 
+import Footer from '@components/Footer.astro';
+
+interface linkItem {
+  title: string;
+  link: string;
+}
+
+interface displayItem {
+  title: string;
+  text: string;
+  linkItem: linkItem;
+}
+
+const displayItems: Array<displayItem> = [
+  {
+    title: "About Me",
+    text: "I'm a passionate developer with expertise in web development, software engineering, and problem-solving.",
+    linkItem: {
+      title: "Learn More",
+      link: "/about",
+    },
+  },
+  {
+    title: "Projects",
+    text: "Check out my latest projects and see how I can help you achieve their goals.",
+    linkItem: {
+      title: "View Projects",
+      link: "/projects",
+    },
+  },
+  {
+    title: "Contact",
+    text: "Let's connect! I'm always open to discussing new projects and opportunities.",
+    linkItem: {
+      title: "Get in Touch",
+      link: "/contact",
+    },
+  }
+]
 ---
 
-<Layout>
-	<h1>Kevin "Anthony" Felker</h1> 
+<Layout> 
+    <div class="max-w-7xl mx-auto px-4 py-16 md:py-24 text-center">
+        <h1 class="text-5xl md:text-6xl font-light text-white mb-4 tracking-tight">
+            Kevin "Anthony" Felker
+        </h1> 
+
+        <h2 class="text-xl md:text-2xl font-light text-slate-400 mb-16">
+            Full-Stack Developer | Web Developer | Software Engineer
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mx-auto px-2">
+        {
+            displayItems.map((item) => (
+                <div class="flex flex-col bg-black/50 border border-slate-800/90
+                shadow-lg p-6 rounded-xl justify-between hover:border-slate-700/50 hover:-translate-y-1
+                transition-all duration-300 ease-out backdrop-blur-sm">
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-3">{item.title}</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">{item.text}</p>
+                    </div>
+                    <a 
+                        href={item.linkItem.link} 
+                        class="inline-block bg-cyan-600 hover:bg-cyan-500 
+                        text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:scale-110
+                        transition-colors duration-400 self-center text-center shadow-md shadow-cyan-950/20"
+                    >
+                        {item.linkItem.title}
+                    </a>
+                </div>
+            ))
+        }
+        </div>
+        <Footer />
+    </div>
 </Layout>

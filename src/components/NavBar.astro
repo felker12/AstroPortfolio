@@ -1,124 +1,62 @@
-<header class="header">
-    <nav class="navbar">
-        <div class="logo">
-            <a href="/" class="logo-link">Kevin "Anthony" Felker</a>
+---
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/projects", label: "Projects" },
+  { href: "/skills", label: "Skills" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<header class="bg-black/50 backdrop-blur-md text-slate-200 font-sans border-b border-slate-800/40 sticky top-0 z-50">
+    <nav class="flex flex-wrap items-center justify-between py-4 px-6 max-w-7xl mx-auto">
+        <div class="text-[1.1rem] font-medium tracking-wide">
+            <a href="/" class="text-white hover:text-cyan-400 transition-colors duration-200 no-underline">
+                Kevin "Anthony" Felker
+            </a>
         </div>
 
-        <input type="checkbox" id="menu-toggle" class="menu-toggle">
+        <input type="checkbox" id="menu-toggle" class="peer hidden" />
 
-        <label for="menu-toggle" class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+        <label 
+            for="menu-toggle" 
+            class="flex flex-col gap-1.5 cursor-pointer md:hidden 
+                   peer-checked:[&>span:nth-child(1)]:translate-y-2 peer-checked:[&>span:nth-child(1)]:rotate-45
+                   peer-checked:[&>span:nth-child(2)]:opacity-0
+                   peer-checked:[&>span:nth-child(3)]:-translate-y-2 peer-checked:[&>span:nth-child(3)]:-rotate-45"
+        >
+            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+            <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
         </label>
 
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/projects">Projects</a></li>
-            <li><a href="/skills">Skills</a></li>
-            <li><a href="/contact">Contact</a></li>
+        <ul class="flex flex-col w-full list-none m-0 p-0 max-h-0 opacity-0 overflow-hidden 
+                   transition-all duration-400 ease-in-out
+                   peer-checked:max-h-64 peer-checked:opacity-100 peer-checked:py-4
+                   md:flex md:flex-row md:w-auto md:max-h-none md:opacity-100 md:overflow-visible md:gap-6 md:p-0">
+            
+            {navLinks.map(({ href, label }) => {
+                const isActive = href === "/" 
+                    ? pathname === "/" 
+                    : pathname.startsWith(href);
+
+                return (
+                    <li class="py-2 px-4 md:p-0">
+                        <a 
+                            href={href} 
+                            class={`no-underline transition-colors duration-200 text-sm tracking-wide
+                                ${isActive 
+                                    ? 'text-cyan-400 font-semibold' 
+                                    : 'text-slate-300 hover:text-white' 
+                                }`}
+                        >
+                            {label}
+                        </a>
+                    </li>
+                );
+            })}
         </ul>
     </nav>
 </header>
-
-<style>
-    .header {
-        background: #333;
-        color: white;
-        font-family: sans-serif;
-    }
-
-    .navbar {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        padding: 15px 20px;
-    }
-
-    .logo {
-        flex: 1;
-        font-size: 1.1rem;
-    }
-
-    .logo-link {
-        color: white;
-        text-decoration: none;
-    }
-
-    .menu-toggle {
-        display: none;
-    }
-
-    .hamburger {
-        display: none;
-        cursor: pointer;
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .bar {
-        width: 25px;
-        height: 3px;
-        background: white;
-        transition: 0.3s;
-    }
-
-    /* Desktop */
-    .nav-links {
-        display: flex;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        gap: 20px;
-    }
-
-    .nav-links a {
-        color: white;
-        text-decoration: none;
-    }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-        .hamburger {
-            display: flex;
-        }
-
-        .nav-links {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.4s ease-in-out;
-        }
-
-        .nav-links li {
-            padding: 10px 20px;
-        }
-
-        .menu-toggle:checked ~ .nav-links {
-            max-height: 300px; /* Set higher than the total height of links */
-            opacity: 1;
-            padding: 15px 0;
-        }
-
-        /* Hamburger animation */
-        .menu-toggle:checked + .hamburger .bar:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-
-        .menu-toggle:checked + .hamburger .bar:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle:checked + .hamburger .bar:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-    }
-</style>
