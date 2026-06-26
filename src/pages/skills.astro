@@ -1,6 +1,108 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@layouts/Layout.astro';
+import Footer from '@components/Footer.astro';
+
+// Categorized skill data mapped directly from your technical profile
+const skillGroups = [
+  {
+    category: "Languages & Core Runtimes",
+    description: "Foundational programming languages utilized for architecting robust backend logic, interactive user interfaces, and structured data queries.",
+    skills: ["C#", "TypeScript", "JavaScript", "SQL (SQL Server)", "HTML5", "CSS3", "XML", "Java"],
+    svgPath: "M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" // Terminal/Code brackets icon
+  },
+  {
+    category: "Frameworks & Libraries",
+    description: "Ecosystems and development frameworks engineered to implement responsive web apps, RESTful APIs, data validation layers, and modular software utilities.",
+    skills: ["ASP.NET Core", ".NET Core", "Astro", "React", "Tailwind CSS", "MonoGame", "xUnit.net"],
+    svgPath: "M2.25 7.125C2.25 6.504 2.754 6 3.375 6h17.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125H3.375a1.125 1.125 0 0 1-1.125-1.125V7.125Z M6.75 9.75l3 2.25-3 2.25M12 14.25h3" // Screen/Terminal block icon
+  },
+  {
+    category: "Cloud, DevOps & Infrastructure",
+    description: "Automation mechanics and environmental platforms optimized for pipeline integrations, continuous delivery schedules, and high-availability application hosting.",
+    skills: ["Azure App Services", "Netlify", "GitHub Actions", "Git", "GitHub Control"],
+    svgPath: "M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 17.25 4.5H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5A2.25 2.25 0 0 0 6.75 19.5Z" // Deployment box/upload icon
+  },
+  {
+    category: "Architecture & System Design",
+    description: "Advanced computational patterns, procedural standards, and development workflows targeting highly scalable, decoupled, and securely authenticated applications.",
+    skills: ["OOP", "REST APIs", "API Integration", "System Design", "Testing Layers", "Agile / Scrum", "Relational Databases", "AuthN / AuthZ"],
+    svgPath: "M9 12h3.75M9 15h3.75M9 9h3.75M6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0-6h.008v.008H6.75V9ZM18 8.25a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 3.75a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 3.75a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z M3.75 4.5h16.5a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H3.75A1.5 1.5 0 0 1 2.25 18V6.75A1.5 1.5 0 0 1 3.75 4.5Z" // Structured diagram/database table icon
+  },
+  {
+    category: "Environments & Technical Tools",
+    description: "IDE engines, database management suites, assistive diagnostic technologies, and operating systems utilized to maximize architectural velocity.",
+    skills: ["Visual Studio", "SQL Server Management Studio (SSMS)", "GitHub Copilot", "Windows Environment", "Linux (Ubuntu)"],
+    svgPath: "M11.42 21.815c-.307.106-.633.16-.959.16a2.25 2.25 0 0 1-1.285-.399l-5.64-3.956A2.25 2.25 0 0 1 2.5 15.795V8.205c0-.528.186-1.043.536-1.449l5.64-3.956A2.25 2.25 0 0 1 11.42 2.185l5.64 3.956c.35.406.536.921.536 1.449v7.59c0 .528-.186 1.043-.536 1.449l-5.64 3.956ZM12 5.25v13.5m-3.75-9.75 3.75 3.75 3.75-3.75" // Cubical toolkit/environment anchor icon
+  }
+];
 ---
+
 <Layout>
-	<h1>Skills of Kevin "Anthony" Felker</h1>
+    <div class="max-w-5xl mx-auto px-4 py-16 md:py-24">
+        
+        <!-- Page Title & Structural Framing -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-light text-white mb-4 tracking-tight">
+                Technical <span class="text-cyan-400 font-normal">Skills</span>
+            </h1>
+            <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+                A granular breakdown of core languages, orchestration frameworks, database platforms, and operational architectures comprising my engineering toolset.
+            </p>
+        </div>
+
+        <!-- Skills Core Stack Loop -->
+        <div class="space-y-6">
+            {skillGroups.map((group) => (
+                <div class="bg-black/50 border border-slate-800/90 shadow-xl rounded-xl backdrop-blur-sm p-6 md:p-8 
+                            hover:border-slate-700/60 transition-all duration-300 ease-out grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    
+                    <!-- Left Column: Category Narrative Descriptor -->
+                    <div class="lg:col-span-5 space-y-2">
+                        <div class="flex items-center gap-3">
+                            <!-- Theme Accented Dynamic Icon Box -->
+                            <div class="p-2 bg-slate-900/60 border border-slate-800 rounded-lg text-cyan-400 shadow-inner">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d={group.svgPath} />
+                                </svg>
+                            </div>
+                            <h2 class="text-lg font-semibold text-white tracking-tight">
+                                {group.category}
+                            </h2>
+                        </div>
+                        <p class="text-xs md:text-sm text-slate-400 leading-relaxed pt-1">
+                            {group.description}
+                        </p>
+                    </div>
+
+                    <!-- Right Column: Interactive Tag Sub-Grid Layer -->
+                    <div class="lg:col-span-7 flex flex-wrap gap-2 lg:pt-1">
+                        {group.skills.map((skill) => (
+                            <div class="group/tag bg-slate-950/40 border border-slate-800/80 px-3.5 py-2 rounded-lg 
+                                        hover:border-cyan-500/30 hover:bg-slate-900/40 transition-all duration-200 cursor-default">
+                                <p class="text-xs font-mono text-slate-300 group-hover/tag:text-cyan-400 transition-colors duration-200">
+                                    {skill}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+
+                </div>
+            ))}
+        </div>
+
+        <!-- Quick Interpage Routing Call to Action Bridge -->
+        <div class="mt-16 text-center">
+            <p class="text-xs text-slate-500 font-mono mb-4 uppercase tracking-widest">Ready to evaluate code execution templates?</p>
+            <a 
+                href="/projects" 
+                class="inline-block bg-cyan-600 hover:bg-cyan-500 hover:scale-105
+                text-white text-sm font-medium px-6 py-3 rounded-lg 
+                transition-all duration-300 text-center shadow-md shadow-cyan-950/20"
+            >
+                Review Full Projects
+            </a>
+        </div>
+
+        <Footer />
+    </div>
 </Layout>

@@ -1,0 +1,150 @@
+---
+const web3formsKey = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+---
+
+<form
+  action="https://api.web3forms.com/submit"
+  method="POST"
+  id="form"
+  class="needs-validation space-y-5"
+  novalidate
+>
+  <input type="hidden" name="access_key" value={web3formsKey} />
+  <input type="checkbox" class="hidden" style="display:none" name="botcheck" />
+  
+  <!-- Full Name Input -->
+  <div>
+    <label for="name" class="sr-only">Full Name</label>
+    <input
+      id="name"
+      type="text"
+      placeholder="Full Name"
+      required
+      class="w-full px-4 py-3 bg-slate-950/60 border border-slate-800 text-slate-100 placeholder:text-slate-500 rounded-lg outline-none transition-all duration-200 focus:border-cyan-500/50 focus:ring-4 focus:ring-cyan-950/30"
+      name="name"
+    />
+    <div class="empty-feedback invalid-feedback text-red-400 text-xs mt-1.5 pl-1">
+      Please provide your full name.
+    </div>
+  </div>
+
+  <!-- Email Input -->
+  <div>
+    <label for="email_address" class="sr-only">Email Address</label>
+    <input
+      id="email_address"
+      type="email"
+      placeholder="Email Address"
+      name="email"
+      required
+      class="w-full px-4 py-3 bg-slate-950/60 border border-slate-800 text-slate-100 placeholder:text-slate-500 rounded-lg outline-none transition-all duration-200 focus:border-cyan-500/50 focus:ring-4 focus:ring-cyan-950/30"
+    />
+    <div class="empty-feedback text-red-400 text-xs mt-1.5 pl-1">
+      Please provide your email address.
+    </div>
+    <div class="invalid-feedback text-red-400 text-xs mt-1.5 pl-1">
+      Please provide a valid email address.
+    </div>
+  </div>
+
+  <!-- Message Input -->
+  <div>
+    <label for="message" class="sr-only">Your Message</label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      placeholder="Your Message"
+      class="w-full px-4 py-3 bg-slate-950/60 border border-slate-800 text-slate-100 placeholder:text-slate-500 rounded-lg outline-none h-36 transition-all duration-200 focus:border-cyan-500/50 focus:ring-4 focus:ring-cyan-950/30 resize-none"
+    ></textarea>
+    <div class="empty-feedback invalid-feedback text-red-400 text-xs mt-1.5 pl-1">
+      Please enter your message.
+    </div>
+  </div>
+
+  <!-- Styled Submit Button -->
+  <button 
+    type="submit" 
+    class="w-full bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-medium py-3 rounded-lg hover:scale-[1.01] transition-all duration-300 text-center shadow-md shadow-cyan-950/20"
+  >
+    Send Message
+  </button>
+  
+  <div id="result" class="mt-3 text-center text-sm font-mono"></div>
+</form>
+
+<style>
+  /* Toggle visibility rules for validation states */
+  .invalid-feedback,
+  .empty-feedback {
+    display: none;
+  }
+
+  .was-validated :placeholder-shown:invalid ~ .empty-feedback {
+    display: block;
+  }
+
+  .was-validated :not(:placeholder-shown):invalid ~ .invalid-feedback {
+    display: block;
+  }
+
+  .was-validated :invalid {
+    border-color: #ef4444 !important; /* Tailwind red-500 */
+  }
+</style>
+
+<script is:inline>
+  const form = document.getElementById("form");
+  const result = document.getElementById("result");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    form.classList.add("was-validated");
+    if (!form.checkValidity()) {
+      form.querySelectorAll(":invalid")[0].focus();
+      return;
+    }
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    
+    if (!object.botcheck) {
+      object.botcheck = "";
+    }
+    
+    const json = JSON.stringify(object);
+    result.className = "mt-3 text-center text-sm font-mono text-slate-400";
+    result.innerHTML = "Sending...";
+
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: json,
+    })
+      .then(async (response) => {
+        let json = await response.json();
+        if (response.status == 200) {
+          result.className = "mt-3 text-center text-sm font-mono text-emerald-400";
+          result.innerHTML = json.message;
+        } else {
+          console.log(response);
+          result.className = "mt-3 text-center text-sm font-mono text-red-400";
+          result.innerHTML = json.message;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        result.className = "mt-3 text-center text-sm font-mono text-red-400";
+        result.innerHTML = "Something went wrong!";
+      })
+      .then(function () {
+        form.reset();
+        form.classList.remove("was-validated");
+        setTimeout(() => {
+          result.innerHTML = "";
+        }, 5000);
+      });
+  });
+</script>
