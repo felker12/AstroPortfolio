@@ -6,10 +6,10 @@ const screenshotroot = "/projectpics/portfolio-generator/";
 
 const screenshots = [
   { src: `${screenshotroot}home.png`, width: 1920, height: 1080, alt: "Portfolio Generator main dashboard" },
-  { src: `${screenshotroot}upload.png`, width: 1920, height: 1080, alt: "Portfolio Generator main dashboard" },
-  { src: `${screenshotroot}uploadwithpreview.png`, width: 1920, height: 1080, alt: "Portfolio Generator main dashboard" },
-  { src: `${screenshotroot}themeselection.png`, width: 1920, height: 1080, alt: "Portfolio Generator main dashboard" },
-  { src: `${screenshotroot}download.png`, width: 1920, height: 1080, alt: "Portfolio Generator main dashboard" },
+  { src: `${screenshotroot}upload.png`, width: 1920, height: 1080, alt: "Portfolio Generator upload interface" },
+  { src: `${screenshotroot}uploadwithpreview.png`, width: 1920, height: 1080, alt: "Portfolio Generator upload with preview" },
+  { src: `${screenshotroot}themeselection.png`, width: 1920, height: 1080, alt: "Portfolio Generator theme selection" },
+  { src: `${screenshotroot}download.png`, width: 1920, height: 1080, alt: "Portfolio Generator download interface" },
 ];
 
 const visibleScreenshots = screenshots.filter((pic) => pic.src.trim() !== "");
@@ -19,7 +19,7 @@ const tags = ["C#", "React", "TypeScript", ".NET Aspire", "Minimal API", "Azure"
 const features = [
   {
     title: "Document Processing API",
-    desc: "Uses an ASP.NET Core backend to parse uploaded Word files, extracting raw profile data and converting it into a clean JSON structure."
+    desc: "Uses an ASP.NET Core backend to parse uploaded Word files, extracting structured resume information and converting it into a clean JSON structure."
   },
   {
     title: "Multi-Step Upload Workflow",
@@ -31,7 +31,7 @@ const features = [
   },
   {
     title: "Dynamic Theme System",
-    desc: "Supports multiple distinct layout styles and CSS themes that apply instantly to the parsed profile information."
+    desc: "Allows users to choose between multiple layouts and visual themes before generating their portfolio website."
   },
   {
     title: "Local Service Orchestration",
@@ -42,11 +42,77 @@ const features = [
     desc: "Configured with GitHub Actions pipelines to automatically test code changes and deploy the live build directly to Azure App Services."
   }
 ];
+
+const workflow = [
+    {
+        title: "Upload",
+        description: "Upload a structured .docx resume."
+    },
+    {
+        title: "Parse",
+        description: "Extract resume data with ASP.NET Core."
+    },
+    {
+        title: "Generate",
+        description: "Convert the document into structured JSON."
+    },
+    {
+        title: "Theme",
+        description: "Choose a portfolio layout and styling."
+    },
+    {
+        title: "Preview",
+        description: "Review the generated website in real time."
+    },
+    {
+        title: "Export",
+        description: "Download the completed portfolio website."
+    }
+];
+
+const technicalHighlights = [
+  {
+    title: "ASP.NET Core",
+    description:
+      "Built Minimal API endpoints to receive uploaded resumes, parse document data, and return structured JSON consumed by the React frontend."
+  },
+  {
+    title: "React + TypeScript",
+    description:
+      "Developed a multi-step user interface for uploading resumes, selecting themes, previewing generated websites, and exporting completed portfolios."
+  },
+  {
+    title: "Theme Engine",
+    description:
+      "Designed a flexible theming system that separates layout templates from resume data, allowing multiple portfolio styles from the same source document."
+  },
+  {
+    title: "Live Preview",
+    description:
+      "Rendered generated portfolio websites inside isolated iframes so themes could be previewed without affecting the application's interface."
+  },
+  {
+    title: ".NET Aspire",
+    description:
+      "Used .NET Aspire to manage local services, configuration, and project orchestration, simplifying development across multiple application components."
+  },
+  {
+    title: "GitHub Actions",
+    description:
+      "Configured CI/CD pipelines to build the React frontend, publish the ASP.NET backend, and deploy the application automatically to Azure App Service."
+  }
+];
+
+const futureImprovements = [
+  "Add custom block editors",
+  "Font customization",
+  "One-click Netlify deployment",
+  "Expanded UI theme library"
+];
 ---
 
 <Layout>
     <div class="max-w-5xl mx-auto px-4 py-16 md:py-24">
-
         <div class="mb-8">
             <a href="/projects" class="inline-flex items-center gap-2 text-xs font-mono text-slate-500 hover:text-cyan-400 transition-colors duration-200">
                 <svg class="w-3 h-3 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
@@ -56,6 +122,7 @@ const features = [
             </a>
         </div>
 
+        <!-- Hero Section -->
         <section class="mb-16">
             <p class="text-cyan-400 font-mono text-xs uppercase tracking-widest">
                 Full-Stack Automation Platform
@@ -66,8 +133,9 @@ const features = [
             </h1>
 
             <p class="text-md md:text-lg text-slate-300 max-w-3xl leading-relaxed mb-6">
-                A full-stack application designed to convert standard, structured resume documents (.docx format) 
-                into fully responsive, multi-page portfolio websites using a React frontend and a dynamic .NET web API.
+                A full-stack application that converts structured Microsoft Word (.docx) resumes into responsive, 
+                multi-page portfolio websites. The application uses a React frontend, ASP.NET Core Minimal APIs, 
+                and a customizable theme system to generate downloadable websites.
             </p>
 
             <div class="flex flex-wrap gap-1.5 mb-8">
@@ -105,8 +173,8 @@ const features = [
             </div>
         </section>
 
+        <!-- Portfolio Gallery -->
         <div id="portfolio-gallery">
-            
             {visibleScreenshots[0] && (
                 <section class="mb-20">
                     <a 
@@ -131,7 +199,8 @@ const features = [
                     </a>
                 </section>
             )}
-
+            
+            <!-- Project Overview Section -->
             <section class="mb-20 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                 <div class="md:col-span-1">
                     <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
@@ -142,14 +211,114 @@ const features = [
 
                 <div class="md:col-span-2 text-slate-300 text-sm leading-relaxed space-y-4">
                     <p>
-                        The purpose of this project was to automate a tedious task: translating structured document data into web layouts. I wanted to build a helper tool that accepts standard resume text inputs, breaks down the information into data blocks, and creates simple layout files quickly.
+                        Portfolio Generator was created to automate the process of transforming a structured 
+                        Microsoft Word resume into a responsive portfolio website.
                     </p>
                     <p>
-                        Working through this helped me improve my frontend file handling, understand how to scope and format data parsed on the backend, and get hands-on experience using CI/CD pipelines to manage code updates automatically.
+                        Building this project gave me experience working with frontend file uploads, 
+                        backend document parsing, REST API design, and automated deployment pipelines. 
+                        It also reinforced the importance of separating presentation from structured application data.
                     </p>
                 </div>
             </section>
 
+            <!-- Application Workflow Section -->
+            <section class="mb-20 border-t border-slate-800/60 pt-16">
+                <div class="mb-10">
+                    <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
+                        <span class="w-1 h-4 bg-cyan-500 rounded-sm"></span>
+                        Application Workflow
+                    </h2>
+
+                    <p class="text-xs text-slate-500 font-mono mt-1 uppercase">
+                        From Resume to Portfolio Website
+                    </p>
+                </div>
+
+                <div class="bg-black/30 border border-slate-800 rounded-xl p-8">
+                    <p class="text-sm text-slate-400 text-center max-w-3xl mx-auto mb-12 leading-relaxed">
+                        The Portfolio Generator guides users through a simple workflow: from uploading
+                        a Microsoft Word resume to generating a complete portfolio website that can
+                        be downloaded and deployed.
+                    </p>
+
+                    <!-- Desktop -->
+                    <div class="hidden lg:flex items-start justify-between">
+                        {workflow.map((step, index) => (
+                            <>
+                                <div class="flex flex-col items-center flex-1">
+                                    <div class="inline-flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-2 border-cyan-500 bg-slate-950">
+                                        <span class="text-center text-[11px] font-semibold text-cyan-400 leading-tight px-2">
+                                            {step.title}
+                                        </span>
+                                    </div>
+
+                                    <p class="mt-3 text-xs text-center text-slate-400 max-w-32.5 leading-relaxed">
+                                        {step.description}
+                                    </p>
+                                </div>
+
+                                {index < workflow.length - 1 && (
+                                    <div class="flex items-center justify-center pt-6 px-3">
+
+                                        <svg
+                                            class="w-8 h-8 text-cyan-500"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M5 12h14m-5-5 5 5-5 5"
+                                            />
+                                        </svg>
+                                    </div>
+                                )}
+                            </>
+                        ))}
+                    </div>
+
+                    <!-- Mobile -->
+                    <div class="flex lg:hidden flex-col items-center">
+                        {workflow.map((step, index) => (
+                            <>
+                                <div class="flex flex-col items-center text-center">
+
+                                    <div class="inline-flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-2 border-cyan-500 bg-slate-950">
+                                        <span class="text-center text-[11px] font-semibold text-cyan-400 leading-tight px-2">
+                                            {step.title}
+                                        </span>
+                                    </div>
+
+                                    <p class="mt-3 text-xs text-center text-slate-400 max-w-32.5 leading-relaxed">
+                                        {step.description}
+                                    </p>
+                                </div>
+
+                                {index < workflow.length - 1 && (
+                                    <svg
+                                        class="w-6 h-6 my-5 text-cyan-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M12 5v14m-5-5 5 5 5-5"
+                                        />
+                                    </svg>
+                                )}
+                            </>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Features Section -->
             <section class="mb-20 border-t border-slate-800/60 pt-16">
                 <div class="mb-10">
                     <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
@@ -210,38 +379,38 @@ const features = [
             )}
         </div>
 
-        <section class="mb-20 border-t border-slate-800/60 pt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-1">
+        <!-- Technical Highlights Section -->
+        <section class="mb-20 border-t border-slate-800/60 pt-16">
+            <div class="mb-10">
                 <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
-                    <span class="w-1 h-4 bg-cyan-500 rounded-sm"></span> Technical Highlights
+                    <span class="w-1 h-4 bg-cyan-500 rounded-sm"></span>
+                    Technical Highlights
                 </h2>
-                <p class="text-xs text-slate-500 font-mono mt-1 uppercase">Stack Implementation</p>
+
+                <p class="text-xs text-slate-500 font-mono mt-1 uppercase">
+                    Technologies Used
+                </p>
             </div>
-            
-            <div class="lg:col-span-2 space-y-6">
-                <div class="border-b border-slate-900 pb-4">
-                    <h3 class="text-sm font-mono text-cyan-400 font-semibold mb-1">ASP.NET Core Minimal APIs</h3>
-                    <p class="text-slate-300 text-xs leading-relaxed">
-                        Implemented simple, lightweight API routes to catch file streams, handle data conversion routing, and return clean JSON payloads back to the client interface.
-                    </p>
-                </div>
 
-                <div class="border-b border-slate-900 pb-4">
-                    <h3 class="text-sm font-mono text-cyan-400 font-semibold mb-1">Isolated Preview Windows</h3>
-                    <p class="text-slate-300 text-xs leading-relaxed">
-                        Leveraged native iframe properties to hold dynamic markup previews, creating a clean styling barrier between parent application tools and custom user CSS code.
-                    </p>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {technicalHighlights.map((highlight) => (
+                    <div
+                        class="bg-black/30 border border-slate-800 rounded-xl p-5
+                            hover:border-cyan-500/30 transition-colors duration-200"
+                    >
+                        <h3 class="text-cyan-400 font-semibold mb-3">
+                            {highlight.title}
+                        </h3>
 
-                <div>
-                    <h3 class="text-sm font-mono text-cyan-400 font-semibold mb-1">GitHub Actions Delivery</h3>
-                    <p class="text-slate-300 text-xs leading-relaxed">
-                        Set up automated continuous integration flows to pack runtime files, build frontend assets, and coordinate deployment steps smoothly with target host instances.
-                    </p>
-                </div>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            {highlight.description}
+                        </p>
+                    </div>
+                ))}
             </div>
         </section>
 
+        <!-- Challenges & Lessons Learned Section -->
         <section class="mb-20 border-t border-slate-800/60 pt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-1">
                 <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
@@ -254,20 +423,27 @@ const features = [
                 <ul class="space-y-3.5 text-xs text-slate-400 list-none pl-0">
                     <li class="flex items-start gap-2.5 leading-relaxed">
                         <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                        <span><strong>Document Mappings:</strong> Figuring out how to handle irregular headings and custom indentation in Word templates took a lot of mapping iterations to avoid empty data outputs.</span>
+                        <span><strong>Document Mappings:</strong> Figuring out how to handle irregular headings 
+                            and custom indentation in Word templates took a lot of mapping iterations 
+                            to avoid empty data outputs.</span>
                     </li>
                     <li class="flex items-start gap-2.5 leading-relaxed">
                         <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                        <span><strong>Style Bleeding:</strong> Ran into bugs where custom theme options leaked out and messed up the dashboard navigation bars. Solved this by moving layout styles completely into sandbox containers.</span>
+                        <span><strong>Theme Isolation:</strong> Ran into bugs where custom theme options leaked 
+                            out and messed up the dashboard navigation bars. Solved this by moving layout styles 
+                            completely into sandbox containers.</span>
                     </li>
                     <li class="flex items-start gap-2.5 leading-relaxed">
                         <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                        <span><strong>Service Coordination:</strong> Setting up multiple service pieces locally used to require tracking several console windows. Adopting .NET Aspire made managing service links and paths much simpler.</span>
+                        <span><strong>Service Coordination:</strong> Setting up multiple service pieces locally 
+                            used to require tracking several console windows. 
+                            Adopting .NET Aspire made managing service links and paths much simpler.</span>
                     </li>
                 </ul>
             </div>
         </section>
 
+        <!-- Future Improvements Section -->
         <section class="mb-20 border-t border-slate-800/60 pt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-1">
                 <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
@@ -278,25 +454,13 @@ const features = [
 
             <div class="lg:col-span-2">
                 <div class="bg-black/20 border border-slate-900 rounded-xl p-6 hover:scale-105 transition-transform duration-300">
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-400 list-none pl-0">
-                        <li class="flex items-center gap-2">
-                            <span class="text-cyan-500 font-mono">01//</span> Add custom block editors
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <span class="text-cyan-500 font-mono">02//</span> Direct asset file uploads
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <span class="text-cyan-500 font-mono">03//</span> Downloadable ZIP exports
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <span class="text-cyan-500 font-mono">04//</span> Dynamic font-pairing tools
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <span class="text-cyan-500 font-mono">05//</span> Public page hosting links
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <span class="text-cyan-500 font-mono">06//</span> Expanded UI theme library
-                        </li>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {futureImprovements.map((item) => (
+                            <li class="flex items-center gap-2 text-xs text-slate-400">
+                                <span class="text-cyan-500 font-mono">01//</span>
+                                {item}
+                            </li>
+                        ))}
                     </ul>
                 </div>
             </div>
