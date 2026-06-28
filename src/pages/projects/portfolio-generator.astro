@@ -103,6 +103,24 @@ const technicalHighlights = [
   }
 ];
 
+const challenges = [
+  {
+    title: "CI/CD Pipeline Configuration:",
+    description:
+      "Configuring the GitHub Actions workflow took several iterations to get right. Setting up the YAML file, coordinating the React frontend build with the ASP.NET Core backend publish process, and automating deployment to Azure App Service helped me better understand modern CI/CD pipelines."
+  },
+  {
+    title: "Reading Word Documents:",
+    description:
+      "One of the biggest challenges was learning how to extract structured data from Microsoft Word (.docx) files. Using the DocumentFormat.OpenXml library, I built a parser that could read document content and convert it into structured data used to generate portfolio websites."
+  },
+  {
+    title: "Service Coordination:",
+    description:
+      "Running multiple services locally initially required managing several applications and endpoints. Adopting .NET Aspire simplified local development by centralizing service orchestration, configuration, and project startup."
+  }
+];
+
 const futureImprovements = [
   "Add custom block editors",
   "Font customization",
@@ -253,7 +271,7 @@ const futureImprovements = [
                                         </span>
                                     </div>
 
-                                    <p class="mt-3 text-xs text-center text-slate-400 max-w-32.5 leading-relaxed">
+                                    <p class="mt-3 text-xs text-center text-slate-400 max-w-32 leading-relaxed">
                                         {step.description}
                                     </p>
                                 </div>
@@ -292,7 +310,7 @@ const futureImprovements = [
                                         </span>
                                     </div>
 
-                                    <p class="mt-3 text-xs text-center text-slate-400 max-w-32.5 leading-relaxed">
+                                    <p class="mt-3 text-xs text-center text-slate-400 max-w-32 leading-relaxed">
                                         {step.description}
                                     </p>
                                 </div>
@@ -410,35 +428,23 @@ const futureImprovements = [
             </div>
         </section>
 
-        <!-- Challenges & Lessons Learned Section -->
+        <!-- Challenges & Solutions Learned Section -->
         <section class="mb-20 border-t border-slate-800/60 pt-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-1">
                 <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
-                    <span class="w-1 h-4 bg-cyan-500 rounded-sm"></span> Challenges & Lessons Learned
+                    <span class="w-1 h-4 bg-cyan-500 rounded-sm"></span> Challenges & Solutions Learned
                 </h2>
                 <p class="text-xs text-slate-500 font-mono mt-1 uppercase">Problem Solving</p>
             </div>
 
             <div class="lg:col-span-2 text-slate-300 text-sm leading-relaxed">
                 <ul class="space-y-3.5 text-xs text-slate-400 list-none pl-0">
-                    <li class="flex items-start gap-2.5 leading-relaxed">
-                        <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                        <span><strong>Document Mappings:</strong> Figuring out how to handle irregular headings 
-                            and custom indentation in Word templates took a lot of mapping iterations 
-                            to avoid empty data outputs.</span>
-                    </li>
-                    <li class="flex items-start gap-2.5 leading-relaxed">
-                        <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                        <span><strong>Theme Isolation:</strong> Ran into bugs where custom theme options leaked 
-                            out and messed up the dashboard navigation bars. Solved this by moving layout styles 
-                            completely into sandbox containers.</span>
-                    </li>
-                    <li class="flex items-start gap-2.5 leading-relaxed">
-                        <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                        <span><strong>Service Coordination:</strong> Setting up multiple service pieces locally 
-                            used to require tracking several console windows. 
-                            Adopting .NET Aspire made managing service links and paths much simpler.</span>
-                    </li>
+                    {challenges.map((item) => (
+                        <li class="flex items-start gap-2.5 leading-relaxed">
+                            <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
+                            <span><strong>{item.title}</strong> {item.description}</span>
+                        </li>
+                    ))}
                 </ul>
             </div>
         </section>
@@ -455,9 +461,11 @@ const futureImprovements = [
             <div class="lg:col-span-2">
                 <div class="bg-black/20 border border-slate-900 rounded-xl p-6 hover:scale-105 transition-transform duration-300">
                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {futureImprovements.map((item) => (
+                        {futureImprovements.map((item, index) => (
                             <li class="flex items-center gap-2 text-xs text-slate-400">
-                                <span class="text-cyan-500 font-mono">01//</span>
+                                <span class="text-cyan-500 font-mono">
+                                    {String(index + 1).padStart(2, '0')}// {/* if end up with more than 10 impovements change to String(index + 1).padStart(3, '0') */}
+                                </span>
                                 {item}
                             </li>
                         ))}
@@ -466,6 +474,7 @@ const futureImprovements = [
             </div>
         </section>
 
+        <!-- Return to Projects Section -->
         <section class="text-center border-t border-slate-800/60 pt-12">
             <a 
                 href="/projects" 
