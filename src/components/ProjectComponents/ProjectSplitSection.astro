@@ -1,0 +1,23 @@
+---
+import ProjectSectionHeader from './ProjectSectionHeader.astro';
+
+interface Props {
+    title: string;
+    subtitle: string;
+    borderTop?: boolean;
+}
+
+const { title, subtitle, borderTop = true } = Astro.props;
+---
+
+<section class={`mb-20 ${borderTop ? 'border-t border-slate-800/60 pt-16' : ''}`}>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div class="lg:col-span-1">
+            <ProjectSectionHeader title={title} subtitle={subtitle} />
+        </div>
+
+        <div class="lg:col-span-2">
+            <slot />
+        </div>
+    </div>
+</section>

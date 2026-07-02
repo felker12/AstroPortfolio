@@ -1,0 +1,105 @@
+---
+import type { WorkflowStep } from "@data/projects/projects"
+
+interface Props {
+    title: string;
+    subtitle: string;
+    description: string;
+    workflow: WorkflowStep[];
+} 
+
+const { title, subtitle, description, workflow } = Astro.props as Props;
+---
+
+<section class="mb-20 border-t border-slate-800/60 pt-16">
+    <div class="mb-10">
+        <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
+            <span class="w-1 h-4 bg-cyan-500 rounded-sm"></span>
+            {title}
+        </h2>
+
+        <p class="text-xs text-slate-500 font-mono mt-1 uppercase">
+            {subtitle}
+        </p>
+    </div>
+
+    <div class="bg-black/30 border border-slate-800 rounded-xl p-8">
+        <p class="text-sm text-slate-400 text-center max-w-3xl mx-auto mb-12 leading-relaxed">
+            {description}
+        </p>
+
+        <!-- Desktop -->
+        <div class="hidden lg:flex items-start justify-between">
+            {workflow.map((step, index) => (
+                <>
+                    <div class="flex flex-col items-center flex-1">
+                        <div class="inline-flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-2 border-cyan-500 bg-slate-950">
+                            <span class="text-center text-[11px] font-semibold text-cyan-400 leading-tight px-2">
+                                {step.title}
+                            </span>
+                        </div>
+
+                        <p class="mt-3 text-xs text-center text-slate-400 max-w-32 leading-relaxed">
+                            {step.description}
+                        </p>
+                    </div>
+
+                    {index < workflow.length - 1 && (
+                        <div class="flex items-center justify-center pt-6 px-3">
+
+                            <svg
+                                class="w-8 h-8 text-cyan-500"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M5 12h14m-5-5 5 5-5 5"
+                                />
+                            </svg>
+                        </div>
+                    )}
+                </>
+            ))}
+        </div>
+
+        <!-- Mobile -->
+        <div class="flex lg:hidden flex-col items-center">
+            {workflow.map((step, index) => (
+                <>
+                    <div class="flex flex-col items-center text-center">
+
+                        <div class="inline-flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-2 border-cyan-500 bg-slate-950">
+                            <span class="text-center text-[11px] font-semibold text-cyan-400 leading-tight px-2">
+                                {step.title}
+                            </span>
+                        </div>
+
+                        <p class="mt-3 text-xs text-center text-slate-400 max-w-32 leading-relaxed">
+                            {step.description}
+                        </p>
+                    </div>
+
+                    {index < workflow.length - 1 && (
+                        <svg
+                            class="w-6 h-6 my-5 text-cyan-500"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 5v14m-5-5 5 5 5-5"
+                            />
+                        </svg>
+                    )}
+                </>
+            ))}
+        </div>
+    </div>
+</section>

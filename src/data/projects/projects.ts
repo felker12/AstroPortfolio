@@ -17,7 +17,7 @@ export interface Feature {
     description: string;
 }
 
-    export interface TechnicalHighlight {
+export interface TechnicalHighlight {
     title: string;
     description: string;
 }
@@ -25,4 +25,11 @@ export interface Feature {
 export interface Challenge {
     title: string;
     description: string;
+}
+
+export interface Screenshot {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
 }

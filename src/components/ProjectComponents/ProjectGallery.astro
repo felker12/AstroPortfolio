@@ -1,0 +1,48 @@
+---
+import type { Screenshot } from '@data/projects/projects'
+
+interface Props {
+    screenshots: Screenshot[];
+}
+
+const { screenshots } = Astro.props as Props;
+---
+
+
+{screenshots.length > 1 && (
+    <section class="mb-20 border-t border-slate-800/60 pt-16">
+        <div class="mb-10">
+            <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
+                <span class="w-1 h-4 bg-cyan-500 rounded-sm"></span> Application Screenshots
+            </h2>
+            <p class="text-xs text-slate-500 font-mono mt-1 uppercase">Interface Preview</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {screenshots.slice(1).map((pic, i) => (
+                <a 
+                    href={pic.src}
+                    data-pswp-width={pic.width}
+                    data-pswp-height={pic.height}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="group bg-black/40 border border-slate-800/90 rounded-xl p-1.5 shadow-lg block 
+                    hover:border-slate-700/60 hover:scale-110 transition-transform duration-300"
+                >
+                    <div class="overflow-hidden rounded-lg relative">
+                        <img 
+                            src={pic.src} 
+                            alt={pic.alt} 
+                            class="w-full h-auto object-cover transform duration-300 group-hover:scale-[1.03]" 
+                        />
+                        <div class="absolute inset-0 bg-cyan-950/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+                            <span class="bg-slate-900/90 border border-slate-800 text-[10px] font-mono text-cyan-400 px-2 py-1 rounded">
+                                View Screenshot {i + 2}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            ))}
+        </div>
+    </section>
+)}
