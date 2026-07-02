@@ -9,7 +9,8 @@
       "@assets/*": ["./src/assets/*"],
       "@styles/*": ["./src/styles/*"],
       "@pages/*": ["./src/pages/*"],
-      "@scripts/*": ["./src/scripts/*"]
+      "@scripts/*": ["./src/scripts/*"],
+      "@data/*": ["./src/data/*"]
     }
   }
 }
