@@ -4,9 +4,16 @@ const pathname = Astro.url.pathname;
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/projects", label: "Projects" },
+  { href: "/projects", label: "Projects", hasDropdown: true },
   { href: "/skills", label: "Skills" },
   { href: "/contact", label: "Contact" },
+];
+
+const projectLinks = [
+  { href: "/projects/portfolio-generator", label: "Portfolio Generator" },
+  { href: "/projects/time-punch", label: "Time Punch" },
+  { href: "/projects/rpg-engine", label: "RPG Engine" },
+  { href: "/projects/legacy-portfolio", label: "Legacy Portfolio" },
 ];
 ---
 
@@ -34,26 +41,84 @@ const navLinks = [
 
         <ul class="flex flex-col w-full list-none m-0 p-0 max-h-0 opacity-0 overflow-hidden 
                    transition-all duration-400 ease-in-out
-                   peer-checked:max-h-64 peer-checked:opacity-100 peer-checked:py-4
+                   peer-checked:max-h-120 peer-checked:opacity-100 peer-checked:py-4
                    md:flex md:flex-row md:w-auto md:max-h-none md:opacity-100 md:overflow-visible md:gap-6 md:p-0">
             
-            {navLinks.map(({ href, label }) => {
+            {navLinks.map(({ href, label, hasDropdown }) => {
                 const isActive = href === "/" 
                     ? pathname === "/" 
                     : pathname.startsWith(href);
 
                 return (
-                    <li class="py-2 px-4 md:p-0">
+                    <li class="relative group py-2 px-4 md:p-0">
                         <a 
                             href={href} 
-                            class={`no-underline transition-colors duration-200 text-sm tracking-wide
+                            class={`inline-flex items-center gap-1 no-underline transition-colors duration-200 text-sm tracking-wide
                                 ${isActive 
                                     ? 'text-cyan-400 font-semibold' 
                                     : 'text-slate-300 hover:text-white' 
                                 }`}
                         >
                             {label}
+
+                            {hasDropdown && (
+                                <svg class="w-3 h-3 stroke-current transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            )}
                         </a>
+
+                        {hasDropdown && (
+                            <>
+                                <ul class="hidden md:block absolute left-0 top-full pt-3 min-w-56
+                                           opacity-0 invisible translate-y-2 pointer-events-none
+                                           group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto
+                                           group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto
+                                           transition-all duration-200">
+                                    <div class="rounded-xl border border-slate-800/90 bg-slate-950/95 backdrop-blur-md shadow-xl overflow-hidden">
+                                        {projectLinks.map((project) => {
+                                            const projectActive = pathname.startsWith(project.href);
+
+                                            return (
+                                                <li>
+                                                    <a
+                                                        href={project.href}
+                                                        class={`block px-4 py-3 text-sm transition-colors duration-200
+                                                            ${projectActive
+                                                                ? 'text-cyan-400 bg-slate-900/70'
+                                                                : 'text-slate-300 hover:text-white hover:bg-slate-900/70'
+                                                            }`}
+                                                    >
+                                                        {project.label}
+                                                    </a>
+                                                </li>
+                                            );
+                                        })}
+                                    </div>
+                                </ul>
+
+                                <ul class="md:hidden mt-2 ml-4 space-y-2 border-l border-slate-800 pl-4">
+                                    {projectLinks.map((project) => {
+                                        const projectActive = pathname.startsWith(project.href);
+
+                                        return (
+                                            <li>
+                                                <a
+                                                    href={project.href}
+                                                    class={`block text-xs transition-colors duration-200
+                                                        ${projectActive
+                                                            ? 'text-cyan-400 font-semibold'
+                                                            : 'text-slate-400 hover:text-white'
+                                                        }`}
+                                                >
+                                                    {project.label}
+                                                </a>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </>
+                        )}
                     </li>
                 );
             })}
