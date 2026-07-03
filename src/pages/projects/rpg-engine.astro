@@ -1,7 +1,17 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Footer from '@components/Footer.astro';
-import { hero, features, flow, technicalHighlights, challenges, futureImprovements, visibleScreenshots } from '@data/projects/portfolioGenerator.ts';
+
+import {
+    hero,
+    features,
+    flow,
+    technicalHighlights,
+    challenges,
+    futureImprovements,
+    visibleScreenshots
+} from '@data/projects/engine.ts';
+
 import ProjectHero from '@components/ProjectComponents/ProjectHero.astro';
 import ProjectShowcase from '@components/ProjectComponents/ProjectShowcase.astro';
 import ProjectSplitSection from '@components/ProjectComponents/ProjectSplitSection.astro';
@@ -21,15 +31,11 @@ import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid
             </a>
         </div>
 
-        <!-- Hero Section -->
         <ProjectHero {...hero} />
 
-        <!-- Portfolio Gallery -->
-        <div id="portfolio-gallery">
-            <!-- Showcase Screenshot -->
+        <div id="game-engine-gallery">
             <ProjectShowcase screenshot={visibleScreenshots[0]} />
 
-            <!-- Project Overview Section -->
             <ProjectSplitSection
                 title="Project Overview"
                 subtitle="Context & Purpose"
@@ -37,31 +43,34 @@ import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid
             >
                 <div class="text-slate-300 text-sm leading-relaxed space-y-4">
                     <p>
-                        Portfolio Generator was created to automate the process of transforming a structured
-                        Microsoft Word resume into a responsive portfolio website.
+                        This project is a custom 2D RPG engine built to practice C# architecture,
+                        game loops, rendering systems, combat logic, animation, persistence, and tool development.
                     </p>
 
                     <p>
-                        Building this project gave me experience working with frontend file uploads,
-                        backend document parsing, REST API design, and automated deployment pipelines.
+                        Building it gave me experience organizing a larger codebase into reusable systems,
+                        testing core logic with xUnit, and creating supporting tools to improve content creation.
                     </p>
                 </div>
             </ProjectSplitSection>
 
-            <!-- Application Workflow Section -->
             <ProjectFlow {...flow} />
 
-            <!-- Key Features Section -->
-            <ProjectFeatureGrid title="Key Features" subtitle="Application Functionality" features={features} />
+            <ProjectFeatureGrid
+                title="Key Features"
+                subtitle="Engine Functionality"
+                features={features}
+            />
 
-            <!-- Gallery Section -->
             <ProjectGallery screenshots={visibleScreenshots} />
         </div>
 
-        <!-- Technical Highlights Section -->
-        <ProjectFeatureGrid title="Technical Highlights" subtitle="Technologies Used, " features={technicalHighlights} />
+        <ProjectFeatureGrid
+            title="Technical Highlights"
+            subtitle="Technologies Used"
+            features={technicalHighlights}
+        />
 
-        <!-- Challenges & Solutions Learned Section -->
         <ProjectSplitSection
             title="Challenges & Solutions"
             subtitle="Problem Solving"
@@ -76,7 +85,6 @@ import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid
             </ul>
         </ProjectSplitSection>
 
-        <!-- Future Improvements Section -->
         <ProjectSplitSection
             title="Future Improvements"
             subtitle="Planned Enhancements"
@@ -86,19 +94,18 @@ import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid
                     {futureImprovements.map((item, index) => (
                         <li class="flex items-center gap-2 text-xs text-slate-400">
                             <span class="text-cyan-500 font-mono">
-                                {String(index + 1).padStart(2, '0')}// {/* if end up with more than 10 impovements change to String(index + 1).padStart(3, '0') */}
+                                {String(index + 1).padStart(2, '0')}//
                             </span>
                             {item}
                         </li>
                     ))}
                 </ul>
             </div>
-        </ProjectSplitSection> 
+        </ProjectSplitSection>
 
-        <!-- Return to Projects Section -->
         <section class="text-center border-t border-slate-800/60 pt-12">
-            <a 
-                href="/projects" 
+            <a
+                href="/projects"
                 class="inline-block border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 text-xs font-mono tracking-wider px-5 py-3 rounded-lg transition-colors duration-200"
             >
                 Back to Projects
@@ -114,10 +121,10 @@ import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid
     import 'photoswipe/style.css';
 
     const lightbox = new PhotoSwipeLightbox({
-        gallery: '#portfolio-gallery',
+        gallery: '#game-engine-gallery',
         children: 'a',
         pswpModule: () => import('photoswipe')
     });
-    
+
     lightbox.init();
 </script>

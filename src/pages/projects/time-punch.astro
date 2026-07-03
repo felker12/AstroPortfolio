@@ -1,11 +1,11 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Footer from '@components/Footer.astro';
-import {visibleScreenshots, features, hero, futureImprovements} from '@data/projects/time-punch.ts';
+import {visibleScreenshots, features, hero, futureImprovements, flow} from '@data/projects/time-punch.ts';
 import ProjectHero from '@components/ProjectComponents/ProjectHero.astro';
 import ProjectShowcase from '@components/ProjectComponents/ProjectShowcase.astro';
 import ProjectSplitSection from '@components/ProjectComponents/ProjectSplitSection.astro';
-import ProjectWorkflow from '@components/ProjectComponents/ProjectWorkflow.astro';
+import ProjectFlow from '@components/ProjectComponents/ProjectFlow.astro';
 import ProjectGallery from '@components/ProjectComponents/ProjectGallery.astro';
 import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid.astro';
 ---
@@ -49,6 +49,9 @@ import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid
                 </div>
             </ProjectSplitSection>
 
+            <!-- Application Workflow Section -->
+            <ProjectFlow {...flow} />
+
             <!-- Key Features Section -->
             <ProjectFeatureGrid title="Key Features" subtitle="Application Functionality" features={features} />
 
@@ -89,22 +92,20 @@ import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid
             title="Challenges & Lessons Learned"
             subtitle="Problem Solving"
         >
-            <div class="lg:col-span-2 text-slate-300 text-sm leading-relaxed">
-                <ul class="space-y-3.5 text-xs text-slate-400 list-none pl-0">
-                    <li class="flex items-start gap-2.5 leading-relaxed">
-                        <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                        <span><strong>State Management:</strong> Learned how important it is to keep frontend state aligned with backend attendance records.</span>
-                    </li>
-                    <li class="flex items-start gap-2.5 leading-relaxed">
-                        <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                        <span><strong>Authentication Flow:</strong> Gained more experience handling login state, protected routes, and role-based access in a full-stack application.</span>
-                    </li>
-                    <li class="flex items-start gap-2.5 leading-relaxed">
-                        <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                        <span><strong>Local Orchestration:</strong> Used .NET Aspire to organize the frontend and backend services during local development.</span>
-                    </li>
-                </ul>
-                </div>
+            <ul class="space-y-3.5 text-xs text-slate-400 list-none pl-0">
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                    <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
+                    <span><strong>State Management:</strong> Learned how important it is to keep frontend state aligned with backend attendance records.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                    <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
+                    <span><strong>Authentication Flow:</strong> Gained more experience handling login state, protected routes, and role-based access in a full-stack application.</span>
+                </li>
+                <li class="flex items-start gap-2.5 leading-relaxed">
+                    <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
+                    <span><strong>Local Orchestration:</strong> Used .NET Aspire to organize the frontend and backend services during local development.</span>
+                </li>
+            </ul>
         </ProjectSplitSection>
 
         <!-- Future Improvements -->

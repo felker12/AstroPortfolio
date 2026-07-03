@@ -1,4 +1,4 @@
-import type { ProjectHeroData, Screenshot, Feature } from '@data/projects/projects';
+import type { ProjectHeroData, Screenshot, Feature, FlowStep, ProjectFlowData } from '@data/projects/projects';
 
 const screenshotroot = "/projectpics/portfolio-generator/";
 
@@ -63,7 +63,7 @@ export const features: Feature[] = [
   }
 ];
 
-export const workflow = [
+const workflow: FlowStep[] = [
     {
         title: "Upload",
         description: "Upload a structured .docx resume."
@@ -89,6 +89,15 @@ export const workflow = [
         description: "Download the completed portfolio website."
     }
 ];
+
+export const flow: ProjectFlowData = {
+    title: "Application Workflow",
+    subtitle: "From Resume to Portfolio Website",
+    description: 
+      "The Portfolio Generator guides users through a simple workflow: from uploading a Microsoft Word resume to generating a complete portfolio website that can be downloaded and deployed.",
+    
+    workflow
+};
 
 export const technicalHighlights = [
   {

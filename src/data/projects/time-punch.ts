@@ -1,4 +1,4 @@
-import type { ProjectHeroData, Screenshot, Feature } from '@data/projects/projects';
+import type { ProjectHeroData, Screenshot, Feature, FlowStep, ProjectFlowData } from '@data/projects/projects';
 
 const screenshotroot = "/projectpics/timepunch/";
 
@@ -33,6 +33,10 @@ export const features: Feature[] = [
     description: "Gives administrators tools to review attendance records, identify discrepancies, and support payroll review."
   },
   {
+    title: "Admin Punch Management",
+    description: "Allows administrators to create, review, update, and delete punch records when corrections are needed."
+  },
+  {
     title: "SQL Server Persistence",
     description: "Stores users, shifts, and time entries using a relational SQL Server database structure."
   },
@@ -62,3 +66,38 @@ export const futureImprovements = [
   "Payroll CSV export",
   "Deployment improvements"
 ];
+
+
+const workflow: FlowStep[] = [
+    {
+    title: "Login",
+    description: "Employees and admins sign in securely."
+    },
+    {
+      title: "Clock In",
+      description: "Employees record the start of a shift."
+    },
+    {
+      title: "Track",
+      description: "Punch data is stored and shown in the dashboard."
+    },
+    {
+      title: "Clock Out",
+      description: "Employees record the end of a shift."
+    },
+    {
+      title: "Review",
+      description: "Admins review records and manage punch corrections."
+    }
+];
+
+export const flow: ProjectFlowData = {
+    title: "Application Workflow",
+
+    subtitle: "From Clock In to Attendance Management",
+
+    description:
+        "The Time Punch application follows a straightforward workflow. Employees record their work hours by clocking in and out, while administrators review attendance records and make corrections when needed.",
+
+    workflow
+};

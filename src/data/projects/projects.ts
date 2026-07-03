@@ -7,7 +7,7 @@ export interface ProjectHeroData {
     demoUrl?: string;
 }
 
-export interface WorkflowStep {
+export interface FlowStep {
     title: string;
     description: string;
 }
@@ -32,4 +32,11 @@ export interface Screenshot {
     width: number;
     height: number;
     alt: string;
+}
+
+export interface ProjectFlowData {
+    title: string;
+    subtitle: string;
+    description: string;
+    workflow: FlowStep[];
 }
