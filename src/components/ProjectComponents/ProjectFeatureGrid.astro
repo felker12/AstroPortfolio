@@ -1,10 +1,13 @@
 ---
+import type { Feature } from '@data/projects/projects';
+
 interface Props {
     title: string;
     subtitle: string;
+    features: Feature[];
 }
 
-const { title, subtitle } = Astro.props;
+const { title, subtitle, features } = Astro.props;
 ---
 
 <section class="mb-20 border-t border-slate-800/60 pt-16">
@@ -15,5 +18,15 @@ const { title, subtitle } = Astro.props;
         <p class="text-xs text-slate-500 font-mono mt-1 uppercase">{subtitle}</p>
     </div>
 
-    <slot />
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {features.map((f) => (
+            <div class="bg-black/30 border border-slate-800/80 p-5 rounded-xl hover:border-slate-700/50
+                transition-colors duration-200 hover:scale-105">
+                <h3 class="text-sm font-semibold text-white mb-2 flex items-center gap-1.5">
+                    <span class="text-cyan-400 font-mono text-xs">▪</span> {f.title}
+                </h3>
+                <p class="text-slate-400 text-xs leading-relaxed">{f.description}</p>
+            </div>
+        ))}
+    </div>
 </section>

@@ -1,8 +1,8 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Footer from '@components/Footer.astro';
-import ProjectHero from '@components/ProjectComponents/ProjectHero.astro';
 import { hero, features, workflow, technicalHighlights, challenges, futureImprovements, visibleScreenshots } from '@data/projects/portfolioGenerator.ts';
+import ProjectHero from '@components/ProjectComponents/ProjectHero.astro';
 import ProjectShowcase from '@components/ProjectComponents/ProjectShowcase.astro';
 import ProjectSplitSection from '@components/ProjectComponents/ProjectSplitSection.astro';
 import ProjectWorkflow from '@components/ProjectComponents/ProjectWorkflow.astro';
@@ -57,43 +57,14 @@ import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid
             />
 
             <!-- Key Features Section -->
-            <ProjectFeatureGrid title="Key Features" subtitle="Application Functionality">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {features.map((f) => (
-                        <div class="bg-black/30 border border-slate-800/80 p-5 rounded-xl hover:border-slate-700/50
-                         transition-colors duration-200 hover:scale-105">
-                            <h3 class="text-sm font-semibold text-white mb-2 flex items-center gap-1.5">
-                                <span class="text-cyan-400 font-mono text-xs">▪</span> {f.title}
-                            </h3>
-                            <p class="text-slate-400 text-xs leading-relaxed">{f.desc}</p>
-                        </div>
-                    ))}
-                </div>
-            </ProjectFeatureGrid>
+            <ProjectFeatureGrid title="Key Features" subtitle="Application Functionality" features={features} />
 
             <!-- Gallery Section -->
             <ProjectGallery screenshots={visibleScreenshots} />
         </div>
 
         <!-- Technical Highlights Section -->
-        <ProjectFeatureGrid title="Technical Highlights" subtitle="Technologies Used">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {technicalHighlights.map((highlight) => (
-                    <div
-                        class="bg-black/30 border border-slate-800 rounded-xl p-5
-                            hover:border-cyan-500/30 transition-colors duration-200"
-                    >
-                        <h3 class="text-cyan-400 font-semibold mb-3">
-                            {highlight.title}
-                        </h3>
-
-                        <p class="text-sm text-slate-400 leading-relaxed">
-                            {highlight.description}
-                        </p>
-                    </div>
-                ))}
-            </div>
-        </ProjectFeatureGrid>
+        <ProjectFeatureGrid title="Technical Highlights" subtitle="Technologies Used, " features={technicalHighlights} />
 
         <!-- Challenges & Solutions Learned Section -->
         <ProjectSplitSection
@@ -116,17 +87,17 @@ import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid
             subtitle="Planned Enhancements"
         >
             <div class="bg-black/20 border border-slate-900 rounded-xl p-6 hover:scale-105 transition-transform duration-300">
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {futureImprovements.map((item, index) => (
-                            <li class="flex items-center gap-2 text-xs text-slate-400">
-                                <span class="text-cyan-500 font-mono">
-                                    {String(index + 1).padStart(2, '0')}// {/* if end up with more than 10 impovements change to String(index + 1).padStart(3, '0') */}
-                                </span>
-                                {item}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {futureImprovements.map((item, index) => (
+                        <li class="flex items-center gap-2 text-xs text-slate-400">
+                            <span class="text-cyan-500 font-mono">
+                                {String(index + 1).padStart(2, '0')}// {/* if end up with more than 10 impovements change to String(index + 1).padStart(3, '0') */}
+                            </span>
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </ProjectSplitSection> 
 
         <!-- Return to Projects Section -->

@@ -1,4 +1,4 @@
-import type { Screenshot } from '@data/projects/projects.ts'
+import type { ProjectHeroData, Screenshot, Feature } from '@data/projects/projects';
 
 const screenshotroot = "/projectpics/timepunch/";
 
@@ -15,29 +15,50 @@ export const visibleScreenshots = screenshots.filter((pic) => pic.src.trim() !==
 
 export const tags = ["C#", "React", "TypeScript", "ASP.NET Core", ".NET Aspire", "SQL Server", "Azure"];
 
-export const features = [
+export const features: Feature[] = [
   {
     title: "Employee Authentication",
-    desc: "Supports secure sign-in workflows with separate access levels for employees and administrators."
+    description: "Supports secure sign-in workflows with separate access levels for employees and administrators."
   },
   {
     title: "Clock In / Clock Out Workflow",
-    desc: "Allows employees to start and end shifts while tracking timestamps and maintaining shift history."
+    description: "Allows employees to start and end shifts while tracking timestamps and maintaining shift history."
   },
   {
     title: "Attendance Dashboard",
-    desc: "Provides a responsive React interface for viewing current status, shift history, and worked time."
+    description: "Provides a responsive React interface for viewing current status, shift history, and worked time."
   },
   {
     title: "Administrative Reporting",
-    desc: "Gives administrators tools to review attendance records, identify discrepancies, and support payroll review."
+    description: "Gives administrators tools to review attendance records, identify discrepancies, and support payroll review."
   },
   {
     title: "SQL Server Persistence",
-    desc: "Stores users, shifts, and time entries using a relational SQL Server database structure."
+    description: "Stores users, shifts, and time entries using a relational SQL Server database structure."
   },
   {
     title: "Responsive Interface",
-    desc: "Built with a responsive layout so the application can be used comfortably on desktop and tablet-sized screens."
+    description: "Built with a responsive layout so the application can be used comfortably on desktop and tablet-sized screens."
   }
+];
+
+export const hero: ProjectHeroData = {
+    category: "Full-Stack Web Application",
+
+    title: "Time Punch Management System",
+
+    description:
+        "A full-stack employee attendance application designed to manage clock-in and clock-out workflows, store shift history, and provide administrative reporting through a React frontend and ASP.NET Core backend.",
+
+    tags: ["C#", "React", "TypeScript", "ASP.NET Core", ".NET Aspire", "SQL Server", "Azure"],
+
+    githubUrl: "https://github.com/felker12/TimePunchSite",
+};
+
+export const futureImprovements = [
+  "Password recovery workflow",
+  "Email notifications",
+  "Manager approval workflows",
+  "Payroll CSV export",
+  "Deployment improvements"
 ];

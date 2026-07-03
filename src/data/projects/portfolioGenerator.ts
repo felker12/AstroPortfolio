@@ -1,4 +1,4 @@
-import type { ProjectHeroData, Screenshot } from '@data/projects/projects.ts';
+import type { ProjectHeroData, Screenshot, Feature } from '@data/projects/projects';
 
 const screenshotroot = "/projectpics/portfolio-generator/";
 
@@ -36,30 +36,30 @@ export const hero: ProjectHeroData = {
 };
 
 
-export const features = [
+export const features: Feature[] = [
   {
     title: "Document Processing API",
-    desc: "Uses an ASP.NET Core backend to parse uploaded Word files, extracting structured resume information and converting it into a clean JSON structure."
+    description: "Uses an ASP.NET Core backend to parse uploaded Word files, extracting structured resume information and converting it into a clean JSON structure."
   },
   {
     title: "Multi-Step Upload Workflow",
-    desc: "A step-by-step frontend guide built in React that helps users upload files, review extracted data, and select themes without confusion."
+    description: "A step-by-step frontend guide built in React that helps users upload files, review extracted data, and select themes without confusion."
   },
   {
     title: "Isolated Live Preview",
-    desc: "Renders the generated portfolio templates inside an isolated iframe, ensuring template styles don't break the main app layout."
+    description: "Renders the generated portfolio templates inside an isolated iframe, ensuring template styles don't break the main app layout."
   },
   {
     title: "Dynamic Theme System",
-    desc: "Allows users to choose between multiple layouts and visual themes before generating their portfolio website."
+    description: "Allows users to choose between multiple layouts and visual themes before generating their portfolio website."
   },
   {
     title: "Local Service Orchestration",
-    desc: "Managed with .NET Aspire to seamlessly handle service endpoints, environment variables, and connections during development."
+    description: "Managed with .NET Aspire to seamlessly handle service endpoints, environment variables, and connections during development."
   },
   {
     title: "Automated Deployment",
-    desc: "Configured with GitHub Actions pipelines to automatically test code changes and deploy the live build directly to Azure App Services."
+    description: "Configured with GitHub Actions pipelines to automatically test code changes and deploy the live build directly to Azure App Services."
   }
 ];
 
