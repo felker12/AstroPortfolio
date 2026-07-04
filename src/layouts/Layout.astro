@@ -1,20 +1,77 @@
 ---
 import NavBar from '../components/NavBar.astro';
 import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  image?: string;
+  keywords?: string[];
+  schema?: object | object[];
+}
+
+const {
+  title = 'Kevin "Anthony" Felker | Full-Stack Developer',
+  description = 'Portfolio of Kevin "Anthony" Felker, a full-stack developer experienced with C#, ASP.NET Core, React, Astro, SQL Server, Azure, GitHub Actions, and production website development.',
+  canonical = Astro.url.href,
+  image = '/og-image.png',
+  keywords = [],
+  schema
+} = Astro.props;
+
+const siteName = 'Kevin Anthony Felker Portfolio';
+const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>Kevin "Anthony" Felker</title>
-	</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased">
-		<NavBar />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
 
-		<main class="grow">
-            <slot /> 
-        </main>
-	</body>
+    <meta name="author" content='Kevin "Anthony" Felker' />
+    <meta name="robots" content="index, follow" />
+
+    {keywords.length > 0 && (
+      <meta name="keywords" content={keywords.join(", ")} />
+    )}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={absoluteImage} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteImage} />
+
+    <!-- Local SEO -->
+    <meta name="geo.region" content="US-IN" />
+    <meta name="geo.placename" content="Terre Haute, Indiana" />
+
+    {schema && (
+      <script
+        is:inline
+        type="application/ld+json"
+        set:html={JSON.stringify(schema)}
+      />
+    )}
+  </head>
+
+  <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased">
+    <NavBar />
+
+    <main class="grow">
+      <slot />
+    </main>
+  </body>
 </html>

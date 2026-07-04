@@ -1,6 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Footer from '@components/Footer.astro';
+import { personSchema } from '@data/seo/person';
 
 // Structured skills data for clean rendering loops
 const skillCategories = [
@@ -23,7 +24,27 @@ const skillCategories = [
 ];
 ---
 
-<Layout>
+<Layout
+    title='About Kevin "Anthony" Felker | Full-Stack Software Engineer'
+    description="Learn about Kevin Anthony Felker, a full-stack software engineer and web developer experienced with C#, ASP.NET Core, React, Astro, SQL Server, Azure, GitHub Actions, and production website development."
+    canonical="https://anthonyfelker.com/about"
+    keywords={[
+        "Kevin Anthony Felker",
+        "Anthony Felker",
+        "Full Stack Developer",
+        "Software Engineer",
+        "Web Developer",
+        "C# Developer",
+        "ASP.NET Core",
+        "React Developer",
+        "Astro Developer",
+        "SQL Server",
+        "Azure",
+        "Indiana Software Engineer",
+        "Terre Haute Web Developer",
+    ]}
+    schema={personSchema}
+>
     <div class="max-w-4xl mx-auto px-4 py-16 md:py-24 text-left">
         
         <!-- Page Title -->
@@ -94,38 +115,35 @@ const skillCategories = [
                         <div class="border-t border-slate-800/60 pt-4 mt-4">
                             <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Production Deployments</h4>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                <navlink>
-                                    <a 
-                                        href="https://southardhomesllc.com" 
-                                        target="_blank" 
-                                        class="block bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg hover:bg-slate-900/70 transition-colors duration-200"
-                                    >
-                                        <p class="text-xs font-medium text-white">Southard Homes</p>
-                                        <p class="text-[11px] text-slate-400 font-mono mt-1">Astro • Tailwind • TS</p>
-                                    </a>
-                                </navlink>
+                                <a 
+                                    href="https://southardhomesllc.com" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"  
+                                    class="block bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg hover:bg-slate-900/70 transition-colors duration-200"
+                                >
+                                    <p class="text-xs font-medium text-white">Southard Homes</p>
+                                    <p class="text-[11px] text-slate-400 font-mono mt-1">Astro • Tailwind • TS</p>
+                                </a>
 
-                                <navlink>
-                                    <a 
-                                        href="https://qualityelectricofindiana.com/" 
-                                        target="_blank" 
-                                        class="block bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg hover:bg-slate-900/70 transition-colors duration-200"
-                                    >
-                                        <p class="text-xs font-medium text-white">Quality Electric of IN</p>
-                                        <p class="text-[11px] text-slate-400 font-mono mt-1">Astro • Tailwind • TS</p>
-                                    </a>
-                                </navlink>
+                                <a 
+                                    href="https://qualityelectricofindiana.com/" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"  
+                                    class="block bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg hover:bg-slate-900/70 transition-colors duration-200"
+                                >
+                                    <p class="text-xs font-medium text-white">Quality Electric of IN</p>
+                                    <p class="text-[11px] text-slate-400 font-mono mt-1">Astro • Tailwind • TS</p>
+                                </a>
 
-                                <navlink>
-                                    <a 
-                                        href="https://qualitylandscapeofindiana.com/" 
-                                        target="_blank" 
-                                        class="block bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg hover:bg-slate-900/70 transition-colors duration-200"
-                                    >
-                                        <p class="text-xs font-medium text-white">Quality Landscape</p>
-                                        <p class="text-[11px] text-slate-400 font-mono mt-1">Astro • Tailwind • TS</p>
-                                    </a>
-                                </navlink>
+                                <a 
+                                    href="https://qualitylandscapeofindiana.com/" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"   
+                                    class="block bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg hover:bg-slate-900/70 transition-colors duration-200"
+                                >
+                                    <p class="text-xs font-medium text-white">Quality Landscape</p>
+                                    <p class="text-[11px] text-slate-400 font-mono mt-1">Astro • Tailwind • TS</p>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -176,9 +194,10 @@ const skillCategories = [
         <div class="text-center mt-16">
             <a 
                 href="/projects" 
-                class="inline-block bg-cyan-600 hover:bg-cyan-500 
-                text-white text-sm font-medium px-6 py-3 rounded-lg hover:scale-110
-                transition-all duration-400 text-center shadow-md shadow-cyan-950/20"
+                class="inline-block bg-cyan-700 hover:bg-cyan-600
+                text-white text-sm font-semibold px-6 py-3 rounded-lg hover:scale-105
+                transition-all duration-300 text-center shadow-md shadow-cyan-950/20
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
             >
                 View My Projects
             </a>

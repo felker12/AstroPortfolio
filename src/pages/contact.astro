@@ -2,9 +2,26 @@
 import Layout from "@layouts/Layout.astro";
 import Footer from "@components/Footer.astro";
 import ContactForm from "@components/ContactForm.astro";
+import { personSchema } from '@data/seo/person';
 ---
 
-<Layout>
+<Layout
+    title='Contact Kevin "Anthony" Felker | Full-Stack Developer'
+    description="Contact Kevin Anthony Felker for full-stack software engineering, web development, production website work, C#, ASP.NET Core, React, Astro, Azure, and GitHub Actions projects."
+    canonical="https://anthonyfelker.com/contact"
+    keywords={[
+        "Contact Kevin Anthony Felker",
+        "Anthony Felker contact",
+        "Full Stack Developer Indiana",
+        "Web Developer Terre Haute",
+        "C# Developer",
+        "ASP.NET Core Developer",
+        "React Developer",
+        "Astro Developer",
+        "Software Engineer Indiana"
+    ]}
+    schema={personSchema}
+>
     <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
         
         <!-- Section Header -->
@@ -38,6 +55,7 @@ import ContactForm from "@components/ContactForm.astro";
                         href="https://github.com/felker12" 
                         target="_blank" 
                         rel="noopener noreferrer" 
+                        aria-label="Open GitHub profile"
                         class="p-2.5 bg-slate-900/60 border border-slate-800 rounded-lg text-cyan-400 shadow-inner shrink-0 hover:border-cyan-500/50 hover:text-cyan-300 hover:bg-slate-900/90 transition-all duration-200"
                         title="Open GitHub Profile"
                     >
@@ -46,8 +64,12 @@ import ContactForm from "@components/ContactForm.astro";
                         </svg>
                     </a>
                     <div>
-                        <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">Source Control</h3>
-                        <a href="https://github.com/felker12" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-white hover:text-cyan-400 transition-colors duration-200">
+                        <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono">Source Control</h3>
+                        <a href="https://github.com/felker12" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        aria-label="Open GitHub profile"
+                        class="text-sm font-medium text-white hover:text-cyan-400 transition-colors duration-200">
                             github.com/felker12
                         </a>
                     </div>
@@ -57,9 +79,10 @@ import ContactForm from "@components/ContactForm.astro";
                 <div class="bg-black/50 border border-slate-800/90 p-5 rounded-xl backdrop-blur-sm flex items-center gap-4">
                     <!-- Clickable Icon Wrapper -->
                     <a 
-                        href="https://www.google.com/maps/place/Quality+Roofing+of+Indiana+LLC/@39.506166,-87.3578661,16.08z" 
+                        href="https://www.google.com/maps/search/Terre+Haute+Indiana"
                         target="_blank" 
                         rel="noopener noreferrer" 
+                        aria-label="Open map for Terre Haute Indiana"
                         class="p-2.5 bg-slate-900/60 border border-slate-800 rounded-lg text-cyan-400 shadow-inner shrink-0 hover:border-cyan-500/50 hover:text-cyan-300 hover:bg-slate-900/90 transition-all duration-200"
                         title="Open Map Location"
                     >
@@ -69,8 +92,11 @@ import ContactForm from "@components/ContactForm.astro";
                         </svg>
                     </a>
                     <div>
-                        <h3 class="text-xs font-semibold text-slate-400 uppercase tracking-wider font-mono">Base Region</h3>
-                        <a href="https://www.google.com/maps/place/Quality+Roofing+of+Indiana+LLC/@39.506166,-87.3578661,16.08z" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-white hover:text-cyan-400 transition-colors duration-200">
+                        <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider font-mono">Base Region</h3>
+                        <a href="https://www.google.com/maps/search/Terre+Haute+Indiana" 
+                        target="_blank" rel="noopener noreferrer"
+                        aria-label="Open map for Terre Haute Indiana" 
+                        class="text-sm font-medium text-white hover:text-cyan-400 transition-colors duration-200">
                             Terre Haute / Greater Indianapolis
                         </a>
                     </div>
