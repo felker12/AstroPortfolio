@@ -94,18 +94,38 @@ const skillCategories = [
                         <div class="border-t border-slate-800/60 pt-4 mt-4">
                             <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Production Deployments</h4>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                <div class="bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg">
-                                    <p class="text-xs font-medium text-white">Southard Homes</p>
-                                    <p class="text-[11px] text-slate-400 font-mono mt-1">Astro • Tailwind • TS</p>
-                                </div>
-                                <div class="bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg">
-                                    <p class="text-xs font-medium text-white">Quality Electric of IN</p>
-                                    <p class="text-[11px] text-slate-400 font-mono mt-1">Astro • Tailwind • TS</p>
-                                </div>
-                                <div class="bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg">
-                                    <p class="text-xs font-medium text-white">Quality Landscape</p>
-                                    <p class="text-[11px] text-slate-400 font-mono mt-1">Launching Soon</p>
-                                </div>
+                                <navlink>
+                                    <a 
+                                        href="https://southardhomesllc.com" 
+                                        target="_blank" 
+                                        class="block bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg hover:bg-slate-900/70 transition-colors duration-200"
+                                    >
+                                        <p class="text-xs font-medium text-white">Southard Homes</p>
+                                        <p class="text-[11px] text-slate-400 font-mono mt-1">Astro • Tailwind • TS</p>
+                                    </a>
+                                </navlink>
+
+                                <navlink>
+                                    <a 
+                                        href="https://qualityelectricofindiana.com/" 
+                                        target="_blank" 
+                                        class="block bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg hover:bg-slate-900/70 transition-colors duration-200"
+                                    >
+                                        <p class="text-xs font-medium text-white">Quality Electric of IN</p>
+                                        <p class="text-[11px] text-slate-400 font-mono mt-1">Astro • Tailwind • TS</p>
+                                    </a>
+                                </navlink>
+
+                                <navlink>
+                                    <a 
+                                        href="https://qualitylandscapeofindiana.com/" 
+                                        target="_blank" 
+                                        class="block bg-slate-900/40 border border-slate-800/60 p-3 rounded-lg hover:bg-slate-900/70 transition-colors duration-200"
+                                    >
+                                        <p class="text-xs font-medium text-white">Quality Landscape</p>
+                                        <p class="text-[11px] text-slate-400 font-mono mt-1">Astro • Tailwind • TS</p>
+                                    </a>
+                                </navlink>
                             </div>
                         </div>
                     </div>
@@ -164,6 +184,7 @@ const skillCategories = [
             </a>
         </div>
 
+        <!-- Footer Component -->
         <Footer />
     </div>
 </Layout>
