@@ -1,0 +1,68 @@
+---
+interface ProjectLink {
+  href: string;
+  label: string;
+  ariaLabel: string;
+}
+
+interface Props {
+  pathname: string;
+  projectLinks: ProjectLink[];
+}
+
+const { pathname, projectLinks } = Astro.props;
+---
+
+<ul
+  class="hidden md:block absolute left-0 top-full pt-3 min-w-56
+  opacity-0 invisible translate-y-2 pointer-events-none
+  group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto
+  group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:pointer-events-auto
+  transition-all duration-200"
+>
+  <li class="rounded-xl border border-slate-800/90 bg-slate-950/95 backdrop-blur-md shadow-xl overflow-hidden">
+    <ul>
+      {projectLinks.map((project) => {
+        const projectActive = pathname.startsWith(project.href);
+
+        return (
+          <li>
+            <a
+              href={project.href}
+              aria-label={project.ariaLabel}
+              aria-current={projectActive ? "page" : undefined}
+              class={`block px-4 py-3 text-sm transition-colors duration-200
+                focus-visible:outline-none focus-visible:bg-slate-900/70 focus-visible:text-cyan-400
+                ${projectActive
+                  ? "text-cyan-400 bg-slate-900/70"
+                  : "text-slate-300 hover:text-white hover:bg-slate-900/70"}`}
+            >
+              {project.label}
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </li>
+</ul>
+
+<ul class="md:hidden mt-2 ml-4 space-y-2 border-l border-slate-800 pl-4">
+  {projectLinks.map((project) => {
+    const projectActive = pathname.startsWith(project.href);
+
+    return (
+      <li>
+        <a
+          href={project.href}
+          aria-label={project.ariaLabel}
+          aria-current={projectActive ? "page" : undefined}
+          class={`block rounded text-xs transition-colors duration-200
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900
+            ${projectActive ? "text-cyan-400 font-semibold" : "text-slate-300 hover:text-white"}`}
+        >
+          {project.label}
+        </a>
+      </li>
+    );
+  })}
+</ul>
