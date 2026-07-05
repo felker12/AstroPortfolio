@@ -1,13 +1,15 @@
 ---
+import {type NavLink} from "@data/navbar/nav.ts";
+
 interface Props {
   href: string;
   label: string;
   ariaLabel: string;
+  children?: NavLink[];
   isActive: boolean;
-  hasDropdown?: boolean;
 }
 
-const { href, label, ariaLabel, isActive, hasDropdown = false } = Astro.props;
+const { href, label, ariaLabel, isActive, children } = Astro.props;
 ---
 
 <a
@@ -20,7 +22,7 @@ const { href, label, ariaLabel, isActive, hasDropdown = false } = Astro.props;
 >
   {label}
 
-  {hasDropdown && (
+  {(children?.length ?? 0) > 0  && (
     <svg
       class="w-3 h-3 stroke-current transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
       fill="none"

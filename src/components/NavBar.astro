@@ -1,22 +1,58 @@
 ---
 import NavItem from "./NavItem.astro";
 import ProjectDropdown from "./ProjectDropdown.astro";
+import {type NavLink} from "@data/navbar/nav.ts";
 
 const pathname = Astro.url.pathname;
 
-const navLinks = [
-  { href: "/", label: "Home", ariaLabel: "Home – Kevin Anthony Felker Portfolio" },
-  { href: "/about", label: "About", ariaLabel: "About Kevin Anthony Felker" },
-  { href: "/projects", label: "Projects", ariaLabel: "Software Development Projects", hasDropdown: true },
-  { href: "/skills", label: "Skills", ariaLabel: "Technical Skills" },
-  { href: "/contact", label: "Contact", ariaLabel: "Contact Kevin Anthony Felker" },
-];
-
-const projectLinks = [
-  { href: "/projects/portfolio-generator", label: "Portfolio Generator", ariaLabel: "Portfolio Generator Case Study" },
-  { href: "/projects/time-punch", label: "Time Punch", ariaLabel: "Time Punch Management System Case Study" },
-  { href: "/projects/rpg-engine", label: "RPG Engine", ariaLabel: "Modular 2D RPG Engine Case Study" },
-  { href: "/projects/legacy-portfolio", label: "Legacy Portfolio", ariaLabel: "Legacy ASP.NET Portfolio Case Study" },
+const navLinks: NavLink[] = [
+  { 
+    href: "/", 
+    label: "Home", 
+    ariaLabel: "Home – Kevin Anthony Felker Portfolio" 
+  },
+  { 
+    href: "/about", 
+    label: "About", 
+    ariaLabel: "About Kevin Anthony Felker" 
+  },
+  { 
+    href: "/projects", 
+    label: "Projects", 
+    ariaLabel: "Software Development Projects", 
+    children: [
+        {
+            href: "/projects/portfolio-generator", 
+            label: "Portfolio Generator", 
+            ariaLabel: "Portfolio Generator Case Study" 
+            },
+            { 
+            href: "/projects/time-punch", 
+            label: "Time Punch", 
+            ariaLabel: "Time Punch Management System Case Study" 
+            },
+            { 
+            href: "/projects/rpg-engine", 
+            label: "RPG Engine", 
+            ariaLabel: "Modular 2D RPG Engine Case Study" 
+            },
+            { 
+            href: "/projects/legacy-portfolio", 
+            label: "Legacy Portfolio", 
+            ariaLabel: "Legacy ASP.NET Portfolio Case Study" 
+        }
+    ]
+  },
+  { 
+    href: "/skills", 
+    label: "Skills", 
+    ariaLabel: "Technical Skills" 
+  },
+  { 
+    href: "/contact", 
+    label: "Contact", 
+    ariaLabel: "Contact Kevin Anthony Felker" 
+  },
 ];
 ---
 
@@ -61,15 +97,14 @@ const projectLinks = [
         return (
           <li class="relative group py-2 px-4 md:p-0">
             <NavItem
-              href={link.href}
-              label={link.label}
-              ariaLabel={link.ariaLabel}
+              {...link}
               isActive={isActive}
-              hasDropdown={link.hasDropdown}
             />
 
-            {link.hasDropdown && (
-              <ProjectDropdown pathname={pathname} projectLinks={projectLinks} />
+            <!-- Project Dropdown -->
+            <!-- Render the dropdown if the link has children -->
+            {(link.children?.length ?? 0) > 0 && (
+              <ProjectDropdown pathname={pathname} projectLinks={link.children ?? []} />
             )}
           </li>
         );

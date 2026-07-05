@@ -1,13 +1,9 @@
 ---
-interface ProjectLink {
-  href: string;
-  label: string;
-  ariaLabel: string;
-}
+import {type NavLink} from "@data/navbar/nav.ts";
 
 interface Props {
   pathname: string;
-  projectLinks: ProjectLink[];
+  projectLinks: NavLink[];
 }
 
 const { pathname, projectLinks } = Astro.props;
@@ -22,7 +18,7 @@ const { pathname, projectLinks } = Astro.props;
 >
   <li class="rounded-xl border border-slate-800/90 bg-slate-950/95 backdrop-blur-md shadow-xl overflow-hidden">
     <ul>
-      {projectLinks.map((project) => {
+      {projectLinks?.map((project) => {
         const projectActive = pathname.startsWith(project.href);
 
         return (
@@ -47,7 +43,7 @@ const { pathname, projectLinks } = Astro.props;
 </ul>
 
 <ul class="md:hidden mt-2 ml-4 space-y-2 border-l border-slate-800 pl-4">
-  {projectLinks.map((project) => {
+  {projectLinks?.map((project) => {
     const projectActive = pathname.startsWith(project.href);
 
     return (
