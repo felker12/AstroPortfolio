@@ -1,59 +1,9 @@
 ---
 import NavItem from "./NavItem.astro";
 import ProjectDropdown from "./ProjectDropdown.astro";
-import {type NavLink} from "@data/navbar/nav.ts";
+import {navLinks} from "@data/navbar/nav.ts";
 
 const pathname = Astro.url.pathname;
-
-const navLinks: NavLink[] = [
-  { 
-    href: "/", 
-    label: "Home", 
-    ariaLabel: "Home – Kevin Anthony Felker Portfolio" 
-  },
-  { 
-    href: "/about", 
-    label: "About", 
-    ariaLabel: "About Kevin Anthony Felker" 
-  },
-  { 
-    href: "/projects", 
-    label: "Projects", 
-    ariaLabel: "Software Development Projects", 
-    children: [
-        {
-            href: "/projects/portfolio-generator", 
-            label: "Portfolio Generator", 
-            ariaLabel: "Portfolio Generator Case Study" 
-            },
-            { 
-            href: "/projects/time-punch", 
-            label: "Time Punch", 
-            ariaLabel: "Time Punch Management System Case Study" 
-            },
-            { 
-            href: "/projects/rpg-engine", 
-            label: "RPG Engine", 
-            ariaLabel: "Modular 2D RPG Engine Case Study" 
-            },
-            { 
-            href: "/projects/legacy-portfolio", 
-            label: "Legacy Portfolio", 
-            ariaLabel: "Legacy ASP.NET Portfolio Case Study" 
-        }
-    ]
-  },
-  { 
-    href: "/skills", 
-    label: "Skills", 
-    ariaLabel: "Technical Skills" 
-  },
-  { 
-    href: "/contact", 
-    label: "Contact", 
-    ariaLabel: "Contact Kevin Anthony Felker" 
-  },
-];
 ---
 
 <header class="bg-black/50 backdrop-blur-md text-slate-200 font-sans border-b border-slate-800/40 sticky top-0 z-50">
