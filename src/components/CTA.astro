@@ -1,0 +1,41 @@
+---
+import { cta } from "@data/components/Cta";
+---
+
+<section class="reveal-target relative flex min-h-svh items-center justify-center px-4 py-28 text-center sm:px-[clamp(1.25rem,6vw,7rem)]">
+  <div class="reveal relative z-2 w-full max-w-170">
+    <p class="mb-3 font-mono text-xs uppercase tracking-[0.13em] text-ice-400 before:content-['//_'] before:text-ice-800">
+      {cta.eyebrow}
+    </p>
+
+    <h2 class="mb-5 font-display text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.08] tracking-[-0.04em] text-ink">
+      {cta.title}
+    </h2>
+
+    <p class="mx-auto mb-7 max-w-[54ch] text-[clamp(0.98rem,1.5vw,1.08rem)] text-ink-dim">
+      {cta.body}
+    </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-3.5 max-[430px]:flex-col max-[430px]:items-stretch">
+      <a
+        href={cta.primary.href}
+        class="inline-flex min-h-12 items-center justify-center rounded-xl border border-ice-300/50 bg-linear-to-br from-[rgba(21,133,190,0.72)] to-[rgba(23,92,135,0.62)] px-5 font-mono text-sm font-semibold tracking-wide text-ice-50 no-underline shadow-[0_0_32px_rgba(42,178,255,0.2)] transition-all duration-150 hover:-translate-y-0.5 hover:border-ice-200 hover:shadow-[0_0_42px_rgba(86,211,255,0.3)] max-[430px]:w-full"
+      >
+        {cta.primary.label}
+      </a>
+      <a
+        href={cta.secondary.href}
+        class="inline-flex min-h-12 items-center justify-center rounded-xl border border-ice-100/20 bg-[rgba(4,25,42,0.5)] px-5 font-mono text-sm tracking-wide text-ice-200 no-underline backdrop-blur-md transition-all duration-150 hover:-translate-y-0.5 hover:border-ice-300/50 hover:bg-[rgba(8,48,75,0.65)] hover:text-ice-50 max-[430px]:w-full"
+      >
+        {cta.secondary.label}
+      </a>
+    </div>
+
+    <div class="mt-9 font-display text-xl font-semibold text-ice-200">
+      {cta.signature.name}
+      <span class="mt-1.5 block font-mono text-[0.62rem] font-normal uppercase tracking-widest text-ink-dim">
+        {cta.signature.label}
+      </span>
+    </div>
+  </div>
+</section>

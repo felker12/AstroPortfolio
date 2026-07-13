@@ -1,6 +1,8 @@
 ---
-import NavBar from '../components/NavBar.astro';
-import '../styles/global.css';
+import NavBar from '@components/NavBar.astro';
+import '@styles/global.css';
+import LoadingScreen from '@components/LoadingScreen.astro';
+import Footer from '@components/Footer.astro';
 
 interface Props {
   title?: string;
@@ -31,6 +33,7 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
     <link rel="canonical" href={canonical} />
 
     <meta name="author" content='Kevin "Anthony" Felker' />
@@ -67,11 +70,53 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
     )}
   </head>
 
-  <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased">
+  <body class="min-h-screen antialiased">
+    <LoadingScreen />
+
+    <!-- Scroll progress -->
+    <div class="progress fixed inset-x-0 top-0 z-30 h-0.5 bg-ice-200/6" aria-hidden="true">
+      <div class="progress__bar h-full w-0 origin-left 
+      bg-linear-to-r from-ice-700 via-ice-400 to-ice-50 shadow-[0_0_15px_rgba(77,205,255,0.8)]"></div>
+    </div>
+
+    <!-- Fixed frame corners -->
+    <div
+      id="scroll-indicator"
+      class="fixed inset-0 z-6 pointer-events-none transition-opacity duration-300"
+      aria-hidden="true"
+    >
+      <span
+        class="absolute bottom-6 right-6 text-right
+        font-mono text-[0.8rem] uppercase tracking-[0.11em]
+        text-ice-400 max-sm:hidden"
+      >
+        scroll ↓
+      </span>
+    </div>
+
     <NavBar />
 
     <main class="grow">
       <slot />
     </main>
+    
+    <Footer />
+
+    <script>
+      import { initAurora } from "../scripts/aurora/index.js";
+      import { initUI } from "../scripts/ui/index.js";
+
+      function initializePage() {
+        initUI();
+
+        try {
+          initAurora();
+        } catch (error) {
+          console.error("Aurora initialization failed:", error);
+        }
+      }
+
+      initializePage();
+    </script>
   </body>
 </html>

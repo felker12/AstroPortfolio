@@ -1,0 +1,66 @@
+---
+import Logo from "@components/Logo.astro";
+---
+
+<!-- Loading screen -->
+<div
+    class=" loader fixed inset-0 z-100  flex flex-col items-center justify-center gap-4 
+    overflow-hidden  bg-bg-deep transition-[opacity,visibility] duration-700"
+    aria-hidden="true"
+>
+    <div
+    class="
+        pointer-events-none
+        absolute
+        inset-0
+        bg-[radial-gradient(circle_at_center,rgba(19,91,133,0.22),transparent_24rem)]
+    "
+    aria-hidden="true"
+    ></div>
+
+    <div class="relative z-1 flex items-center gap-1">
+    <Logo size={64} />
+    </div>
+
+    <div
+    class="loader__status relative z-1 font-mono text-[0.62rem] uppercase tracking-[0.15em] text-ink-dim"
+    >
+    Initializing portfolio
+    </div>
+
+    <div
+    class="loader__bar relative z-1 h-0.5 w-[min(260px,68vw)] overflow-hidden bg-ice-100/10"
+    >
+    <div
+        class="loader__bar-fill h-full w-0 
+        bg-linear-to-r from-ice-700 via-ice-400 to-ice-50 shadow-[0_0_15px_rgba(67,199,255,0.8)]"
+    ></div>
+    </div>
+
+    <div
+    class="loader__pct relative z-1 font-mono text-sm text-ice-400 drop-shadow-[0_0_12px_rgba(67,199,255,0.7)]"
+    >
+    0%
+    </div>
+</div>
+
+<!-- Scroll progress -->
+<div class="progress fixed inset-x-0 top-0 z-30 h-0.5 bg-ice-200/6" aria-hidden="true">
+    <div class="progress__bar h-full w-0 origin-left 
+    bg-linear-to-r from-ice-700 via-ice-400 to-ice-50 shadow-[0_0_15px_rgba(77,205,255,0.8)]"></div>
+</div>
+
+<!-- Fixed frame corners -->
+<div
+    id="scroll-indicator"
+    class="fixed inset-0 z-6 pointer-events-none transition-opacity duration-300"
+    aria-hidden="true"
+>
+    <span
+    class="absolute bottom-6 right-6 text-right
+    font-mono text-[0.8rem] uppercase tracking-[0.11em]
+    text-ice-400 max-sm:hidden"
+    >
+    scroll ↓
+    </span>
+</div>

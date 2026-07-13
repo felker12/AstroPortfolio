@@ -1,64 +1,174 @@
 ---
 import NavItem from "./NavItem.astro";
 import ProjectDropdown from "./ProjectDropdown.astro";
-import {navLinks} from "@data/navbar/nav.ts";
+import Logo from "./Logo.astro";
+import { navLinks } from "@data/navbar/nav";
 
 const pathname = Astro.url.pathname;
 ---
 
-<header class="bg-black/50 backdrop-blur-md text-slate-200 font-sans border-b border-slate-800/40 sticky top-0 z-50">
-  <nav class="flex flex-wrap items-center justify-between py-4 px-6 max-w-7xl mx-auto" aria-label="Primary navigation">
-    <div class="text-[1.1rem] font-medium tracking-wide">
-      <a
-        href="/"
-        aria-label="Home – Kevin Anthony Felker Portfolio"
-        class="text-white hover:text-cyan-400 transition-colors duration-200 no-underline"
+<header>
+  <nav
+    aria-label="Primary navigation"
+    class="nav fixed inset-x-0 top-0 z-20 flex min-h-72px items-center justify-between gap-4
+      border-b border-transparent
+      bg-[linear-gradient(180deg,rgba(1,8,16,0.88),rgba(1,8,16,0))]
+      px-4 py-4
+      transition-[background,backdrop-filter,border-color,box-shadow] duration-200
+      sm:px-[clamp(1rem,3vw,2.5rem)]
+      [&.is-scrolled]:border-ice-100/10
+      [&.is-scrolled]:bg-[rgba(1,9,17,0.78)]
+      [&.is-scrolled]:shadow-[0_8px_32px_rgba(0,0,0,0.18)]
+      [&.is-scrolled]:backdrop-blur-xl"
+  >
+    <!-- Brand -->
+    <a
+      href="/"
+      aria-label="Home: Kevin Anthony Felker Portfolio"
+      class="group flex items-center gap-3 no-underline"
+    >
+      <Logo />
+
+      <span
+        class="whitespace-nowrap text-[1.05rem] font-medium tracking-wide text-white
+          transition-colors duration-200 group-hover:text-cyan-300
+          max-sm:text-sm"
       >
         Kevin "Anthony" Felker
-      </a>
-    </div>
+      </span>
 
-    <input type="checkbox" id="menu-toggle" class="peer hidden" />
+      <span
+        class="rounded-md border border-ice-100/10 px-2 py-0.5
+          font-mono text-[0.56rem] font-medium tracking-[0.14em]
+          text-ink-dim max-lg:hidden"
+      >
+        PORTFOLIO
+      </span>
+    </a>
+
+    <!-- Mobile menu toggle -->
+    <input
+      type="checkbox"
+      id="menu-toggle"
+      class="peer sr-only"
+    />
 
     <label
       for="menu-toggle"
       aria-label="Toggle navigation menu"
-      class="flex flex-col gap-1.5 cursor-pointer md:hidden
-      peer-checked:[&>span:nth-child(1)]:translate-y-2 peer-checked:[&>span:nth-child(1)]:rotate-45
-      peer-checked:[&>span:nth-child(2)]:opacity-0
-      peer-checked:[&>span:nth-child(3)]:-translate-y-2 peer-checked:[&>span:nth-child(3)]:-rotate-45"
+      class="relative z-30 flex cursor-pointer flex-col gap-1.5 md:hidden
+        peer-checked:[&>span:nth-child(1)]:translate-y-2
+        peer-checked:[&>span:nth-child(1)]:rotate-45
+        peer-checked:[&>span:nth-child(2)]:opacity-0
+        peer-checked:[&>span:nth-child(3)]:-translate-y-2
+        peer-checked:[&>span:nth-child(3)]:-rotate-45"
     >
-      <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
-      <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
-      <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+      <span
+        class="h-0.5 w-6 bg-white transition-all duration-300"
+      ></span>
+      <span
+        class="h-0.5 w-6 bg-white transition-all duration-300"
+      ></span>
+      <span
+        class="h-0.5 w-6 bg-white transition-all duration-300"
+      ></span>
     </label>
 
+    <!-- Navigation links -->
     <ul
-      class="flex flex-col w-full list-none m-0 p-0 max-h-0 opacity-0 overflow-hidden
-      transition-all duration-400 ease-in-out
-      peer-checked:max-h-120 peer-checked:opacity-100 peer-checked:py-4
-      md:flex md:flex-row md:w-auto md:max-h-none md:opacity-100 md:overflow-visible md:gap-6 md:p-0"
+      class="absolute inset-x-0 top-full flex max-h-0 w-full flex-col
+        overflow-hidden border-b border-transparent
+        bg-[rgba(1,9,17,0.94)] p-0 opacity-0 backdrop-blur-xl
+        transition-[max-height,opacity,padding,border-color] duration-300 ease-in-out
+        peer-checked:max-h-128
+        peer-checked:border-ice-100/10
+        peer-checked:py-4
+        peer-checked:opacity-100
+        md:static md:flex md:w-auto md:max-h-none md:flex-row md:items-center
+        md:gap-6 md:overflow-visible md:border-0 md:bg-transparent
+        md:p-0 md:opacity-100 md:backdrop-blur-none"
     >
-      {navLinks.map((link) => {
-        const isActive = link.href === "/"
-          ? pathname === "/"
-          : pathname.startsWith(link.href);
+      {
+        navLinks.map((link) => {
+          const isActive =
+            link.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(link.href);
 
-        return (
-          <li class="relative group py-2 px-4 md:p-0">
-            <NavItem
-              {...link}
-              isActive={isActive}
-            />
+          const hasChildren = (link.children?.length ?? 0) > 0;
+          const isContact = link.href === "/contact";
 
-            <!-- Project Dropdown -->
-            <!-- Render the dropdown if the link has children -->
-            {(link.children?.length ?? 0) > 0 && (
-              <ProjectDropdown pathname={pathname} projectLinks={link.children ?? []} />
-            )}
-          </li>
-        );
-      })}
+          return (
+            <li class="group relative px-4 py-2 md:p-0">
+              {isContact ? (
+                <a
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  class:list={[
+                    `relative inline-flex w-full items-center justify-center gap-2
+                    overflow-hidden rounded-lg border px-4 py-2.5
+                    font-mono text-xs uppercase tracking-wide no-underline
+                    backdrop-blur-md transition-all duration-150
+                    before:h-1.5 before:w-1.5 before:shrink-0
+                    before:rounded-full before:bg-ice-400
+                    before:shadow-[0_0_12px_rgba(67,199,255,0.9)]
+                    hover:-translate-y-px
+                    hover:border-ice-300/60
+                    hover:bg-[rgba(11,63,96,0.6)]
+                    hover:text-ice-50
+                    hover:shadow-[0_0_32px_rgba(42,178,255,0.2)]
+                    md:w-auto`,
+                    isActive
+                      ? `border-ice-300/60 bg-[rgba(11,63,96,0.6)]
+                        text-ice-50 shadow-[0_0_24px_rgba(42,178,255,0.16)]`
+                      : `border-ice-100/20 bg-[rgba(5,28,46,0.42)]
+                        text-ice-200`,
+                  ]}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <NavItem
+                  {...link}
+                  isActive={isActive}
+                />
+              )}
+
+              {hasChildren && (
+                <ProjectDropdown
+                  pathname={pathname}
+                  projectLinks={link.children ?? []}
+                />
+              )}
+            </li>
+          );
+        })
+      }
     </ul>
   </nav>
 </header>
+
+<script>
+  const nav = document.querySelector(".nav");
+
+  const updateNavbar = () => {
+    nav?.classList.toggle("is-scrolled", window.scrollY > 16);
+  };
+
+  updateNavbar();
+  window.addEventListener("scroll", updateNavbar, { passive: true });
+
+  const menuToggle =
+    document.querySelector<HTMLInputElement>("#menu-toggle");
+
+  const navLinks =
+    document.querySelectorAll<HTMLAnchorElement>(".nav a");
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (menuToggle) {
+        menuToggle.checked = false;
+      }
+    });
+  });
+</script>
