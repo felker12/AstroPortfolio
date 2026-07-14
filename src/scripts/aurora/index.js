@@ -74,11 +74,13 @@ export function initAurora() {
   }
   window.addEventListener("resize", onResize);
 
-  const clock = new THREE.Clock();
+  const clock = new THREE.Timer();
   let lastTime = 0;
 
   function animate() {
-    const elapsed = clock.getElapsedTime();
+    clock.update();
+
+    const elapsed = clock.getElapsed();
     const deltaTime = Math.min(0.05, elapsed - lastTime);
     lastTime = elapsed;
 
