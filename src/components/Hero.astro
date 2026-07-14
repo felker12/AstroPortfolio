@@ -1,24 +1,28 @@
 ---
-import { site } from '@data/content';
-import { heroContent } from '@data/components/Hero';
+import { heroContent } from "@data/components/Hero";
 ---
 
-<section class="hero relative mx-auto flex min-h-svh max-w-375 items-center px-4 py-28 sm:px-[clamp(1.25rem,6vw,7rem)]
-  before:content-[''] before:absolute before:left-3 before:top-[15%] before:bottom-[15%] before:w-px before:bg-linear-to-b before:from-transparent before:via-ice-100/20 before:to-transparent sm:before:left-[clamp(0.75rem,3vw,2rem)]
-  after:content-[''] after:absolute after:bottom-[12%] after:left-4 after:h-px after:w-[min(42rem,74vw)] after:opacity-50 after:bg-linear-to-r after:from-ice-400 after:via-ice-100/10 after:to-transparent sm:after:left-[clamp(1.25rem,6vw,7rem)]"
+<section 
+  class="hero relative mx-auto flex min-h-svh max-w-375 
+  items-center px-4 py-28 sm:px-[clamp(1.25rem,6vw,7rem)]
+  before:content-[''] before:absolute before:left-3 before:top-[15%] 
+  before:bottom-[15%] before:w-px before:bg-linear-to-b before:from-transparent 
+  before:via-ice-100/20 before:to-transparent sm:before:left-[clamp(0.75rem,3vw,2rem)]
+  after:content-[''] after:absolute after:bottom-[12%] after:left-4 after:h-px after:w-[min(42rem,74vw)] 
+  after:opacity-50 after:bg-linear-to-r after:from-ice-400 
+  after:via-ice-100/10 after:to-transparent sm:after:left-[clamp(1.25rem,6vw,7rem)]"
 >
-  <div class="relative z-2 w-full max-w-225">
-    <div class="mb-4 inline-flex items-center gap-2.5 rounded-full border border-ice-100/10 bg-[rgba(4,24,40,0.54)] px-3 py-2 font-mono text-[0.66rem] tracking-wide text-ice-200 backdrop-blur-md">
-      <span class="h-[0.46rem] w-[0.46rem] rounded-full bg-ice-400 shadow-[0_0_0_4px_rgba(67,199,255,0.08),0_0_12px_rgba(67,199,255,0.9)] animate-[status-pulse_2.2s_ease-in-out_infinite]"></span>
-      {site.location}
-    </div>
-
-    <p class="mb-4 font-mono text-sm uppercase tracking-[0.12em] text-ice-400 before:content-['<_'] before:text-ice-800 after:content-['_/>'] after:text-ice-800">
+  <div class="relative z-2 w-full max-w-200">
+    <p
+      class="mb-4 font-mono text-sm tracking-[0.12em] text-ice-400
+        before:content-['<'] before:text-ice-800
+        after:content-['/>'] after:text-ice-800"
+    >
       {heroContent.eyebrow}
     </p>
 
     <h1
-      class="m-0 max-w-[15ch] text-balance font-display text-[clamp(3rem,8vw,7rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-ink
+      class="m-0 max-w-[15ch] text-balance font-display text-[clamp(2rem,6vw,6rem)] font-extrabold leading-[0.98] tracking-[-0.055em] text-ink
         [&_em]:not-italic [&_em]:text-ice-400 [&_em]:drop-shadow-[0_0_28px_rgba(67,199,255,0.28)] max-sm:max-w-[10ch]"
       set:html={heroContent.titleHtml}
     />

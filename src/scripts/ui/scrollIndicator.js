@@ -2,23 +2,26 @@ export function initScrollIndicator() {
   const indicator = document.getElementById("scroll-indicator");
   const footer = document.getElementById("contact");
 
-  if (!indicator || !footer) {
-    console.warn("Scroll indicator or footer could not be found.");
-    return;
+  if (!indicator) {
+    console.warn("Scroll indicator could not be found.");
   }
+
+  if (!footer) {
+    console.warn("Footer with id='contact' could not be found.");
+  }
+
+  if (!indicator || !footer) return;
 
   let ticking = false;
 
   function update() {
     const footerBounds = footer.getBoundingClientRect();
 
-    // Hide once any part of the footer enters the viewport.
     const footerIsVisible =
       footerBounds.top < window.innerHeight &&
       footerBounds.bottom > 0;
 
     indicator.style.opacity = footerIsVisible ? "0" : "1";
-
     ticking = false;
   }
 

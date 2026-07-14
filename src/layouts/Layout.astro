@@ -35,6 +35,10 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
     <link rel="canonical" href={canonical} />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <meta name="author" content='Kevin "Anthony" Felker' />
     <meta name="robots" content="index, follow" />
@@ -70,7 +74,7 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
     )}
   </head>
 
-  <body class="min-h-screen antialiased">
+  <body class="flex min-h-screen flex-col antialiased">
     <LoadingScreen />
 
     <!-- Scroll progress -->
@@ -96,7 +100,7 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
 
     <NavBar />
 
-    <main class="grow">
+    <main class="relative z-3 grow">
       <slot />
     </main>
     
@@ -116,7 +120,13 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
         }
       }
 
-      initializePage();
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializePage, {
+          once: true,
+        });
+      } else {
+        initializePage();
+      }
     </script>
   </body>
 </html>

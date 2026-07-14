@@ -1,5 +1,6 @@
 ---
 import { cta } from "@data/components/Cta";
+import { site } from '@data/components/SiteInfo'
 ---
 
 <section class="reveal-target relative flex min-h-svh items-center justify-center px-4 py-28 text-center sm:px-[clamp(1.25rem,6vw,7rem)]">
@@ -36,6 +37,11 @@ import { cta } from "@data/components/Cta";
       <span class="mt-1.5 block font-mono text-[0.62rem] font-normal uppercase tracking-widest text-ink-dim">
         {cta.signature.label}
       </span>
+    </div>
+
+     <div class="mt-4 inline-flex items-center gap-2.5 rounded-full border border-ice-100/10 bg-[rgba(4,24,40,0.54)] px-3 py-2 font-mono text-[0.66rem] tracking-wide text-ice-200 backdrop-blur-md">
+      <span class="h-[0.46rem] w-[0.46rem] rounded-full bg-ice-400 shadow-[0_0_0_4px_rgba(67,199,255,0.08),0_0_12px_rgba(67,199,255,0.9)] animate-[status-pulse_2.2s_ease-in-out_infinite]"></span>
+      {site.location}
     </div>
   </div>
 </section>

@@ -2,8 +2,12 @@
 import Layout from '@layouts/Layout.astro'; 
 import BackgroundCanvas from "@components/BackgroundCanvas.astro";
 import { personSchema } from '@data/seo/person';
-import { displayItems, websiteSchema, type displayItem } from '@data/pages/index';
+import { websiteSchema, } from '@data/pages/index';
 import Hero from '@components/Hero.astro';
+import StatsGrid from '@components/StatsGrid.astro';
+import SectionCard from '@components/SectionCard.astro';
+import { highlights } from '@data/components/HomepageHighlights'
+import { stats } from '@data/components/Stats'
 import CTA from '@components/CTA.astro';
 ---
 
@@ -13,31 +17,17 @@ import CTA from '@components/CTA.astro';
   canonical='https://anthonyfelker.com/'
   schema={[personSchema, websiteSchema]}
 >
-  <BackgroundCanvas />
-  <Hero />
-  <CTA />
+  <BackgroundCanvas class="z-0" />
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mx-auto px-2">
+  <Hero />
+
   {
-      displayItems.map((item: displayItem) => (
-          <div class="flex flex-col bg-black/50 border border-slate-800/90
-          shadow-lg p-6 rounded-xl justify-between hover:border-slate-700/50 hover:-translate-y-1
-          transition-all duration-300 ease-out backdrop-blur-sm">
-              <div>
-                  <h3 class="text-xl font-semibold text-white mb-3">{item.title}</h3>
-                  <p class="text-slate-400 text-sm leading-relaxed mb-6">{item.text}</p>
-              </div>
-              <a 
-                href={item.linkItem.link} 
-                class="inline-block bg-cyan-700 hover:bg-cyan-600
-                text-white text-sm font-semibold px-5 py-2.5 rounded-lg hover:scale-105
-                transition-all duration-300 self-center text-center shadow-md shadow-cyan-950/20
-                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
-              >
-                {item.linkItem.title}
-            </a>
-          </div>
-      ))
-    }
-    </div>
+    highlights.map((highlight) => (
+      <SectionCard {...highlight} />
+    ))
+  }
+
+  <StatsGrid {stats} />
+
+  <CTA />
 </Layout>

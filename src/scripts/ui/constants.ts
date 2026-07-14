@@ -1,0 +1,1 @@
+export const LOADER_STORAGE_KEY = "portfolio-loader-shown";

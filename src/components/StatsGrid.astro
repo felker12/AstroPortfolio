@@ -1,0 +1,92 @@
+---
+import type { StatsContent } from "@data/components/Stats";
+
+interface Props {
+  stats: StatsContent;
+}
+
+const { stats } = Astro.props;
+---
+
+<section
+  class="reveal-target relative flex min-h-svh items-center justify-center
+    px-4 py-28 sm:px-[clamp(1.25rem,6vw,7rem)]
+
+    before:absolute before:bottom-[15%] before:left-3 before:top-[15%]
+    before:w-px before:bg-linear-to-b
+    before:from-transparent before:via-ice-100/20 before:to-transparent
+    before:content-['']
+
+    sm:before:left-[clamp(0.75rem,3vw,2rem)]"
+>
+  <div class="reveal relative z-2 w-full max-w-260">
+    <div class="mb-8 max-w-162.5">
+      <p
+        class="m-0 mb-3 font-mono text-xs tracking-[0.12em]
+          text-ice-400 before:text-ice-800 before:content-['//_']"
+      >
+        {stats.number}
+      </p>
+
+      <p
+        class="m-0 mb-3 font-mono text-[0.66rem]
+          tracking-[0.12em] text-ink-dim
+          before:mr-1 before:text-ice-800 before:content-['[']
+          after:ml-1 after:text-ice-800 after:content-[']']"
+      >
+        {stats.eyebrow}
+      </p>
+
+      <h2
+        class="m-0 font-display text-[clamp(2rem,5vw,3.5rem)]
+          font-bold leading-[1.08] tracking-[-0.04em] text-ink
+          [&_em]:not-italic [&_em]:text-ice-400
+          [&_em]:drop-shadow-[0_0_28px_rgba(67,199,255,0.28)]"
+        set:html={stats.titleHtml}
+      />
+    </div>
+
+    <div class="grid grid-cols-2 gap-3.5 sm:grid-cols-4">
+      {
+        stats.items.map((stat) => (
+          <article
+            class="panel-tilt relative min-h-37.5 overflow-hidden
+              rounded-xl border border-ice-100/10 p-5
+              bg-[linear-gradient(145deg,rgba(23,98,139,0.15),rgba(3,18,31,0.52))]
+              transition-all duration-150
+
+              hover:-translate-y-1 hover:border-ice-300/35
+              hover:bg-[linear-gradient(145deg,rgba(23,112,161,0.24),rgba(4,25,42,0.64))]
+              hover:shadow-[0_18px_42px_rgba(0,8,16,0.3)]
+
+              before:absolute before:left-5 before:top-0
+              before:h-px before:w-12 before:bg-ice-400
+              before:shadow-[0_0_12px_rgba(67,199,255,0.7)]
+              before:content-['']
+
+              after:absolute after:-bottom-10 after:-right-10
+              after:h-28 after:w-28 after:rounded-full
+              after:border after:border-ice-400/8
+              after:content-['']"
+          >
+            <strong
+              class="mb-2.5 block font-display
+                text-[clamp(2rem,4vw,3rem)] font-bold
+                leading-none tracking-tighter text-ice-50
+                drop-shadow-[0_0_20px_rgba(67,199,255,0.24)]"
+            >
+              {stat.value}
+            </strong>
+
+            <span
+              class="block max-w-[18ch] text-sm
+                leading-[1.45] text-ink-dim"
+            >
+              {stat.label}
+            </span>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

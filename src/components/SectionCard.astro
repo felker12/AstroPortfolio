@@ -1,0 +1,115 @@
+---
+import type { Highlight } from "@data/components/HomepageHighlights";
+
+type Props = Highlight;
+
+const {
+  number,
+  eyebrow,
+  titleHtml,
+  body,
+  cta,
+  href,
+  tags,
+  align = "left",
+} = Astro.props;
+---
+
+<section
+  class:list={[
+    `reveal-target relative flex min-h-svh items-center
+    px-4 py-28 sm:px-[clamp(1.25rem,6vw,7rem)]
+
+    before:absolute before:bottom-[15%] before:left-3 before:top-[15%]
+    before:w-px before:bg-linear-to-b
+    before:from-transparent before:via-ice-100/20 before:to-transparent
+    before:content-['']
+
+    sm:before:left-[clamp(0.75rem,3vw,2rem)]`,
+
+    align === "right" && "justify-end",
+  ]}
+>
+  <article
+    class="reveal panel-tilt pointer-glow relative z-2 w-full max-w-155
+      rounded-2xl border border-ice-100/10 p-6
+      bg-[linear-gradient(135deg,rgba(18,76,111,0.12),transparent_48%),rgba(3,19,32,0.68)]
+      shadow-[inset_0_1px_0_rgba(222,247,255,0.06),0_24px_70px_rgba(0,7,14,0.38)]
+      backdrop-blur-xl
+
+      before:absolute before:-top-px before:left-8 before:h-px before:w-20
+      before:bg-linear-to-r before:from-transparent
+      before:via-ice-400 before:to-transparent
+      before:shadow-[0_0_14px_rgba(67,199,255,0.72)]
+      before:content-['']
+
+      sm:p-[clamp(1.4rem,4vw,2.5rem)]"
+  >
+    <div class="mb-3 flex items-center gap-3.5">
+      <p
+        class="m-0 font-mono text-xs tracking-[0.12em] text-ice-400
+          before:text-ice-800 before:content-['//_']"
+      >
+        {number}
+      </p>
+
+      <p
+        class="m-0 font-mono text-[0.66rem] tracking-[0.12em] text-ink-dim
+          before:mr-1 before:text-ice-800 before:content-['[']
+          after:ml-1 after:text-ice-800 after:content-[']']"
+      >
+        {eyebrow}
+      </p>
+    </div>
+
+    <h2
+      class="mb-5 font-display text-[clamp(2rem,5vw,3.5rem)]
+        font-bold leading-[1.08] tracking-[-0.04em] text-ink
+        [&_em]:not-italic [&_em]:text-ice-400
+        [&_em]:drop-shadow-[0_0_28px_rgba(67,199,255,0.28)]"
+      set:html={titleHtml}
+    />
+
+    <p
+      class="mb-7 max-w-[54ch]
+        text-[clamp(0.98rem,1.5vw,1.08rem)]
+        leading-relaxed text-ink-dim"
+    >
+      {body}
+    </p>
+
+    <ul
+      class="mb-7 flex list-none flex-wrap gap-2 p-0"
+      aria-label={`${eyebrow} technologies and skills`}
+    >
+      {
+        tags.map((tag) => (
+          <li
+            class="rounded-md border border-ice-100/10
+              bg-[rgba(5,29,47,0.58)] px-2.5 py-1.5
+              font-mono text-xs tracking-wide text-ice-200"
+          >
+            {tag}
+          </li>
+        ))
+      }
+    </ul>
+
+    <a
+      href={href}
+      aria-label={`${cta}: ${eyebrow}`}
+      class="inline-flex items-center gap-2.5 border-b
+        border-ice-100/20 pb-1.5 font-mono text-sm
+        tracking-wide text-ice-200 no-underline
+        transition-all duration-150
+        hover:gap-3.5 hover:border-ice-400 hover:text-ice-50
+
+        focus-visible:rounded-sm focus-visible:outline-none
+        focus-visible:ring-2 focus-visible:ring-ice-400
+        focus-visible:ring-offset-4 focus-visible:ring-offset-bg-deep"
+    >
+      {cta}
+      <span aria-hidden="true">→</span>
+    </a>
+  </article>
+</section>

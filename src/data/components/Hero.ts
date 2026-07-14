@@ -10,11 +10,26 @@ export interface HeroContent {
 }
 
 export const heroContent: HeroContent = {
-  eyebrow: "C# · .NET · TypeScript · React · Astro",
-  titleHtml: "I build dependable software and <em>modern web experiences.</em>",
+  eyebrow: "Software Engineer · Full-Stack Developer",
+  titleHtml:
+    "I build dependable software and <em>modern web experiences.</em>",
   body:
-    "I'm Kevin Anthony Felker, a software engineer and web developer focused on full-stack .NET applications, production websites, API development, and solving real-world technical problems.",
-  primaryCta: { label: "View my work", href: "/projects" },
-  secondaryCta: { label: "More about me", href: "/about" },
-  tech: ["ASP.NET Core", "C#", "React", "TypeScript", "SQL", "Azure"],
+    "My work includes production websites and full-stack software, with an emphasis on performance, maintainability, and solving real business problems.",
+  primaryCta: {
+    label: "View my work",
+    href: "/projects",
+  },
+  secondaryCta: {
+    label: "More about me",
+    href: "/about",
+  },
+  tech: [
+    "ASP.NET Core",
+    "C#",
+    "React",
+    "TypeScript",
+    "SQL",
+    "Astro",
+    "Azure",
+  ],
 };

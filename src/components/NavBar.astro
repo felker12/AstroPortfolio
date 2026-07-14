@@ -35,15 +35,7 @@ const pathname = Astro.url.pathname;
           max-sm:text-sm"
       >
         Kevin "Anthony" Felker
-      </span>
-
-      <span
-        class="rounded-md border border-ice-100/10 px-2 py-0.5
-          font-mono text-[0.56rem] font-medium tracking-[0.14em]
-          text-ink-dim max-lg:hidden"
-      >
-        PORTFOLIO
-      </span>
+      </span> 
     </a>
 
     <!-- Mobile menu toggle -->
@@ -103,11 +95,12 @@ const pathname = Astro.url.pathname;
               {isContact ? (
                 <a
                   href={link.href}
+                  aria-label={link.ariaLabel}
                   aria-current={isActive ? "page" : undefined}
                   class:list={[
                     `relative inline-flex w-full items-center justify-center gap-2
                     overflow-hidden rounded-lg border px-4 py-2.5
-                    font-mono text-xs uppercase tracking-wide no-underline
+                    font-mono text-xs tracking-wide no-underline
                     backdrop-blur-md transition-all duration-150
                     before:h-1.5 before:w-1.5 before:shrink-0
                     before:rounded-full before:bg-ice-400
@@ -117,6 +110,11 @@ const pathname = Astro.url.pathname;
                     hover:bg-[rgba(11,63,96,0.6)]
                     hover:text-ice-50
                     hover:shadow-[0_0_32px_rgba(42,178,255,0.2)]
+                    focus-visible:outline-none
+                    focus-visible:ring-2
+                    focus-visible:ring-ice-400
+                    focus-visible:ring-offset-2
+                    focus-visible:ring-offset-slate-950
                     md:w-auto`,
                     isActive
                       ? `border-ice-300/60 bg-[rgba(11,63,96,0.6)]

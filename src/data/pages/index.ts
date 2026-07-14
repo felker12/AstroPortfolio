@@ -39,6 +39,6 @@ export const displayItems: Array<displayItem> = [
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Kevin Anthony Felker Portfolio",
-  url: "https://anthonyfelker.com"
+  name: 'Kevin "Anthony" Felker Portfolio',
+  url: "https://anthonyfelker.com/",
 };

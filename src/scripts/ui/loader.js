@@ -1,4 +1,5 @@
 import { REDUCED_MOTION } from "../aurora/constants.js";
+import { LOADER_STORAGE_KEY } from "./constants.js";
 
 const STATUS_MESSAGES = [
   "Initializing portfolio",
@@ -16,20 +17,39 @@ export function initLoader() {
 
   if (!loader) return;
 
-  if (REDUCED_MOTION) {
-    if (fill) fill.style.width = "100%";
-    if (pct) pct.textContent = "100%";
-    if (status) status.textContent = "System ready";
+  try {
+    if (sessionStorage.getItem(LOADER_STORAGE_KEY) === "true") {
+      loader.remove();
+      document.body.classList.add("page-ready");
+      return;
+    }
+  } catch {
+    // Continue normally if sessionStorage is unavailable.
+  }
 
+  function finishLoader(delay = 0) {
     window.setTimeout(() => {
+      try {
+        sessionStorage.setItem(LOADER_STORAGE_KEY, "true");
+      } catch {
+        // Continue normally if sessionStorage is unavailable.
+      }
+
       loader.classList.add("is-hidden");
       document.body.classList.add("page-ready");
 
       window.setTimeout(() => {
         loader.remove();
       }, 750);
-    }, 100);
+    }, delay);
+  }
 
+  if (REDUCED_MOTION) {
+    if (fill) fill.style.width = "100%";
+    if (pct) pct.textContent = "100%";
+    if (status) status.textContent = "System ready";
+
+    finishLoader(100);
     return;
   }
 
@@ -38,32 +58,46 @@ export function initLoader() {
 
   function tick() {
     const remaining = 100 - progress;
-    const increment = remaining > 35 ? Math.random() * 12 + 4 : Math.random() * 5 + 1;
+
+    const increment =
+      remaining > 35
+        ? Math.random() * 12 + 4
+        : Math.random() * 5 + 1;
+
     progress = Math.min(100, progress + increment);
 
-    if (fill) fill.style.width = `${progress}%`;
-    if (pct) pct.textContent = `${Math.floor(progress)}%`;
+    if (fill) {
+      fill.style.width = `${progress}%`;
+    }
+
+    if (pct) {
+      pct.textContent = `${Math.floor(progress)}%`;
+    }
 
     const nextIndex = Math.min(
       STATUS_MESSAGES.length - 1,
       Math.floor((progress / 100) * STATUS_MESSAGES.length)
     );
+
     if (status && nextIndex !== statusIndex) {
       statusIndex = nextIndex;
       status.textContent = STATUS_MESSAGES[statusIndex];
     }
 
     if (progress >= 100) {
-      if (status) status.textContent = "System ready";
-      window.setTimeout(() => {
-        loader.classList.add("is-hidden");
-        document.body.classList.add("page-ready");
-        window.setTimeout(() => loader.remove(), 750);
-      }, 250);
+      if (status) {
+        status.textContent = "System ready";
+      }
+
+      finishLoader(250);
       return;
     }
 
-    const delay = progress < 75 ? Math.random() * 90 + 70 : Math.random() * 70 + 40;
+    const delay =
+      progress < 75
+        ? Math.random() * 90 + 70
+        : Math.random() * 70 + 40;
+
     window.setTimeout(tick, delay);
   }
 
