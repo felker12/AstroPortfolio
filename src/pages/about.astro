@@ -1,6 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import { personSchema } from '@data/seo/person';
+import BackgroundCanvas from '@components/BackgroundCanvas.astro';
 
 // Structured skills data for clean rendering loops
 const skillCategories = [
@@ -44,6 +45,8 @@ const skillCategories = [
     ]}
     schema={personSchema}
 >
+    <BackgroundCanvas mode="subtle" />
+
     <div class="max-w-4xl mx-auto px-4 py-16 md:py-24 text-left">
         
         <!-- Page Title -->
