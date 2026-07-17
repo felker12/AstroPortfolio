@@ -3,6 +3,7 @@ import NavBar from '@components/NavBar.astro';
 import '@styles/global.css';
 import LoadingScreen from '@components/LoadingScreen.astro';
 import Footer from '@components/Footer.astro';
+import BackgroundCanvas from "@components/BackgroundCanvas.astro";
 
 interface Props {
   title?: string;
@@ -11,6 +12,7 @@ interface Props {
   image?: string;
   keywords?: string[];
   schema?: object | object[];
+  backgroundMode?: "hero" | "subtle";
 }
 
 const {
@@ -19,7 +21,8 @@ const {
   canonical = Astro.url.href,
   image = '/og-image.png',
   keywords = [],
-  schema
+  schema,
+  backgroundMode = "subtle"
 } = Astro.props;
 
 const siteName = 'Kevin Anthony Felker Portfolio';
@@ -77,6 +80,9 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
   <body class="flex min-h-screen flex-col antialiased">
     <LoadingScreen />
 
+    
+    <BackgroundCanvas mode= {backgroundMode} />
+
     <!-- Scroll progress -->
     <div class="progress fixed inset-x-0 top-0 z-30 h-0.5 bg-ice-200/6" aria-hidden="true">
       <div class="progress__bar h-full w-0 origin-left 
@@ -100,7 +106,7 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
 
     <NavBar />
 
-    <main class="relative grow">
+    <main class="relative grow z-3">
       <slot />
     </main>
     

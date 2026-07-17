@@ -1,6 +1,5 @@
 ---
 import Layout from '@layouts/Layout.astro'; 
-import BackgroundCanvas from "@components/BackgroundCanvas.astro";
 import { personSchema } from '@data/seo/person';
 import { websiteSchema, } from '@data/pages/index';
 import Hero from '@components/Hero.astro';
@@ -16,8 +15,8 @@ import CTA from '@components/CTA.astro';
   description='Portfolio of Kevin "Anthony" Felker, a full-stack developer based in Indiana with experience in C#, ASP.NET Core, React, Astro, SQL Server, Azure, GitHub Actions, and production website development.'
   canonical='https://anthonyfelker.com/'
   schema={[personSchema, websiteSchema]}
+  backgroundMode="hero"
 >
-  <BackgroundCanvas mode="hero" />
 
   <Hero />
 
