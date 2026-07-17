@@ -1,0 +1,76 @@
+---
+import { Icon } from "astro-icon/components";
+import type { InfoProps } from "@data/components/ContactInfo";
+
+const {
+  description,
+  purpose,
+  title,
+  mdiIconName,
+  href,
+} = Astro.props as InfoProps;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={title}
+  title={title}
+  class="group pointer-glow relative flex items-center gap-4 overflow-hidden
+    rounded-xl border border-ice-100/10 p-4 no-underline
+    bg-[linear-gradient(135deg,rgba(18,76,111,0.1),transparent_55%),rgba(3,19,32,0.68)]
+    shadow-[inset_0_1px_0_rgba(222,247,255,0.04),0_16px_38px_rgba(0,7,14,0.22)]
+    backdrop-blur-xl transition-all duration-200
+
+    before:absolute before:left-5 before:top-0 before:h-px before:w-12
+    before:bg-linear-to-r before:from-transparent before:via-ice-400
+    before:to-transparent before:opacity-50
+    before:shadow-[0_0_12px_rgba(67,199,255,0.65)]
+    before:content-['']
+
+    hover:-translate-y-0.5 hover:border-ice-300/30
+    hover:bg-[linear-gradient(135deg,rgba(18,92,132,0.16),transparent_55%),rgba(4,25,42,0.76)]
+    hover:shadow-[inset_0_1px_0_rgba(222,247,255,0.06),0_20px_46px_rgba(0,7,14,0.3)]
+
+    focus-visible:outline-none focus-visible:ring-2
+    focus-visible:ring-ice-400 focus-visible:ring-offset-2
+    focus-visible:ring-offset-bg-deep"
+>
+  <span
+    class="flex h-11 w-11 shrink-0 items-center justify-center
+      rounded-lg border border-ice-100/10
+      bg-[rgba(7,40,63,0.7)] text-ice-400
+      shadow-[inset_0_1px_0_rgba(222,247,255,0.05)]
+      transition-all duration-200
+      group-hover:border-ice-300/35 group-hover:text-ice-200
+      group-hover:shadow-[0_0_22px_rgba(67,199,255,0.12)]"
+  >
+    <Icon name={mdiIconName} class="h-6 w-6" />
+  </span>
+
+  <span class="min-w-0">
+    <span
+      class="mb-1 block font-mono text-[0.62rem]
+        tracking-[0.12em] text-ice-400"
+    >
+      {description}
+    </span>
+
+    <span
+      class="block truncate text-sm font-medium
+        text-ink-soft transition-colors duration-200
+        group-hover:text-ice-50"
+    >
+      {purpose}
+    </span>
+  </span>
+
+  <span
+    class="ml-auto text-ice-800 transition-all duration-200
+      group-hover:translate-x-0.5 group-hover:text-ice-300"
+    aria-hidden="true"
+  >
+    →
+  </span>
+</a>
