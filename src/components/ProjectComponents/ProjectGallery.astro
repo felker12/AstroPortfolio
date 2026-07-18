@@ -1,47 +1,77 @@
 ---
-import type { Screenshot } from '@data/projects/projects'
+import { Icon } from "astro-icon/components";
+import type { Screenshot } from "@data/projects/projects";
+import ProjectSectionHeader from "./ProjectSectionHeader.astro";
 
 interface Props {
-    screenshots: Screenshot[];
+  screenshots: Screenshot[];
 }
 
 const { screenshots } = Astro.props as Props;
 ---
 
-{screenshots.length > 1 && (
-    <section class="mb-20 border-t border-slate-800/60 pt-16">
+{
+  screenshots.length > 1 && (
+    <section
+      class="reveal-target relative py-20
+        before:absolute before:inset-x-0 before:top-0 before:h-px
+        before:bg-linear-to-r before:from-transparent
+        before:via-ice-100/10 before:to-transparent before:content-['']"
+    >
+      <div class="reveal">
         <div class="mb-10">
-            <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
-                <span class="w-1 h-4 bg-cyan-500 rounded-sm"></span> Application Screenshots
-            </h2>
-            <p class="text-xs text-slate-500 font-mono mt-1 uppercase">Interface Preview</p>
+          <ProjectSectionHeader
+            title="Application screenshots"
+            subtitle="Interface preview"
+          />
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {screenshots.slice(1).map((pic, i) => (
-                <a 
-                    href={pic.src}
-                    data-pswp-width={pic.width}
-                    data-pswp-height={pic.height}
-                    target="_blank"
-                    rel="noreferrer"
-                    class="group bg-black/40 border border-slate-800/90 rounded-xl p-1.5 shadow-lg block 
-                    hover:border-slate-700/60 hover:scale-110 transition-transform duration-300"
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {screenshots.slice(1).map((screenshot, index) => (
+            <a
+              href={screenshot.src}
+              data-pswp-width={screenshot.width}
+              data-pswp-height={screenshot.height}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`View screenshot ${index + 2}: ${screenshot.alt}`}
+              class="group pointer-glow relative block overflow-hidden
+                rounded-xl border border-ice-100/10 p-1.5 no-underline
+                bg-[rgba(3,19,32,0.68)]
+                shadow-[0_16px_38px_rgba(0,7,14,0.24)]
+                backdrop-blur-xl transition-all duration-250
+                hover:-translate-y-1 hover:border-ice-300/30
+                hover:shadow-[0_22px_48px_rgba(0,7,14,0.34)]"
+            >
+              <div class="relative overflow-hidden rounded-lg">
+                <img
+                  src={screenshot.src}
+                  alt={screenshot.alt}
+                  loading="lazy"
+                  class="h-full w-full object-cover transition-transform
+                    duration-500 group-hover:scale-[1.03]"
+                />
+
+                <div
+                  class="absolute inset-0 flex items-center justify-center
+                    bg-[rgba(1,9,17,0.42)] opacity-0
+                    transition-opacity duration-200 group-hover:opacity-100"
                 >
-                    <div class="overflow-hidden rounded-lg relative">
-                        <img 
-                            src={pic.src} 
-                            alt={pic.alt} 
-                            class="w-full h-auto object-cover transform duration-300 group-hover:scale-[1.03]" 
-                        />
-                        <div class="absolute inset-0 bg-cyan-950/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                            <span class="bg-slate-900/90 border border-slate-800 text-[10px] font-mono text-cyan-400 px-2 py-1 rounded">
-                                View Screenshot {i + 2}
-                            </span>
-                        </div>
-                    </div>
-                </a>
-            ))}
+                  <span
+                    class="inline-flex items-center gap-2 rounded-lg
+                      border border-ice-100/15 bg-[rgba(1,9,17,0.84)]
+                      px-3 py-2 font-mono text-[0.65rem]
+                      tracking-wide text-ice-200 backdrop-blur-md"
+                  >
+                    View screenshot
+                    <Icon name="mdi:magnify-plus-outline" class="h-4 w-4" />
+                  </span>
+                </div>
+              </div>
+            </a>
+          ))}
         </div>
+      </div>
     </section>
-)}
+  )
+}

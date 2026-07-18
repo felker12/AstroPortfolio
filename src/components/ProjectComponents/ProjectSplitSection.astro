@@ -1,23 +1,44 @@
 ---
-import ProjectSectionHeader from './ProjectSectionHeader.astro';
+import ProjectSectionHeader from "./ProjectSectionHeader.astro";
 
 interface Props {
-    title: string;
-    subtitle: string;
-    borderTop?: boolean;
+  title: string;
+  subtitle: string;
+  borderTop?: boolean;
 }
 
 const { title, subtitle, borderTop = true } = Astro.props;
 ---
 
-<section class={`mb-20 ${borderTop ? 'border-t border-slate-800/60 pt-16' : ''}`}>
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-        <div class="lg:col-span-1">
-            <ProjectSectionHeader title={title} subtitle={subtitle} />
-        </div>
-
-        <div class="lg:col-span-2">
-            <slot />
-        </div>
+<section
+  class:list={[
+    "reveal-target relative py-20",
+    borderTop &&
+      "before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-ice-100/10 before:to-transparent before:content-['']",
+  ]}
+>
+  <div
+    class="reveal grid items-start gap-8
+      lg:grid-cols-[0.72fr_1.28fr] lg:gap-14"
+  >
+    <div class="lg:sticky lg:top-28">
+      <ProjectSectionHeader title={title} subtitle={subtitle} />
     </div>
+
+    <div
+      class="pointer-glow relative overflow-hidden rounded-2xl
+        border border-ice-100/10 p-6
+        bg-[linear-gradient(135deg,rgba(18,76,111,0.1),transparent_50%),rgba(3,19,32,0.68)]
+        shadow-[inset_0_1px_0_rgba(222,247,255,0.05),0_24px_60px_rgba(0,7,14,0.28)]
+        backdrop-blur-xl md:p-8
+
+        before:absolute before:-top-px before:left-8 before:h-px
+        before:w-20 before:bg-linear-to-r before:from-transparent
+        before:via-ice-400 before:to-transparent
+        before:shadow-[0_0_14px_rgba(67,199,255,0.6)]
+        before:content-['']"
+    >
+      <slot />
+    </div>
+  </div>
 </section>

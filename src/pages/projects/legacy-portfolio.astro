@@ -1,122 +1,144 @@
 ---
-import Layout from '@layouts/Layout.astro';
+import { Icon } from "astro-icon/components";
+import Layout from "@layouts/Layout.astro";
+import ProjectHero from "@components/ProjectComponents/ProjectHero.astro";
+import ProjectShowcase from "@components/ProjectComponents/ProjectShowcase.astro";
+import ProjectSplitSection from "@components/ProjectComponents/ProjectSplitSection.astro";
+import ProjectFlow from "@components/ProjectComponents/ProjectFlow.astro";
+import ProjectGallery from "@components/ProjectComponents/ProjectGallery.astro";
+import ProjectFeatureGrid from "@components/ProjectComponents/ProjectFeatureGrid.astro";
 
 import {
-    hero,
-    features,
-    flow,
-    technicalHighlights,
-    challenges,
-    visibleScreenshots
-} from '@data/projects/portfolio.ts';
-
-import ProjectHero from '@components/ProjectComponents/ProjectHero.astro';
-import ProjectShowcase from '@components/ProjectComponents/ProjectShowcase.astro';
-import ProjectSplitSection from '@components/ProjectComponents/ProjectSplitSection.astro';
-import ProjectFlow from '@components/ProjectComponents/ProjectFlow.astro';
-import ProjectGallery from '@components/ProjectComponents/ProjectGallery.astro';
-import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid.astro';
+  hero,
+  features,
+  flow,
+  technicalHighlights,
+  challenges,
+  visibleScreenshots,
+} from "@data/projects/portfolio.ts";
 ---
 
 <Layout
-    title='Legacy Personal Portfolio | Kevin "Anthony" Felker'
-    description="Case study for a legacy ASP.NET Framework 4.8 personal portfolio updated with GitHub Actions CI/CD and Azure App Service deployment."
-    canonical="https://anthonyfelker.com/projects/legacy-portfolio"
-    keywords={[
-        "ASP.NET Framework 4.8",
-        "legacy portfolio",
-        "C# portfolio website",
-        "Azure App Service",
-        "GitHub Actions deployment",
-        "CI/CD project",
-        "legacy .NET deployment"
-    ]}
-/>
-    <div class="max-w-5xl mx-auto px-4 py-16 md:py-24">
-
-        <div class="mb-8">
-            <a href="/projects" class="inline-flex items-center gap-2 text-xs font-mono text-slate-500 hover:text-cyan-400 transition-colors duration-200">
-                <svg class="w-3 h-3 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-                Back to Projects
-            </a>
-        </div>
-
-        <ProjectHero {...hero} />
-
-        <div id="legacy-portfolio-gallery">
-            <ProjectShowcase screenshot={visibleScreenshots[0]} />
-
-            <ProjectSplitSection
-                title="Project Overview"
-                subtitle="Context & Purpose"
-                borderTop={false}
-            >
-                <div class="text-slate-300 text-sm leading-relaxed space-y-4">
-                    <p>
-                        This project was my original personal portfolio website, built with C# and ASP.NET Framework 4.8.
-                        It served as an early professional web presence before I rebuilt my portfolio with Astro and Tailwind CSS.
-                    </p>
-
-                    <p>
-                        The main value of this project was learning how to modernize the deployment process for an older
-                        .NET Framework application by using GitHub Actions and Azure App Service.
-                    </p>
-                </div>
-            </ProjectSplitSection>
-
-            <ProjectFlow {...flow} />
-
-            <ProjectFeatureGrid
-                title="Key Features"
-                subtitle="Application Functionality"
-                features={features}
-            />
-
-            <ProjectGallery screenshots={visibleScreenshots} />
-        </div>
-
-        <ProjectFeatureGrid
-            title="Technical Highlights"
-            subtitle="Technologies Used"
-            features={technicalHighlights}
-        />
-
-        <ProjectSplitSection
-            title="Challenges & Solutions"
-            subtitle="Problem Solving"
-        >
-            <ul class="space-y-3.5 text-xs text-slate-400 list-none pl-0">
-                {challenges.map((item) => (
-                    <li class="flex items-start gap-2.5 leading-relaxed">
-                        <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                        <span><strong>{item.title}</strong> {item.description}</span>
-                    </li>
-                ))}
-            </ul>
-        </ProjectSplitSection>
-
-        <section class="text-center border-t border-slate-800/60 pt-12">
-            <a
-                href="/projects"
-                class="inline-block border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 text-xs font-mono tracking-wider px-5 py-3 rounded-lg transition-colors duration-200"
-            >
-                Back to Projects
-            </a>
-        </section>
+  title='Legacy Personal Portfolio | Kevin "Anthony" Felker'
+  description="Case study for a legacy ASP.NET Framework 4.8 personal portfolio updated with GitHub Actions CI/CD and Azure App Service deployment."
+  canonical="https://anthonyfelker.com/projects/legacy-portfolio"
+>
+  <div class="mx-auto w-full max-w-375 px-4 sm:px-6 lg:px-8">
+    <div class="relative z-3 pt-28">
+      <a href="/projects" class="inline-flex items-center gap-2 font-mono text-xs tracking-wide text-ink-dim no-underline transition-colors duration-200 hover:text-ice-300">
+        <Icon name="mdi:arrow-left" class="h-4 w-4" />
+        Back to projects
+      </a>
     </div>
+
+    <ProjectHero {...hero} />
+
+    <div id="legacy-portfolio-gallery">
+      <ProjectShowcase screenshot={visibleScreenshots[0]} />
+
+      <ProjectSplitSection title="Project overview" subtitle="Context & purpose" borderTop={false}>
+        <div class="space-y-5 leading-relaxed text-ink-dim">
+          <p>
+            This was my original personal portfolio, built with C# and ASP.NET Framework 4.8
+            before the current Astro-based version of the site.
+          </p>
+          <p>
+            Its strongest value came from modernizing the delivery process around an older application
+            by introducing GitHub Actions, repeatable builds, and automated Azure App Service deployment.
+          </p>
+          <p>
+            The project demonstrates experience maintaining legacy technology while improving the
+            surrounding release workflow instead of requiring a full rewrite first.
+          </p>
+        </div>
+      </ProjectSplitSection>
+
+      <ProjectFlow {...flow} />
+
+      <ProjectFeatureGrid title="Key features" subtitle="Application functionality" features={features} />
+
+      <ProjectGallery screenshots={visibleScreenshots} />
+    </div>
+
+    <ProjectFeatureGrid title="Technical highlights" subtitle="CI/CD & deployment" features={technicalHighlights} />
+
+    <ProjectSplitSection title="Challenges & solutions" subtitle="Problem solving">
+      <ul class="space-y-4 text-sm leading-relaxed text-ink-dim">
+        {
+          challenges.map((item) => (
+            <li class="relative pl-5 before:absolute before:left-0 before:top-[0.68em] before:h-1 before:w-1 before:rounded-full before:bg-ice-400 before:shadow-[0_0_7px_rgba(67,199,255,0.7)] before:content-['']">
+              <strong class="font-semibold text-ink-soft">{item.title}</strong> 
+              {item.description}
+            </li>
+          ))
+        }
+      </ul>
+    </ProjectSplitSection>
+
+    <section
+      class="reveal-target relative flex min-h-[58svh]
+        items-center justify-center py-24 text-center
+        before:absolute before:inset-x-0 before:top-0 before:h-px
+        before:bg-linear-to-r before:from-transparent
+        before:via-ice-100/10 before:to-transparent before:content-['']"
+    >
+      <div class="reveal relative z-3 w-full max-w-170">
+        <p
+          class="mb-3 font-mono text-xs tracking-[0.13em]
+            text-ice-400 before:text-ice-800 before:content-['//_']"
+        >
+          Continue exploring
+        </p>
+
+        <h2
+          class="mb-5 font-display text-[clamp(2rem,5vw,3.5rem)]
+            font-bold leading-[1.08] tracking-[-0.04em] text-ink"
+        >
+          Explore more
+          <span class="ml-[0.22em] text-ice-400">engineering projects.</span>
+        </h2>
+
+        <p
+          class="mx-auto mb-7 max-w-[54ch]
+            text-[clamp(0.98rem,1.5vw,1.08rem)] text-ink-dim"
+        >
+          Browse additional full-stack applications, production websites, and
+          software projects covering APIs, databases, testing, deployment, and
+          maintainable system design.
+        </p>
+
+        <a
+          href="/projects"
+          class="inline-flex min-h-12 items-center justify-center gap-2.5
+            rounded-xl border border-ice-300/50
+            bg-linear-to-br from-[rgba(21,133,190,0.82)]
+            to-[rgba(23,92,135,0.72)] px-5
+            font-mono text-sm font-semibold tracking-wide
+            text-ice-50 no-underline
+            shadow-[0_0_32px_rgba(42,178,255,0.2)]
+            transition-all duration-150
+            hover:-translate-y-0.5 hover:border-ice-200
+            hover:shadow-[0_0_42px_rgba(86,211,255,0.3)]"
+        >
+          Back to projects
+          <Icon name="mdi:arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+    </section>
+
+  </div>
 </Layout>
 
 <script>
-    import PhotoSwipeLightbox from 'photoswipe/lightbox';
-    import 'photoswipe/style.css';
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
 
-    const lightbox = new PhotoSwipeLightbox({
-        gallery: '#legacy-portfolio-gallery',
-        children: 'a',
-        pswpModule: () => import('photoswipe')
-    });
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: "#legacy-portfolio-gallery",
+    children: "a[data-pswp-width]",
+    pswpModule: () => import("photoswipe"),
+  });
 
-    lightbox.init();
+  lightbox.init();
 </script>
+

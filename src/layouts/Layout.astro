@@ -107,7 +107,9 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
     <NavBar />
 
     <main class="relative grow z-3">
-      <slot />
+      <div class="mx-auto w-full max-w-375 px-4 sm:px-6 lg:px-8">
+        <slot />
+      </div>
     </main>
     
     <Footer />

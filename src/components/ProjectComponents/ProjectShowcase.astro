@@ -1,34 +1,62 @@
 ---
-import type { Screenshot } from '@data/projects/projects'
+import { Icon } from "astro-icon/components";
+import type { Screenshot } from "@data/projects/projects";
 
 interface Props {
-    screenshot?: Screenshot;
+  screenshot?: Screenshot;
 }
 
 const { screenshot } = Astro.props as Props;
 ---
 
- {screenshot && (
-    <section class="mb-20">
-        <a 
-            href={screenshot.src}
-            data-pswp-width={screenshot.width}
-            data-pswp-height={screenshot.height}
-            target="_blank"
-            rel="noreferrer"
-            class="group block bg-black/40 border border-slate-800/90 rounded-xl p-2 backdrop-blur-sm shadow-2xl 
-            transition-all duration-300 hover:border-slate-700/60 hover:scale-105"
+{
+  screenshot && (
+    <section class="reveal-target relative py-16">
+      <div class="reveal">
+        <a
+          href={screenshot.src}
+          data-pswp-width={screenshot.width}
+          data-pswp-height={screenshot.height}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`View larger screenshot: ${screenshot.alt}`}
+          class="group pointer-glow relative block overflow-hidden
+            rounded-2xl border border-ice-100/10 p-2 no-underline
+            bg-[linear-gradient(135deg,rgba(18,76,111,0.12),transparent_48%),rgba(3,19,32,0.72)]
+            shadow-[inset_0_1px_0_rgba(222,247,255,0.06),0_28px_80px_rgba(0,7,14,0.42)]
+            backdrop-blur-xl transition-all duration-300
+
+            before:absolute before:-top-px before:left-10 before:h-px
+            before:w-28 before:bg-linear-to-r before:from-transparent
+            before:via-ice-400 before:to-transparent
+            before:shadow-[0_0_16px_rgba(67,199,255,0.72)]
+            before:content-['']
+
+            hover:-translate-y-1 hover:border-ice-300/30
+            hover:shadow-[inset_0_1px_0_rgba(222,247,255,0.08),0_34px_90px_rgba(0,7,14,0.52)]"
         >
-            <div class="overflow-hidden rounded-lg relative">
-                <img
-                    src={screenshot.src}
-                    alt={screenshot.alt}
-                    class="w-full object-cover transform duration-500 ease-out group-hover:scale-[1.01]"
-                />
-                <div class="absolute bottom-4 right-4 bg-slate-950/80 border border-slate-800/80 backdrop-blur px-3 py-1.5 rounded text-[10px] font-mono text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    View Larger
-                </div>
-            </div>
+          <div class="relative overflow-hidden rounded-xl">
+            <img
+              src={screenshot.src}
+              alt={screenshot.alt}
+              class="w-full object-cover transition-transform duration-500
+                ease-out group-hover:scale-[1.01]"
+            />
+
+            <span
+              class="absolute bottom-4 right-4 inline-flex items-center gap-2
+                rounded-lg border border-ice-100/15
+                bg-[rgba(1,9,17,0.82)] px-3 py-2
+                font-mono text-[0.65rem] tracking-wide text-ice-200
+                opacity-0 backdrop-blur-md transition-all duration-200
+                group-hover:opacity-100"
+            >
+              View larger
+              <Icon name="mdi:magnify-plus-outline" class="h-4 w-4" />
+            </span>
+          </div>
         </a>
+      </div>
     </section>
-)}
+  )
+}

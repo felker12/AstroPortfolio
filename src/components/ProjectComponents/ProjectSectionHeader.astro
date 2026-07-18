@@ -1,19 +1,24 @@
 ---
 interface Props {
-    title: string;
-    subtitle: string;
+  title: string;
+  subtitle: string;
 }
 
 const { title, subtitle } = Astro.props;
 ---
 
-<div class="mb-10">
-    <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
-        <span class="w-1 h-4 bg-cyan-500 rounded-sm"></span>
-        {title}
-    </h2>
+<div class="max-w-190">
+  <p
+    class="mb-3 font-mono text-xs tracking-[0.12em]
+      text-ice-400 before:text-ice-800 before:content-['//_']"
+  >
+    {subtitle}
+  </p>
 
-    <p class="text-xs text-slate-500 font-mono mt-1 uppercase">
-        {subtitle}
-    </p>
+  <h2
+    class="font-display text-[clamp(2rem,4vw,3.25rem)]
+      font-bold leading-[1.05] tracking-[-0.04em] text-ink"
+  >
+    {title}
+  </h2>
 </div>

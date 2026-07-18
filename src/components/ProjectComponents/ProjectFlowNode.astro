@@ -1,0 +1,44 @@
+---
+import type { FlowStep } from "@data/projects/projects";
+
+interface Props {
+  step: FlowStep;
+  descriptionWidthClass?: string;
+}
+
+const {
+  step,
+  descriptionWidthClass = "max-w-40",
+} = Astro.props as Props;
+---
+
+<li class="flex min-w-0 flex-1 flex-col items-center text-center">
+  <div
+    class="relative inline-flex h-22 w-22 shrink-0
+      items-center justify-center rounded-full
+      border border-ice-300/40
+      bg-[linear-gradient(145deg,rgba(17,91,132,0.3),rgba(2,15,26,0.92))]
+      px-3 text-center
+      shadow-[inset_0_1px_0_rgba(222,247,255,0.06),0_0_24px_rgba(67,199,255,0.12)]
+
+      before:absolute before:inset-1 before:rounded-full
+      before:border before:border-ice-100/8
+      before:content-['']"
+  >
+    <span
+      class="relative z-1 font-mono text-[0.68rem]
+        font-semibold leading-tight text-ice-200"
+    >
+      {step.title}
+    </span>
+  </div>
+
+  <p
+    class:list={[
+      "mt-4 text-xs leading-relaxed text-ink-dim",
+      descriptionWidthClass,
+    ]}
+  >
+    {step.description}
+  </p>
+</li>

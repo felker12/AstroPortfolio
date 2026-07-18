@@ -1,167 +1,190 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import {visibleScreenshots, features, hero, futureImprovements, flow} from '@data/projects/time-punch.ts';
-import ProjectHero from '@components/ProjectComponents/ProjectHero.astro';
-import ProjectShowcase from '@components/ProjectComponents/ProjectShowcase.astro';
-import ProjectSplitSection from '@components/ProjectComponents/ProjectSplitSection.astro';
-import ProjectFlow from '@components/ProjectComponents/ProjectFlow.astro';
-import ProjectGallery from '@components/ProjectComponents/ProjectGallery.astro';
-import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid.astro';
+import { Icon } from "astro-icon/components";
+import Layout from "@layouts/Layout.astro";
+import ProjectHero from "@components/ProjectComponents/ProjectHero.astro";
+import ProjectShowcase from "@components/ProjectComponents/ProjectShowcase.astro";
+import ProjectSplitSection from "@components/ProjectComponents/ProjectSplitSection.astro";
+import ProjectFlow from "@components/ProjectComponents/ProjectFlow.astro";
+import ProjectGallery from "@components/ProjectComponents/ProjectGallery.astro";
+import ProjectFeatureGrid from "@components/ProjectComponents/ProjectFeatureGrid.astro";
+
+import {
+  visibleScreenshots,
+  features,
+  hero,
+  futureImprovements,
+  flow,
+} from "@data/projects/time-punch.ts";
 ---
 
 <Layout
-    title='Time Punch Management System | Kevin "Anthony" Felker'
-    description="Case study for Time Punch Management System, a full-stack employee attendance application built with C#, ASP.NET Core, React, TypeScript, SQL Server, .NET Aspire, and Azure."
-    canonical="https://anthonyfelker.com/projects/time-punch"
-    keywords={[
-        "Time Punch Management System",
-        "employee time tracking application",
-        "C# time tracking app",
-        "ASP.NET Core project",
-        "React TypeScript dashboard",
-        "SQL Server",
-        ".NET Aspire",
-        "role based authentication",
-        "attendance management"
-    ]}
-/>
-    <div class="max-w-5xl mx-auto px-4 py-16 md:py-24">
-
-        <div class="mb-8">
-            <a href="/projects" class="inline-flex items-center gap-2 text-xs font-mono text-slate-500 hover:text-cyan-400 transition-colors duration-200">
-                <svg class="w-3 h-3 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-                Back to Projects
-            </a>
-        </div>
-
-        <!-- Hero Section -->
-        <ProjectHero {...hero} />
-
-        <div id="timepunch-gallery">
-            <!-- Showcase Screenshot -->
-            <ProjectShowcase screenshot={visibleScreenshots[0]} />
-
-            <!-- Project Overview Section -->
-            <ProjectSplitSection
-                title="Project Overview"
-                subtitle="Context & Purpose"
-                borderTop={false}
-            >
-                <div class="text-slate-300 text-sm leading-relaxed space-y-4">
-                    <p>
-                        This project was built around a practical business workflow: employee time tracking. 
-                        The goal was to create an application where employees could record attendance and 
-                        administrators could review time data in a structured interface.
-                    </p>
-
-                    <p>
-                        Building it gave me more experience connecting a React and TypeScript frontend 
-                        to an ASP.NET Core backend, designing API endpoints, working with SQL Server data, and organizing services with .NET Aspire.
-                    </p>
-                </div>
-            </ProjectSplitSection>
-
-            <!-- Application Workflow Section -->
-            <ProjectFlow {...flow} />
-
-            <!-- Key Features Section -->
-            <ProjectFeatureGrid title="Key Features" subtitle="Application Functionality" features={features} />
-
-            <!-- Gallery Section -->
-            <ProjectGallery screenshots={visibleScreenshots} />
-        </div>
-
-        <!-- Technical Highlights -->
-        <ProjectSplitSection
-            title="Technical Highlights"
-            subtitle="Stack Implementation"
-            borderTop={false}
-        >
-            <div class="border-b border-slate-900 pb-4">
-                <h3 class="text-sm font-mono text-cyan-400 font-semibold mb-1">ASP.NET Core APIs</h3>
-                <p class="text-slate-300 text-xs leading-relaxed">
-                    Built API endpoints for employee attendance actions, authentication workflows, and administrative data access.
-                </p>
-            </div>
-
-            <div class="border-b border-slate-900 pb-4">
-                <h3 class="text-sm font-mono text-cyan-400 font-semibold mb-1">SQL Server Data Model</h3>
-                <p class="text-slate-300 text-xs leading-relaxed">
-                    Designed relational tables for users, shifts, and time entries so attendance data could be stored and queried consistently.
-                </p>
-            </div>
-
-            <div>
-                <h3 class="text-sm font-mono text-cyan-400 font-semibold mb-1">React + TypeScript Frontend</h3>
-                <p class="text-slate-300 text-xs leading-relaxed">
-                    Developed dashboard views with reusable React components and TypeScript types to improve reliability across frontend data handling.
-                </p>
-            </div>
-        </ProjectSplitSection>
-
-        <!-- Challenges & Lessons Learned -->
-        <ProjectSplitSection
-            title="Challenges & Lessons Learned"
-            subtitle="Problem Solving"
-        >
-            <ul class="space-y-3.5 text-xs text-slate-400 list-none pl-0">
-                <li class="flex items-start gap-2.5 leading-relaxed">
-                    <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                    <span><strong>State Management:</strong> Learned how important it is to keep frontend state aligned with backend attendance records.</span>
-                </li>
-                <li class="flex items-start gap-2.5 leading-relaxed">
-                    <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                    <span><strong>Authentication Flow:</strong> Gained more experience handling login state, protected routes, and role-based access in a full-stack application.</span>
-                </li>
-                <li class="flex items-start gap-2.5 leading-relaxed">
-                    <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                    <span><strong>Local Orchestration:</strong> Used .NET Aspire to organize the frontend and backend services during local development.</span>
-                </li>
-            </ul>
-        </ProjectSplitSection>
-
-        <!-- Future Improvements -->
-        <ProjectSplitSection
-            title="Future Improvements"
-            subtitle="Planned Enhancements"
-        >
-             <div class="bg-black/20 border border-slate-900 rounded-xl p-6 hover:scale-105 transition-transform duration-300">
-                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {futureImprovements.map((item, index) => (
-                        <li class="flex items-center gap-2 text-xs text-slate-400">
-                            <span class="text-cyan-500 font-mono">
-                                {String(index + 1).padStart(2, '0')}// {/* if end up with more than 10 impovements change to String(index + 1).padStart(3, '0') */}
-                            </span>
-                            {item}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </ProjectSplitSection> 
-
-        <!-- Back to Projects -->
-        <section class="text-center border-t border-slate-800/60 pt-12">
-            <a 
-                href="/projects" 
-                class="inline-block border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 text-xs font-mono tracking-wider px-5 py-3 rounded-lg transition-colors duration-200"
-            >
-                Back to Projects
-            </a>
-        </section>
+  title='Time Punch Management System | Kevin "Anthony" Felker'
+  description="Case study for Time Punch Management System, a full-stack employee attendance application built with C#, ASP.NET Core, React, TypeScript, SQL Server, .NET Aspire, and Azure."
+  canonical="https://anthonyfelker.com/projects/time-punch"
+>
+  <div class="mx-auto w-full max-w-375 px-4 sm:px-6 lg:px-8">
+    <div class="relative z-3 pt-28">
+      <a href="/projects" class="inline-flex items-center gap-2 font-mono text-xs tracking-wide text-ink-dim no-underline transition-colors duration-200 hover:text-ice-300">
+        <Icon name="mdi:arrow-left" class="h-4 w-4" />
+        Back to projects
+      </a>
     </div>
+
+    <ProjectHero {...hero} />
+
+    <div id="timepunch-gallery">
+      <ProjectShowcase screenshot={visibleScreenshots[0]} />
+
+      <ProjectSplitSection title="Project overview" subtitle="Context & purpose" borderTop={false}>
+        <div class="space-y-5 leading-relaxed text-ink-dim">
+          <p>
+            Time Punch Management System was designed around a practical business workflow:
+            recording employee attendance while giving administrators a structured way to review time data.
+          </p>
+          <p>
+            The application connects a React and TypeScript frontend to ASP.NET Core APIs,
+            uses SQL Server for relational persistence, and organizes local development through .NET Aspire.
+          </p>
+          <p>
+            Building it strengthened my experience with authentication, protected workflows,
+            relational data modeling, API design, and coordinating frontend state with backend business rules.
+          </p>
+        </div>
+      </ProjectSplitSection>
+
+      <ProjectFlow {...flow} />
+
+      <ProjectFeatureGrid title="Key features" subtitle="Application functionality" features={features} />
+
+      <ProjectGallery screenshots={visibleScreenshots} />
+    </div>
+
+    <ProjectSplitSection title="Technical highlights" subtitle="Stack implementation">
+      <div class="grid gap-4">
+        <article class="rounded-xl border border-ice-100/10 bg-[rgba(3,20,34,0.56)] p-5">
+          <h3 class="font-display text-lg font-semibold text-ink">ASP.NET Core APIs</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-dim">
+            Built API endpoints for employee attendance actions, authentication workflows,
+            and administrative data access.
+          </p>
+        </article>
+
+        <article class="rounded-xl border border-ice-100/10 bg-[rgba(3,20,34,0.56)] p-5">
+          <h3 class="font-display text-lg font-semibold text-ink">SQL Server data model</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-dim">
+            Designed relational tables for users, shifts, and time entries so attendance data
+            could be stored, validated, and queried consistently.
+          </p>
+        </article>
+
+        <article class="rounded-xl border border-ice-100/10 bg-[rgba(3,20,34,0.56)] p-5">
+          <h3 class="font-display text-lg font-semibold text-ink">React and TypeScript frontend</h3>
+          <p class="mt-2 text-sm leading-relaxed text-ink-dim">
+            Developed dashboard views with reusable components and typed data handling
+            for employee and administrative workflows.
+          </p>
+        </article>
+      </div>
+    </ProjectSplitSection>
+
+    <ProjectSplitSection title="Challenges & lessons learned" subtitle="Problem solving">
+      <ul class="space-y-4 text-sm leading-relaxed text-ink-dim">
+        <li class="relative pl-5 before:absolute before:left-0 before:top-[0.68em] before:h-1 before:w-1 before:rounded-full before:bg-ice-400 before:shadow-[0_0_7px_rgba(67,199,255,0.7)] before:content-['']">
+          <strong class="font-semibold text-ink-soft">State management:</strong>
+          Keeping frontend state aligned with backend attendance records emphasized
+          the value of predictable update flows.
+        </li>
+        <li class="relative pl-5 before:absolute before:left-0 before:top-[0.68em] before:h-1 before:w-1 before:rounded-full before:bg-ice-400 before:shadow-[0_0_7px_rgba(67,199,255,0.7)] before:content-['']">
+          <strong class="font-semibold text-ink-soft">Authentication flow:</strong>
+          The project provided hands-on experience with login state, protected routes,
+          and role-based access across frontend and backend boundaries.
+        </li>
+        <li class="relative pl-5 before:absolute before:left-0 before:top-[0.68em] before:h-1 before:w-1 before:rounded-full before:bg-ice-400 before:shadow-[0_0_7px_rgba(67,199,255,0.7)] before:content-['']">
+          <strong class="font-semibold text-ink-soft">Local orchestration:</strong>
+          .NET Aspire helped coordinate frontend and backend services during development.
+        </li>
+      </ul>
+    </ProjectSplitSection>
+
+    <ProjectSplitSection title="Future improvements" subtitle="Planned enhancements">
+      <ol class="grid list-none gap-3 p-0 sm:grid-cols-2">
+        {
+          futureImprovements.map((item, index) => (
+            <li class="flex items-start gap-3 rounded-xl border border-ice-100/10 bg-[rgba(3,20,34,0.56)] p-4">
+              <span class="shrink-0 font-mono text-xs tracking-wide text-ice-400">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span class="text-sm leading-relaxed text-ink-dim">{item}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </ProjectSplitSection>
+
+    <section
+      class="reveal-target relative flex min-h-[58svh]
+        items-center justify-center py-24 text-center
+        before:absolute before:inset-x-0 before:top-0 before:h-px
+        before:bg-linear-to-r before:from-transparent
+        before:via-ice-100/10 before:to-transparent before:content-['']"
+    >
+      <div class="reveal relative z-3 w-full max-w-170">
+        <p
+          class="mb-3 font-mono text-xs tracking-[0.13em]
+            text-ice-400 before:text-ice-800 before:content-['//_']"
+        >
+          Continue exploring
+        </p>
+
+        <h2
+          class="mb-5 font-display text-[clamp(2rem,5vw,3.5rem)]
+            font-bold leading-[1.08] tracking-[-0.04em] text-ink"
+        >
+          Explore more
+          <span class="ml-[0.22em] text-ice-400">engineering projects.</span>
+        </h2>
+
+        <p
+          class="mx-auto mb-7 max-w-[54ch]
+            text-[clamp(0.98rem,1.5vw,1.08rem)] text-ink-dim"
+        >
+          Browse additional full-stack applications, production websites, and
+          software projects covering APIs, databases, testing, deployment, and
+          maintainable system design.
+        </p>
+
+        <a
+          href="/projects"
+          class="inline-flex min-h-12 items-center justify-center gap-2.5
+            rounded-xl border border-ice-300/50
+            bg-linear-to-br from-[rgba(21,133,190,0.82)]
+            to-[rgba(23,92,135,0.72)] px-5
+            font-mono text-sm font-semibold tracking-wide
+            text-ice-50 no-underline
+            shadow-[0_0_32px_rgba(42,178,255,0.2)]
+            transition-all duration-150
+            hover:-translate-y-0.5 hover:border-ice-200
+            hover:shadow-[0_0_42px_rgba(86,211,255,0.3)]"
+        >
+          Back to projects
+          <Icon name="mdi:arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+    </section>
+
+  </div>
 </Layout>
 
 <script>
-    import PhotoSwipeLightbox from 'photoswipe/lightbox';
-    import 'photoswipe/style.css';
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
 
-    const lightbox = new PhotoSwipeLightbox({
-        gallery: '#timepunch-gallery',
-        children: 'a',
-        pswpModule: () => import('photoswipe')
-    });
-    
-    lightbox.init();
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: "#timepunch-gallery",
+    children: "a[data-pswp-width]",
+    pswpModule: () => import("photoswipe"),
+  });
+
+  lightbox.init();
 </script>
+

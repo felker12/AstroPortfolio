@@ -7,19 +7,21 @@ import { navLinks } from "@data/navbar/nav";
 const pathname = Astro.url.pathname;
 ---
 
-<header>
+<header
+  class="fixed inset-x-0 top-0 z-20
+    border-b border-transparent
+    bg-[linear-gradient(180deg,rgba(1,8,16,0.88),rgba(1,8,16,0))]
+    transition-[background,backdrop-filter,border-color,box-shadow] duration-200
+    [&.is-scrolled]:border-ice-100/10
+    [&.is-scrolled]:bg-[rgba(1,9,17,0.78)]
+    [&.is-scrolled]:shadow-[0_8px_32px_rgba(0,0,0,0.18)]
+    [&.is-scrolled]:backdrop-blur-xl"
+>
   <nav
     aria-label="Primary navigation"
-    class="nav fixed inset-x-0 top-0 z-20 flex min-h-72px items-center justify-between gap-4
-      border-b border-transparent
-      bg-[linear-gradient(180deg,rgba(1,8,16,0.88),rgba(1,8,16,0))]
-      px-4 py-4
-      transition-[background,backdrop-filter,border-color,box-shadow] duration-200
-      sm:px-[clamp(1rem,3vw,2.5rem)]
-      [&.is-scrolled]:border-ice-100/10
-      [&.is-scrolled]:bg-[rgba(1,9,17,0.78)]
-      [&.is-scrolled]:shadow-[0_8px_32px_rgba(0,0,0,0.18)]
-      [&.is-scrolled]:backdrop-blur-xl"
+    class="mx-auto flex min-h-18 w-full max-w-375
+      items-center justify-between gap-4
+      px-4 py-4 sm:px-6 lg:px-8"
   >
     <!-- Brand -->
     <a
@@ -147,7 +149,7 @@ const pathname = Astro.url.pathname;
 </header>
 
 <script>
-  const nav = document.querySelector(".nav");
+  const nav = document.querySelector("header");
 
   const updateNavbar = () => {
     nav?.classList.toggle("is-scrolled", window.scrollY > 16);
@@ -160,7 +162,7 @@ const pathname = Astro.url.pathname;
     document.querySelector<HTMLInputElement>("#menu-toggle");
 
   const navLinks =
-    document.querySelectorAll<HTMLAnchorElement>(".nav a");
+    document.querySelectorAll<HTMLAnchorElement>("header nav a");
 
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {

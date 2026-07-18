@@ -1,0 +1,197 @@
+---
+import { Icon } from "astro-icon/components";
+import type { Project } from "@data/pages/Projects";
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const reverseLayout = index % 2 === 1;
+---
+
+<article
+  class:list={[
+    `project-showcase reveal-target relative grid items-start gap-7
+    pb-20 lg:grid-cols-12 lg:gap-10
+
+    after:absolute
+    after:bottom-0
+    after:left-0
+    after:right-0
+    after:h-px
+    after:bg-linear-to-r
+    after:from-transparent
+    after:via-ice-100/10
+    after:to-transparent
+    after:content-['']
+
+    last:pb-0
+    last:after:hidden`,
+    reverseLayout && "lg:[&>.project-meta]:order-2",
+  ]}
+>
+  <!-- Project identity -->
+  <div
+    class="project-meta reveal relative
+      lg:col-span-4 lg:sticky lg:top-28"
+  >
+    <p
+      class="mb-3 font-mono text-xs tracking-[0.12em]
+        text-ice-400 before:text-ice-800 before:content-['//_']"
+    >
+      {project.number}
+    </p>
+
+    <p
+      class="mb-3 font-mono text-[0.66rem]
+        tracking-[0.12em] text-ink-dim"
+    >
+      {project.subtitle}
+    </p>
+
+    <h3
+      class="font-display text-[clamp(2rem,4vw,3.3rem)]
+        font-bold leading-[1.02] tracking-[-0.04em] text-ink"
+    >
+      {project.title}
+    </h3>
+
+    <p class="mt-5 leading-relaxed text-ink-dim">
+      {project.description}
+    </p>
+
+    <ul
+      class="mt-6 flex list-none flex-wrap gap-2 p-0"
+      aria-label={`${project.title} technologies`}
+    >
+      {
+        project.tags.map((tag) => (
+          <li
+            class="tech-tag rounded-md border border-ice-100/10
+              bg-[rgba(5,29,47,0.58)] px-2.5 py-1.5
+              font-mono text-xs tracking-wide text-ice-200
+              transition-all duration-150
+
+              [&.is-active]:-translate-y-0.5
+              [&.is-active]:border-ice-300/50
+              [&.is-active]:bg-[rgba(9,60,92,0.68)]
+              [&.is-active]:text-ice-50
+              [&.is-active]:shadow-[0_0_18px_rgba(67,199,255,0.12)]"
+          >
+            {tag}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <!-- Project detail panel -->
+  <div
+    class="reveal pointer-glow relative overflow-hidden rounded-2xl
+      border border-ice-100/10 p-6 lg:col-span-8
+      bg-[linear-gradient(135deg,rgba(18,76,111,0.12),transparent_48%),rgba(3,19,32,0.7)]
+      shadow-[inset_0_1px_0_rgba(222,247,255,0.06),0_24px_70px_rgba(0,7,14,0.38)]
+      backdrop-blur-xl md:p-8
+
+      before:absolute before:-top-px before:left-8
+      before:h-px before:w-24 before:bg-linear-to-r
+      before:from-transparent before:via-ice-400 before:to-transparent
+      before:shadow-[0_0_14px_rgba(67,199,255,0.72)]
+      before:content-['']"
+  >
+    <div class="mb-7">
+      <p
+        class="mb-3 font-mono text-xs tracking-[0.12em]
+          text-ice-400"
+      >
+        Engineering highlights
+      </p>
+
+      <ul class="space-y-3 text-sm leading-relaxed text-ink-dim">
+        {
+          project.features.map((feature) => (
+            <li
+              class="relative pl-5
+                before:absolute before:left-0 before:top-[0.65em]
+                before:h-1 before:w-1 before:rounded-full
+                before:bg-ice-400
+                before:shadow-[0_0_7px_rgba(67,199,255,0.7)]
+                before:content-['']"
+            >
+              {feature}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div
+      class="flex flex-wrap gap-3 border-t
+        border-ice-100/10 pt-6"
+    >
+      {
+        project.links.caseStudy && (
+          <a
+            href={project.links.caseStudy}
+            class="inline-flex min-h-11 items-center justify-center
+              gap-2 rounded-lg border border-ice-300/30
+              bg-ice-400/8 px-4 font-mono text-xs
+              font-semibold tracking-wide text-ice-300
+              no-underline transition-all duration-200
+              hover:-translate-y-0.5 hover:border-ice-200/60
+              hover:bg-ice-400/12 hover:text-ice-50"
+          >
+            View case study
+            <Icon name="mdi:arrow-right" class="h-4 w-4" />
+          </a>
+        )
+      }
+
+      {
+        project.links.demo && (
+          <a
+            href={project.links.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-11 items-center justify-center
+              gap-2 rounded-lg border border-ice-300/50
+              bg-linear-to-br from-[rgba(21,133,190,0.82)]
+              to-[rgba(23,92,135,0.72)] px-4
+              font-mono text-xs font-semibold tracking-wide
+              text-ice-50 no-underline
+              shadow-[0_0_24px_rgba(42,178,255,0.14)]
+              transition-all duration-200
+              hover:-translate-y-0.5 hover:border-ice-200"
+          >
+            Launch application
+            <Icon name="mdi:open-in-new" class="h-4 w-4" />
+          </a>
+        )
+      }
+
+      {
+        project.links.github && (
+          <a
+            href={project.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-11 items-center justify-center
+              gap-2 rounded-lg border border-ice-100/15
+              bg-[rgba(4,25,42,0.52)] px-4
+              font-mono text-xs font-semibold tracking-wide
+              text-ice-200 no-underline
+              transition-all duration-200
+              hover:-translate-y-0.5 hover:border-ice-300/40
+              hover:bg-[rgba(8,48,75,0.65)]
+              hover:text-ice-50"
+          >
+            <Icon name="mdi:github" class="h-4 w-4" />
+            Code repository
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>

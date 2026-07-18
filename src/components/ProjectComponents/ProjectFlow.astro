@@ -1,105 +1,109 @@
 ---
-import type { WorkflowStep } from "@data/projects/projects"
+import type { FlowStep } from "@data/projects/projects";
+import ProjectSectionHeader from "./ProjectSectionHeader.astro";
+import ProjectFlowNode from "./ProjectFlowNode.astro";
+import ProjectFlowConnector from "./ProjectFlowConnector.astro";
 
 interface Props {
-    title: string;
-    subtitle: string;
-    description: string;
-    workflow: WorkflowStep[];
-} 
+  title: string;
+  subtitle: string;
+  description: string;
+  workflow: FlowStep[];
+}
 
-const { title, subtitle, description, workflow } = Astro.props as Props;
+const { title, subtitle, description, workflow } =
+  Astro.props as Props;
+
+const FLOW_ANIMATION_MS = 3600;
+const FLOW_STAGGER_MS = 700;
 ---
 
-<section class="mb-20 border-t border-slate-800/60 pt-16">
+<section
+  class="reveal-target relative py-20
+
+    before:absolute before:inset-x-0 before:top-0
+    before:h-px before:bg-linear-to-r
+    before:from-transparent before:via-ice-100/10
+    before:to-transparent before:content-['']"
+>
+  <div class="reveal">
     <div class="mb-10">
-        <h2 class="text-xl font-semibold text-white tracking-tight flex items-center gap-2">
-            <span class="w-1 h-4 bg-cyan-500 rounded-sm"></span>
-            {title}
-        </h2>
-
-        <p class="text-xs text-slate-500 font-mono mt-1 uppercase">
-            {subtitle}
-        </p>
+      <ProjectSectionHeader
+        title={title}
+        subtitle={subtitle}
+      />
     </div>
 
-    <div class="bg-black/30 border border-slate-800 rounded-xl p-8">
-        <p class="text-sm text-slate-400 text-center max-w-3xl mx-auto mb-12 leading-relaxed">
-            {description}
-        </p>
+    <div
+      class="pointer-glow relative overflow-hidden rounded-2xl
+        border border-ice-100/10 p-6
+        bg-[linear-gradient(135deg,rgba(18,76,111,0.12),transparent_48%),rgba(3,19,32,0.68)]
+        shadow-[inset_0_1px_0_rgba(222,247,255,0.06),0_24px_70px_rgba(0,7,14,0.38)]
+        backdrop-blur-xl md:p-8
 
-        <!-- Desktop -->
-        <div class="hidden lg:flex items-start justify-between">
-            {workflow.map((step, index) => (
-                <>
-                    <div class="flex flex-col items-center flex-1">
-                        <div class="inline-flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-2 border-cyan-500 bg-slate-950">
-                            <span class="text-center text-[11px] font-semibold text-cyan-400 leading-tight px-2">
-                                {step.title}
-                            </span>
-                        </div>
+        before:absolute before:-top-px before:left-8
+        before:h-px before:w-24 before:bg-linear-to-r
+        before:from-transparent before:via-ice-400
+        before:to-transparent
+        before:shadow-[0_0_14px_rgba(67,199,255,0.72)]
+        before:content-['']"
+    >
+      <p
+        class="mx-auto mb-12 max-w-[66ch] text-center
+          text-sm leading-relaxed text-ink-dim"
+      >
+        {description}
+      </p>
 
-                        <p class="mt-3 text-xs text-center text-slate-400 max-w-32 leading-relaxed">
-                            {step.description}
-                        </p>
-                    </div>
+      <!-- Desktop workflow -->
+      <ol
+        class="hidden list-none items-start p-0 lg:flex"
+        aria-label={`${title} workflow`}
+      >
+        {
+          workflow.map((step, index) => (
+            <>
+              <ProjectFlowNode
+                step={step}
+                descriptionWidthClass="max-w-38"
+              />
 
-                    {index < workflow.length - 1 && (
-                        <div class="flex items-center justify-center pt-6 px-3">
+              {index < workflow.length - 1 && (
+                <ProjectFlowConnector
+                  orientation="horizontal"
+                  durationMs={FLOW_ANIMATION_MS}
+                  delayMs={index * FLOW_STAGGER_MS}
+                />
+              )}
+            </>
+          ))
+        }
+      </ol>
 
-                            <svg
-                                class="w-8 h-8 text-cyan-500"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M5 12h14m-5-5 5 5-5 5"
-                                />
-                            </svg>
-                        </div>
-                    )}
-                </>
-            ))}
-        </div>
+      <!-- Mobile workflow -->
+      <ol
+        class="flex list-none flex-col items-center p-0 lg:hidden"
+        aria-label={`${title} workflow`}
+      >
+        {
+          workflow.map((step, index) => (
+            <>
+              <ProjectFlowNode
+                step={step}
+                descriptionWidthClass="max-w-48"
+              />
 
-        <!-- Mobile -->
-        <div class="flex lg:hidden flex-col items-center">
-            {workflow.map((step, index) => (
-                <>
-                    <div class="flex flex-col items-center text-center">
-
-                        <div class="inline-flex h-20 w-20 shrink-0 items-center justify-center rounded-full border-2 border-cyan-500 bg-slate-950">
-                            <span class="text-center text-[11px] font-semibold text-cyan-400 leading-tight px-2">
-                                {step.title}
-                            </span>
-                        </div>
-
-                        <p class="mt-3 text-xs text-center text-slate-400 max-w-32 leading-relaxed">
-                            {step.description}
-                        </p>
-                    </div>
-
-                    {index < workflow.length - 1 && (
-                        <svg
-                            class="w-6 h-6 my-5 text-cyan-500"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M12 5v14m-5-5 5 5 5-5"
-                            />
-                        </svg>
-                    )}
-                </>
-            ))}
-        </div>
+              {index < workflow.length - 1 && (
+                <ProjectFlowConnector
+                  orientation="vertical"
+                  durationMs={FLOW_ANIMATION_MS}
+                  delayMs={index * FLOW_STAGGER_MS}
+                />
+              )}
+            </>
+          ))
+        }
+      </ol>
     </div>
+  </div>
 </section>

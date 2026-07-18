@@ -1,135 +1,217 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import { hero, features, flow, technicalHighlights, challenges, futureImprovements, visibleScreenshots } from '@data/projects/portfolioGenerator.ts';
-import ProjectHero from '@components/ProjectComponents/ProjectHero.astro';
-import ProjectShowcase from '@components/ProjectComponents/ProjectShowcase.astro';
-import ProjectSplitSection from '@components/ProjectComponents/ProjectSplitSection.astro';
-import ProjectFlow from '@components/ProjectComponents/ProjectFlow.astro';
-import ProjectGallery from '@components/ProjectComponents/ProjectGallery.astro';
-import ProjectFeatureGrid from '@components/ProjectComponents/ProjectFeatureGrid.astro';
+import { Icon } from "astro-icon/components";
+import Layout from "@layouts/Layout.astro";
+import {
+  hero,
+  features,
+  flow,
+  technicalHighlights,
+  challenges,
+  futureImprovements,
+  visibleScreenshots,
+} from "@data/projects/portfolioGenerator.ts";
+import ProjectHero from "@components/ProjectComponents/ProjectHero.astro";
+import ProjectShowcase from "@components/ProjectComponents/ProjectShowcase.astro";
+import ProjectSplitSection from "@components/ProjectComponents/ProjectSplitSection.astro";
+import ProjectFlow from "@components/ProjectComponents/ProjectFlow.astro";
+import ProjectGallery from "@components/ProjectComponents/ProjectGallery.astro";
+import ProjectFeatureGrid from "@components/ProjectComponents/ProjectFeatureGrid.astro";
 ---
 
 <Layout
-    title='Portfolio Generator | Kevin "Anthony" Felker'
-    description="Case study for Portfolio Generator, a full-stack C#, ASP.NET Core, React, TypeScript, .NET Aspire, Azure, and GitHub Actions application that converts Word resumes into portfolio websites."
-    canonical="https://anthonyfelker.com/projects/portfolio-generator"
-    keywords={[
-        "Portfolio Generator",
-        "C# portfolio generator",
-        "ASP.NET Core project",
-        "React TypeScript project",
-        ".NET Aspire",
-        "Azure App Service",
-        "GitHub Actions",
-        "resume parser",
-        "DocumentFormat OpenXml"
-    ]}
-/>
-    <div class="max-w-5xl mx-auto px-4 py-16 md:py-24">
-        <div class="mb-8">
-            <a href="/projects" class="inline-flex items-center gap-2 text-xs font-mono text-slate-500 hover:text-cyan-400 transition-colors duration-200">
-                <svg class="w-3 h-3 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-                Back to Projects
-            </a>
-        </div>
+  title='Portfolio Generator | Kevin "Anthony" Felker'
+  description="Case study for Portfolio Generator, a full-stack C#, ASP.NET Core, React, TypeScript, .NET Aspire, Azure, and GitHub Actions application that converts Word resumes into portfolio websites."
+  canonical="https://anthonyfelker.com/projects/portfolio-generator"
+  keywords={[
+    "Portfolio Generator",
+    "C# portfolio generator",
+    "ASP.NET Core project",
+    "React TypeScript project",
+    ".NET Aspire",
+    "Azure App Service",
+    "GitHub Actions",
+    "resume parser",
+    "DocumentFormat OpenXml",
+  ]}
+>
+  <div class="mx-auto w-full max-w-375 px-4 sm:px-6 lg:px-8">
+    <div class="relative z-3 pt-28">
+      <a
+        href="/projects"
+        class="inline-flex items-center gap-2 font-mono text-xs
+          tracking-wide text-ink-dim no-underline
+          transition-colors duration-200 hover:text-ice-300
 
-        <!-- Hero Section -->
-        <ProjectHero {...hero} />
-
-        <!-- Portfolio Gallery -->
-        <div id="portfolio-gallery">
-            <!-- Showcase Screenshot -->
-            <ProjectShowcase screenshot={visibleScreenshots[0]} />
-
-            <!-- Project Overview Section -->
-            <ProjectSplitSection
-                title="Project Overview"
-                subtitle="Context & Purpose"
-                borderTop={false}
-            >
-                <div class="text-slate-300 text-sm leading-relaxed space-y-4">
-                    <p>
-                        Portfolio Generator was created to automate the process of transforming a structured
-                        Microsoft Word resume into a responsive portfolio website.
-                    </p>
-
-                    <p>
-                        Building this project gave me experience working with frontend file uploads,
-                        backend document parsing, REST API design, and automated deployment pipelines.
-                    </p>
-                </div>
-            </ProjectSplitSection>
-
-            <!-- Application Workflow Section -->
-            <ProjectFlow {...flow} />
-
-            <!-- Key Features Section -->
-            <ProjectFeatureGrid title="Key Features" subtitle="Application Functionality" features={features} />
-
-            <!-- Gallery Section -->
-            <ProjectGallery screenshots={visibleScreenshots} />
-        </div>
-
-        <!-- Technical Highlights Section -->
-        <ProjectFeatureGrid title="Technical Highlights" subtitle="Technologies Used, " features={technicalHighlights} />
-
-        <!-- Challenges & Solutions Learned Section -->
-        <ProjectSplitSection
-            title="Challenges & Solutions"
-            subtitle="Problem Solving"
-        >
-            <ul class="space-y-3.5 text-xs text-slate-400 list-none pl-0">
-                {challenges.map((item) => (
-                    <li class="flex items-start gap-2.5 leading-relaxed">
-                        <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                        <span><strong>{item.title}</strong> {item.description}</span>
-                    </li>
-                ))}
-            </ul>
-        </ProjectSplitSection>
-
-        <!-- Future Improvements Section -->
-        <ProjectSplitSection
-            title="Future Improvements"
-            subtitle="Planned Enhancements"
-        >
-            <div class="bg-black/20 border border-slate-900 rounded-xl p-6 hover:scale-105 transition-transform duration-300">
-                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {futureImprovements.map((item, index) => (
-                        <li class="flex items-center gap-2 text-xs text-slate-400">
-                            <span class="text-cyan-500 font-mono">
-                                {String(index + 1).padStart(2, '0')}// {/* if end up with more than 10 impovements change to String(index + 1).padStart(3, '0') */}
-                            </span>
-                            {item}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </ProjectSplitSection> 
-
-        <!-- Return to Projects Section -->
-        <section class="text-center border-t border-slate-800/60 pt-12">
-            <a 
-                href="/projects" 
-                class="inline-block border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 text-xs font-mono tracking-wider px-5 py-3 rounded-lg transition-colors duration-200"
-            >
-                Back to Projects
-            </a>
-        </section>
+          focus-visible:rounded-sm focus-visible:outline-none
+          focus-visible:ring-2 focus-visible:ring-ice-400
+          focus-visible:ring-offset-4 focus-visible:ring-offset-bg-deep"
+      >
+        <Icon name="mdi:arrow-left" class="h-4 w-4" />
+        Back to projects
+      </a>
     </div>
+
+    <ProjectHero {...hero} />
+
+    <div id="portfolio-gallery">
+      <ProjectShowcase screenshot={visibleScreenshots[0]} />
+
+      <ProjectSplitSection
+        title="Project overview"
+        subtitle="Context & purpose"
+        borderTop={false}
+      >
+        <div class="space-y-5 leading-relaxed text-ink-dim">
+          <p>
+            Portfolio Generator was created to automate the process of turning
+            a structured Microsoft Word resume into a responsive, multi-page
+            portfolio website.
+          </p>
+
+          <p>
+            The project combines document parsing, REST API development,
+            frontend file handling, live theme previews, generated site output,
+            and automated cloud deployment in one end-to-end workflow.
+          </p>
+
+          <p>
+            Building it gave me practical experience designing a system that
+            crosses multiple application boundaries while keeping each stage
+            understandable, testable, and maintainable.
+          </p>
+        </div>
+      </ProjectSplitSection>
+
+      <ProjectFlow {...flow} />
+
+      <ProjectFeatureGrid
+        title="Key features"
+        subtitle="Application functionality"
+        features={features}
+      />
+
+      <ProjectGallery screenshots={visibleScreenshots} />
+    </div>
+
+    <ProjectFeatureGrid
+      title="Technical highlights"
+      subtitle="Architecture & implementation"
+      features={technicalHighlights}
+    />
+
+    <ProjectSplitSection
+      title="Challenges & solutions"
+      subtitle="Problem solving"
+    >
+      <ul class="space-y-4 text-sm leading-relaxed text-ink-dim">
+        {
+          challenges.map((item) => (
+            <li
+              class="relative pl-5
+                before:absolute before:left-0 before:top-[0.68em]
+                before:h-1 before:w-1 before:rounded-full
+                before:bg-ice-400
+                before:shadow-[0_0_7px_rgba(67,199,255,0.7)]
+                before:content-['']"
+            >
+              <strong class="font-semibold text-ink-soft">
+                {item.title}
+              </strong>{" "}
+              {item.description}
+            </li>
+          ))
+        }
+      </ul>
+    </ProjectSplitSection>
+
+    <ProjectSplitSection
+      title="Future improvements"
+      subtitle="Planned enhancements"
+    >
+      <ol class="grid list-none gap-3 p-0 sm:grid-cols-2">
+        {
+          futureImprovements.map((item, index) => (
+            <li
+              class="flex items-start gap-3 rounded-xl border
+                border-ice-100/10 bg-[rgba(3,20,34,0.56)] p-4"
+            >
+              <span
+                class="shrink-0 font-mono text-xs tracking-wide text-ice-400"
+              >
+                {String(index + 1).padStart(2, "0")}
+              </span>
+
+              <span class="text-sm leading-relaxed text-ink-dim">
+                {item}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </ProjectSplitSection>
+
+    <section
+      class="reveal-target relative flex min-h-[58svh]
+        items-center justify-center py-24 text-center
+
+        before:absolute before:inset-x-0 before:top-0 before:h-px
+        before:bg-linear-to-r before:from-transparent
+        before:via-ice-100/10 before:to-transparent before:content-['']"
+    >
+      <div class="reveal relative z-3 w-full max-w-170">
+        <p
+          class="mb-3 font-mono text-xs tracking-[0.13em]
+            text-ice-400 before:text-ice-800 before:content-['//_']"
+        >
+          Continue exploring
+        </p>
+
+        <h2
+          class="mb-5 font-display text-[clamp(2rem,5vw,3.5rem)]
+            font-bold leading-[1.08] tracking-[-0.04em] text-ink"
+        >
+          Explore more
+          <span class="ml-[0.22em] text-ice-400">engineering projects.</span>
+        </h2>
+
+        <p
+          class="mx-auto mb-7 max-w-[54ch]
+            text-[clamp(0.98rem,1.5vw,1.08rem)] text-ink-dim"
+        >
+          Browse additional full-stack applications, production websites, and
+          software projects covering APIs, databases, testing, and deployment.
+        </p>
+
+        <a
+          href="/projects"
+          class="inline-flex min-h-12 items-center justify-center gap-2.5
+            rounded-xl border border-ice-300/50
+            bg-linear-to-br from-[rgba(21,133,190,0.82)]
+            to-[rgba(23,92,135,0.72)] px-5
+            font-mono text-sm font-semibold tracking-wide
+            text-ice-50 no-underline
+            shadow-[0_0_32px_rgba(42,178,255,0.2)]
+            transition-all duration-150
+            hover:-translate-y-0.5 hover:border-ice-200
+            hover:shadow-[0_0_42px_rgba(86,211,255,0.3)]"
+        >
+          Back to projects
+          <Icon name="mdi:arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+    </section>
+  </div>
 </Layout>
 
 <script>
-    import PhotoSwipeLightbox from 'photoswipe/lightbox';
-    import 'photoswipe/style.css';
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
 
-    const lightbox = new PhotoSwipeLightbox({
-        gallery: '#portfolio-gallery',
-        children: 'a',
-        pswpModule: () => import('photoswipe')
-    });
-    
-    lightbox.init();
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: "#portfolio-gallery",
+    children: "a[data-pswp-width]",
+    pswpModule: () => import("photoswipe"),
+  });
+
+  lightbox.init();
 </script>

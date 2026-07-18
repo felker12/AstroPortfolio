@@ -1,240 +1,196 @@
 ---
-import Layout from '@layouts/Layout.astro';
-
-//Structured projects array
-const projects = [
-  {
-    title: "Portfolio Generator",
-    subtitle: "Full-Stack Document Automation Platform",
-    tags: ["C#", "React", "TypeScript", ".NET Aspire", "Minimal API", "Azure", "GitHub Actions"],
-    description:
-      "A full-stack application that converts structured resume data (.docx format) into multi-page portfolio websites with selectable themes and preview capabilities.",
-    features: [
-      "Built RESTful API endpoints using ASP.NET Core Minimal API to handle document parsing and structured data transformation.",
-      "Developed React + TypeScript frontend with multi-step upload workflow and live preview rendering using iframe-based isolation.",
-      "Implemented theme system supporting multiple CSS layouts for generated portfolio output.",
-      "Configured GitHub Actions CI/CD pipeline to automate build, deployment, and Azure App Service publishing.",
-      "Utilized .NET Aspire for local orchestration and cloud-ready service structure."
-    ],
-    links: {
-      github: "https://github.com/felker12/PortfolioSiteCreator",
-      demo: "https://portfoliocreator-hwemcghrh5axesey.canadacentral-01.azurewebsites.net/",
-      caseStudy: "/projects/portfolio-generator"
-    }
-  },
-
-  {
-    title: "Time Punch Management System",
-    subtitle: "Workforce Attendance Tracking Application",
-    tags: ["C#", "React", "TypeScript", "ASP.NET Core", ".NET Aspire", "SQL Server", "Azure"],
-    description:
-      "A full-stack employee time tracking system with authentication, role-based access control, and administrative reporting features.",
-    features: [
-      "Designed REST API for employee clock-in/clock-out and attendance tracking workflows using ASP.NET Core.",
-      "Implemented role-based authentication and authorization for employee and admin access levels.",
-      "Modeled SQL Server database schema with relational structure for users, shifts, and time entries.",
-      "Developed React dashboard interfaces for employee time tracking and administrative reporting.",
-      "Integrated CI/CD workflows using GitHub Actions and deployed to Azure App Service."
-    ],
-    links: {
-      github: "https://github.com/felker12/TimePunchSite",
-      demo: null,
-      caseStudy: "/projects/time-punch"
-    }
-  },
-
-  {
-    title: "Modular 2D RPG Engine",
-    subtitle: "Game Engine Architecture Project",
-    tags: ["C#", "MonoGame", "xUnit.net", "XML", "WinForms"],
-    description:
-      "A modular 2D game engine built in C# with separated systems for rendering, input handling, and game logic, focused on scalability and maintainability.",
-    features: [
-      "Designed modular architecture separating rendering, input processing, and game state management.",
-      "Built reusable systems for animation, combat, and tile-based map handling.",
-      "Created WinForms-based tool for content creation and asset management workflows.",
-      "Implemented XML-based serialization system for game state and asset persistence.",
-      "Added unit tests using xUnit to validate core engine functionality and prevent regressions."
-    ],
-    links: {
-      github: "https://github.com/felker12/SkeletonsAdventure",
-      demo: null,
-      caseStudy: "/projects/rpg-engine"
-    }
-  },
-
-  {
-    title: "Legacy Personal Portfolio",
-    subtitle: "CI/CD & Deployment Automation Project",
-    tags: ["C#", "ASP.NET Framework 4.8", "Azure", "GitHub Actions"],
-    description:
-      "A legacy ASP.NET Framework portfolio application enhanced with modern CI/CD workflows and automated deployment pipelines.",
-    features: [
-      "Configured GitHub Actions pipeline for automated build and deployment workflows.",
-      "Deployed application to Azure App Service with continuous delivery integration.",
-      "Maintained and updated legacy ASP.NET Framework application structure.",
-      "Managed hosting configuration and deployment validation processes."
-    ],
-    links: {
-      github: "https://github.com/felker12/PortfolioWebsite",
-      demo: "https://portfoliowebsite20250804050941-fxffbqhbcmdqbgg9.canadacentral-01.azurewebsites.net/",
-      caseStudy: "/projects/legacy-portfolio"
-    }
-  }
-];
+import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import ProjectShowcase from "@components/ProjectShowcase.astro";
+import { projects } from "@data/pages/Projects";
 ---
 
 <Layout
-    title='Projects | Kevin "Anthony" Felker'
-    description="Explore software development projects by Kevin Anthony Felker, including full-stack .NET applications, React and TypeScript frontends, Astro websites, CI/CD workflows, Azure deployments, and a custom C# MonoGame RPG engine."
-    canonical="https://anthonyfelker.com/projects"
-    keywords={[
-        "Kevin Anthony Felker projects",
-        "Anthony Felker portfolio projects",
-        "Full Stack Developer projects",
-        "C# projects",
-        ".NET projects",
-        "ASP.NET Core projects",
-        "React TypeScript projects",
-        "Azure deployment projects",
-        "GitHub Actions CI/CD",
-        "MonoGame RPG engine"
-    ]}
+  title='Projects | Kevin "Anthony" Felker'
+  description="Explore software development projects by Kevin Anthony Felker, including full-stack .NET applications, React and TypeScript frontends, Astro websites, CI/CD workflows, Azure deployments, and a custom C# MonoGame RPG engine."
+  canonical="https://anthonyfelker.com/projects"
+  keywords={[
+    "Kevin Anthony Felker projects",
+    "Anthony Felker portfolio projects",
+    "Full Stack Developer projects",
+    "C# projects",
+    ".NET projects",
+    "ASP.NET Core projects",
+    "React TypeScript projects",
+    "Azure deployment projects",
+    "GitHub Actions CI/CD",
+    "MonoGame RPG engine",
+  ]}
 >
-    <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
-        
-        <!-- Page Title & Header Context -->
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-light text-white mb-4 tracking-tight">
-                Featured <span class="text-cyan-400 font-normal">Projects</span>
-            </h1>
-            <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
-                A selection of full-stack applications, development projects, and deployment workflows highlighting practical problem solving and clean implementation.
-            </p>
-        </div>
+  <!-- Page introduction -->
+  <section
+    class="relative mx-auto flex min-h-[72svh] max-w-375 items-center
+      px-4 py-28 sm:px-[clamp(1.25rem,6vw,7rem)]
 
-        <!-- Projects Grid Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            {projects.map((project) => (
-                <div class="flex flex-col bg-black/50 border border-slate-800/90 shadow-xl 
-                            rounded-xl backdrop-blur-sm p-6 md:p-8 justify-between min-h-full 
-                            hover:border-slate-700/60 hover:-translate-y-1 transition-all duration-300 ease-out">
-                    <div>
-                        <!-- Project Headers -->
-                        <div class="mb-4">
-                            <h2 class="text-2xl font-semibold text-white tracking-tight">
-                                {project.links.caseStudy ? (
-                                    <a 
-                                        href={project.links.caseStudy}
-                                        class="hover:text-cyan-400 transition-colors duration-200"
-                                    >
-                                        {project.title}
-                                    </a>
-                                ) : (
-                                    project.title
-                                )}
-                            </h2>
-                            <p class="text-xs text-cyan-400 font-mono tracking-wider mt-1 uppercase">{project.subtitle}</p>
-                        </div>
+      before:absolute before:bottom-[12%] before:left-3 before:top-[12%]
+      before:w-px before:bg-linear-to-b before:from-transparent
+      before:via-ice-100/20 before:to-transparent before:content-['']
+      sm:before:left-[clamp(0.75rem,3vw,2rem)]"
+  >
+    <div class="relative z-3 w-full max-w-220">
+      <p
+        class="mb-4 font-mono text-sm tracking-[0.12em] text-ice-400
+          before:mr-1 before:text-ice-800 before:content-['<']
+          after:ml-1 after:text-ice-800 after:content-['/>']"
+      >
+        Selected projects
+      </p>
 
-                        <!-- Technical Tags Cloud -->
-                        <div class="flex flex-wrap gap-1.5 mb-6">
-                            {project.tags.map((tag) => (
-                                <span class="bg-slate-950/60 border border-slate-800/80 text-slate-300 font-mono text-[11px] px-2.5 py-0.5 rounded">
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
+      <h1
+        class="m-0 max-w-[15ch] text-balance font-display
+          text-[clamp(2.8rem,7vw,6rem)] font-extrabold leading-[0.98]
+          tracking-[-0.055em] text-ink"
+      >
+        Software built around
+        <span
+          class="ml-[0.22em] text-ice-400
+            drop-shadow-[0_0_28px_rgba(67,199,255,0.28)]"
+        >
+          real problems.
+        </span>
+      </h1>
 
-                        <!-- Core Project Narrative -->
-                        <p class="text-slate-300 text-md leading-relaxed mb-6">
-                            {project.description}
-                        </p>
+      <p
+        class="mt-6 max-w-[62ch]
+          text-[clamp(1rem,1.8vw,1.18rem)]
+          leading-relaxed text-ink-dim"
+      >
+        A selection of full-stack applications, development tools, production
+        websites, and engineering projects that demonstrate how I approach
+        architecture, implementation, testing, deployment, and long-term
+        maintainability.
+      </p>
 
-                        <!-- Engineering Key Highlights Bullet Points -->
-                        <div class="border-t border-slate-800/60 pt-5 mt-2 mb-8">
-                            <h3 class="text-md font-semibold text-slate-400 tracking-wider uppercase mb-3 flex items-center gap-1.5">
-                                <span class="w-1 h-3 bg-cyan-500 rounded-sm"></span> Technical Highlights
-                            </h3>
-                            <ul class="space-y-2.5 text-xs text-slate-400 list-none pl-0">
-                                {project.features.map((feature) => (
-                                    <li class="flex items-start gap-2.5 leading-relaxed">
-                                        <span class="text-cyan-500 text-md leading-none mt-0.5">▪</span>
-                                        <span>{feature}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href="#project-list"
+          class="inline-flex min-h-12 items-center justify-center gap-2.5
+            rounded-xl border border-ice-300/50
+            bg-linear-to-br from-[rgba(21,133,190,0.82)]
+            to-[rgba(23,92,135,0.72)] px-5
+            font-mono text-sm font-semibold tracking-wide
+            text-ice-50 no-underline
+            shadow-[0_0_32px_rgba(42,178,255,0.2)]
+            transition-all duration-150
+            hover:-translate-y-0.5 hover:border-ice-200
+            hover:shadow-[0_0_42px_rgba(86,211,255,0.3)]"
+        >
+          Explore projects
+          <span aria-hidden="true">↓</span>
+        </a>
 
-                    <!-- Action Link Routing Layer -->
-                    <div class="flex flex-wrap gap-4 border-t border-slate-800/40 pt-4 mt-auto">
-                        {project.links.caseStudy && (
-                            <a
-                                href={project.links.caseStudy}
-                                class="flex-1 inline-flex items-center justify-center gap-2
-                                border border-cyan-500/30 hover:bg-cyan-500/10
-                                text-cyan-400 text-xs font-medium px-4 py-2.5 rounded-lg
-                                transition-all duration-200 text-center"
-                            >
-                                View Case Study
-
-                                <svg
-                                    class="w-3 h-3 stroke-current"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="2"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M9 5l7 7-7 7"
-                                    />
-                                </svg>
-                            </a>
-                        )}
-
-                        {project.links.demo && (
-                            <a 
-                                href={project.links.demo}
-                                target="_blank"
-                                rel="noopener noreferrer" 
-                                class="flex-1 inline-flex items-center justify-center gap-1.5 bg-cyan-700 hover:bg-cyan-600 hover:scale-[1.03] text-white text-xs font-medium px-4 py-2.5 rounded-lg transition-all duration-300 text-center shadow-md shadow-cyan-950/20"
-                            >
-                                Launch Application
-                                <svg class="w-3 h-3 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                                </svg>
-                            </a>
-                        )}
-
-                        {project.links.github && (
-                            <a 
-                                href={project.links.github} 
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="flex-1 inline-flex items-center justify-center gap-2 border border-slate-700 hover:border-slate-500 hover:bg-slate-900/50 text-slate-200 text-xs font-medium px-4 py-2.5 rounded-lg transition-all duration-200 text-center"
-                            >
-                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z" />
-                                </svg>
-                                Code Repository
-                            </a>
-                        )}
-                    </div>
-                </div>
-            ))}
-        </div>
-
-        <!-- Contact Bridge -->
-        <div class="mt-20 text-center border-t border-slate-800/60 pt-16">
-            <h3 class="text-xl font-light text-slate-300 mb-4">Want to dive deeper into the code architecture?</h3>
-            <a 
-                href="/contact" 
-                class="inline-block border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 text-xs font-mono tracking-wider px-5 py-3 rounded-lg transition-colors duration-200"
-            >
-                GET_IN_TOUCH.exe
-            </a>
-        </div>
+        <a
+          href="https://github.com/felker12"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex min-h-12 items-center justify-center gap-2.5
+            rounded-xl border border-ice-100/20
+            bg-[rgba(4,25,42,0.52)] px-5
+            font-mono text-sm font-semibold tracking-wide
+            text-ice-200 no-underline backdrop-blur-md
+            transition-all duration-150
+            hover:-translate-y-0.5 hover:border-ice-300/50
+            hover:bg-[rgba(8,48,75,0.66)] hover:text-ice-50"
+        >
+          <Icon name="mdi:github" class="h-5 w-5" />
+          GitHub profile
+        </a>
+      </div>
     </div>
+  </section>
+
+  <!-- Project list -->
+  <section
+    id="project-list"
+    class="relative mx-auto max-w-375 scroll-mt-24
+      px-4 py-24 sm:px-[clamp(1.25rem,6vw,7rem)]"
+  >
+    <div class="mb-12 max-w-190">
+      <p
+        class="mb-3 font-mono text-xs tracking-[0.12em]
+          text-ice-400 before:text-ice-800 before:content-['//_']"
+      >
+        Project archive
+      </p>
+
+      <h2
+        class="font-display text-[clamp(2rem,5vw,3.5rem)]
+          font-bold leading-[1.08] tracking-[-0.04em] text-ink"
+      >
+        From working prototypes to
+        <span class="ml-[0.22em] text-ice-400">deployed systems.</span>
+      </h2>
+
+      <p class="mt-5 max-w-[62ch] leading-relaxed text-ink-dim">
+        Each project reflects a different part of my experience, including API
+        development, frontend architecture, relational databases, testing,
+        deployment automation, production support, and reusable system design.
+      </p>
+    </div>
+
+    <div class="space-y-30">
+        {
+            projects.map((project, index) => (
+            <ProjectShowcase
+                project={project}
+                index={index}
+            />
+            ))
+        }
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section
+    class="reveal-target relative flex min-h-[80svh] items-center
+      justify-center px-4 py-28 text-center
+      sm:px-[clamp(1.25rem,6vw,7rem)]"
+  >
+    <div class="reveal relative z-3 w-full max-w-170">
+      <p
+        class="mb-3 font-mono text-xs tracking-[0.13em]
+          text-ice-400 before:text-ice-800 before:content-['//_']"
+      >
+        Have a project or opportunity?
+      </p>
+
+      <h2
+        class="mb-5 font-display text-[clamp(2rem,5vw,3.5rem)]
+          font-bold leading-[1.08] tracking-[-0.04em] text-ink"
+      >
+        Let’s discuss what needs to become
+        <span class="ml-[0.22em] text-ice-400">working software.</span>
+      </h2>
+
+      <p
+        class="mx-auto mb-7 max-w-[54ch]
+          text-[clamp(0.98rem,1.5vw,1.08rem)] text-ink-dim"
+      >
+        Reach out about a software engineering role, production website,
+        full-stack application, or technical problem that needs a dependable
+        path forward.
+      </p>
+
+      <a
+        href="/contact"
+        class="inline-flex min-h-12 items-center justify-center gap-2.5
+          rounded-xl border border-ice-300/50
+          bg-linear-to-br from-[rgba(21,133,190,0.82)]
+          to-[rgba(23,92,135,0.72)] px-5
+          font-mono text-sm font-semibold tracking-wide
+          text-ice-50 no-underline
+          shadow-[0_0_32px_rgba(42,178,255,0.2)]
+          transition-all duration-150
+          hover:-translate-y-0.5 hover:border-ice-200
+          hover:shadow-[0_0_42px_rgba(86,211,255,0.3)]"
+      >
+        Start a conversationy
+      </a>
+    </div>
+  </section>
 </Layout>

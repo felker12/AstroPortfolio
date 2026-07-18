@@ -72,26 +72,6 @@ const { pathname, projectLinks } = Astro.props;
                 ]}
               >
                 <span>{project.label}</span>
-
-                <svg
-                  class:list={[
-                    `h-3.5 w-3.5 shrink-0 stroke-current
-                    transition-[transform,opacity] duration-200`,
-                    projectActive
-                      ? "translate-x-0 opacity-100"
-                      : "-translate-x-1 opacity-0 group-hover/project:translate-x-0 group-hover/project:opacity-100",
-                  ]}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="2"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M5 12h14m-6-6 6 6-6 6"
-                  />
-                </svg>
               </a>
             </li>
           );

@@ -1,0 +1,204 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  orientation: "horizontal" | "vertical";
+  durationMs: number;
+  delayMs: number;
+}
+
+const {
+  orientation,
+  durationMs,
+  delayMs,
+} = Astro.props as Props;
+
+const isHorizontal = orientation === "horizontal";
+const iconName = isHorizontal
+  ? "mdi:arrow-right"
+  : "mdi:arrow-down";
+---
+
+<li
+  class:list={[
+    isHorizontal
+      ? "flex min-w-20 flex-[0.58] items-center justify-center px-1 pt-11"
+      : "relative my-5 flex h-16 items-center justify-center",
+  ]}
+  aria-hidden="true"
+>
+  <div
+    class:list={[
+      "workflow-connector relative",
+      isHorizontal
+        ? "workflow-connector--horizontal flex w-full items-center"
+        : "workflow-connector--vertical flex h-full w-8 justify-center",
+    ]}
+    style={`--flow-duration: ${durationMs}ms; --flow-delay: ${delayMs}ms;`}
+  >
+    <!-- Faint inactive path -->
+    <span
+      class:list={[
+        "absolute bg-ice-800/10",
+        isHorizontal
+          ? "inset-x-0 h-px"
+          : "inset-y-0 w-px",
+      ]}
+    ></span>
+
+    <!--
+      This single animated wrapper draws the line and carries the arrow
+      at its leading edge, which keeps both perfectly synchronized.
+    -->
+    <span
+      class:list={[
+        "workflow-draw absolute",
+        isHorizontal
+          ? `left-0 h-0.5
+            bg-linear-to-r from-ice-500/30 via-ice-300 to-ice-400`
+          : `top-0 w-0.5
+            bg-linear-to-b from-ice-500/30 via-ice-300 to-ice-400`,
+      ]}
+    >
+      <Icon
+        name={iconName}
+        class:list={[
+          `workflow-arrow absolute h-7 w-7 text-ice-400
+          drop-shadow-[0_0_9px_rgba(67,199,255,0.72)]`,
+          isHorizontal
+            ? "right-0 top-1/2 -translate-y-1/2 translate-x-1/2"
+            : "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2",
+        ]}
+      />
+    </span>
+  </div>
+</li>
+
+<style>
+  @keyframes draw-horizontal {
+    0% {
+      width: 0;
+      opacity: 0;
+    }
+
+    10% {
+      width: 0;
+      opacity: 1;
+    }
+
+    82% {
+      width: 100%;
+      opacity: 1;
+    }
+
+    94% {
+      width: 100%;
+      opacity: 1;
+    }
+
+    100% {
+      width: 100%;
+      opacity: 0;
+    }
+  }
+
+  @keyframes draw-vertical {
+    0% {
+      height: 0;
+      opacity: 0;
+    }
+
+    10% {
+      height: 0;
+      opacity: 1;
+    }
+
+    82% {
+      height: 100%;
+      opacity: 1;
+    }
+
+    94% {
+      height: 100%;
+      opacity: 1;
+    }
+
+    100% {
+      height: 100%;
+      opacity: 0;
+    }
+  }
+
+  @keyframes arrow-energy {
+    0%,
+    100% {
+      opacity: 0;
+      scale: 0.82;
+      filter: brightness(0.85);
+    }
+
+    10% {
+      opacity: 1;
+    }
+
+    48% {
+      opacity: 1;
+      scale: 1.08;
+      filter: brightness(1.35);
+    }
+
+    94% {
+      opacity: 1;
+      scale: 1;
+      filter: brightness(1.1);
+    }
+  }
+
+  .workflow-draw,
+  .workflow-arrow {
+    animation-duration: var(--flow-duration);
+    animation-delay: var(--flow-delay);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+  }
+
+  .workflow-draw {
+    box-shadow: 0 0 9px rgba(67, 199, 255, 0.5);
+  }
+
+  .workflow-connector--horizontal .workflow-draw {
+    width: 0;
+    animation-name: draw-horizontal;
+  }
+
+  .workflow-connector--vertical .workflow-draw {
+    height: 0;
+    animation-name: draw-vertical;
+  }
+
+  .workflow-arrow {
+    animation-name: arrow-energy;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .workflow-draw,
+    .workflow-arrow {
+      animation: none;
+      opacity: 1;
+    }
+
+    .workflow-connector--horizontal .workflow-draw {
+      width: 100%;
+    }
+
+    .workflow-connector--vertical .workflow-draw {
+      height: 100%;
+    }
+
+    .workflow-arrow {
+      scale: 1;
+      filter: none;
+    }
+  }
+</style>
