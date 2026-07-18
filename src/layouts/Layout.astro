@@ -1,11 +1,10 @@
 ---
-import NavBar from "@components/NavBar.astro";
-import "@styles/global.css";
-
 import "@fontsource-variable/inter/wght.css";
 import "@fontsource-variable/jetbrains-mono/wght.css";
 import "@fontsource-variable/space-grotesk/wght.css";
+import "@styles/global.css";
 
+import NavBar from "@components/NavBar.astro";
 import LoadingScreen from "@components/LoadingScreen.astro";
 import Footer from "@components/Footer.astro";
 import BackgroundCanvas from "@components/BackgroundCanvas.astro";
@@ -24,13 +23,13 @@ const {
   title = 'Kevin "Anthony" Felker | Full-Stack Developer',
   description = 'Portfolio of Kevin "Anthony" Felker, a full-stack developer experienced with C#, ASP.NET Core, React, Astro, SQL Server, Azure, GitHub Actions, and production website development.',
   canonical = Astro.url.href,
-  image = '/og-image.png',
+  image = "/og-image.png",
   keywords = [],
   schema,
-  backgroundMode = "subtle"
+  backgroundMode = "subtle",
 } = Astro.props;
 
-const siteName = 'Kevin Anthony Felker Portfolio';
+const siteName = "Kevin Anthony Felker Portfolio";
 const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
 ---
 
@@ -41,7 +40,7 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
 
     <meta name="author" content='Kevin "Anthony" Felker' />
@@ -51,7 +50,6 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
       <meta name="keywords" content={keywords.join(", ")} />
     )}
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={title} />
@@ -59,13 +57,11 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={absoluteImage} />
 
-    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={absoluteImage} />
 
-    <!-- Local SEO -->
     <meta name="geo.region" content="US-IN" />
     <meta name="geo.placename" content="Terre Haute, Indiana" />
 
@@ -80,26 +76,29 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
 
   <body class="flex min-h-screen flex-col antialiased">
     <LoadingScreen />
+    <BackgroundCanvas mode={backgroundMode} />
 
-    
-    <BackgroundCanvas mode= {backgroundMode} />
-
-    <!-- Scroll progress -->
-    <div class="progress fixed inset-x-0 top-0 z-30 h-0.5 bg-ice-200/6" aria-hidden="true">
-      <div class="progress__bar h-full w-0 origin-left 
-      bg-linear-to-r from-ice-700 via-ice-400 to-ice-50 shadow-[0_0_15px_rgba(77,205,255,0.8)]"></div>
+    <div
+      class="progress fixed inset-x-0 top-0 z-30 h-0.5 bg-ice-200/6"
+      aria-hidden="true"
+    >
+      <div
+        class="progress__bar h-full w-0 origin-left
+          bg-linear-to-r from-ice-700 via-ice-400 to-ice-50
+          shadow-[0_0_15px_rgba(77,205,255,0.8)]"
+      ></div>
     </div>
 
-    <!-- Fixed frame corners -->
     <div
       id="scroll-indicator"
-      class="fixed inset-0 z-6 pointer-events-none transition-opacity duration-300"
+      class="pointer-events-none fixed inset-0 z-6
+        transition-opacity duration-300"
       aria-hidden="true"
     >
       <span
         class="absolute bottom-6 right-6 text-right
-        font-mono text-[0.8rem] uppercase tracking-[0.11em]
-        text-ice-400 max-sm:hidden"
+          font-mono text-[0.8rem] uppercase tracking-[0.11em]
+          text-ice-400 max-sm:hidden"
       >
         scroll ↓
       </span>
@@ -107,26 +106,87 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
 
     <NavBar />
 
-    <main class="relative grow z-3">
+    <main class="relative z-3 grow">
       <div class="mx-auto w-full max-w-375 px-4 sm:px-6 lg:px-8">
         <slot />
       </div>
     </main>
-    
+
     <Footer />
 
     <script>
-      import { initAurora } from "../scripts/aurora/index.js";
-      import { initUI } from "../scripts/ui/index.js";
+      type BrowserWindow = Window &
+        typeof globalThis & {
+          requestIdleCallback?: (
+            callback: IdleRequestCallback,
+            options?: IdleRequestOptions
+          ) => number;
+        };
 
-      function initializePage() {
+
+      let auroraInstance:
+        | Awaited<ReturnType<
+            typeof import("../scripts/aurora/index.js")["initAurora"]
+          >>
+        | undefined;
+
+      function afterInitialPaint(callback: () => void) {
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(callback);
+        });
+      }
+
+      async function initializeUI() {
+        const { initUI } = await import("../scripts/ui/index.js");
         initUI();
+      }
+
+      async function initializeAurora() {
+        const canvas =
+          document.querySelector<HTMLCanvasElement>("#aurora-canvas");
+
+        if (!canvas || document.hidden) return;
 
         try {
-          initAurora();
+          const { initAurora } =
+            await import("../scripts/aurora/index.js");
+
+          auroraInstance = initAurora();
         } catch (error) {
           console.error("Aurora initialization failed:", error);
         }
+      }
+
+      function scheduleAurora() {
+        const start = () => void initializeAurora();
+        const browserWindow = window as BrowserWindow;
+
+        if (typeof browserWindow.requestIdleCallback === "function") {
+          browserWindow.requestIdleCallback(start, {
+            timeout: 1200,
+          });
+        } else {
+          globalThis.setTimeout(start, 180);
+        }
+      }
+
+      function initializePage() {
+        afterInitialPaint(() => {
+          void initializeUI();
+        });
+
+        if (document.readyState === "complete") {
+          scheduleAurora();
+        } else {
+          window.addEventListener("load", scheduleAurora, {
+            once: true,
+          });
+        }
+      }
+
+      function destroyAurora() {
+        auroraInstance?.destroy?.();
+        auroraInstance = undefined;
       }
 
       if (document.readyState === "loading") {
@@ -136,6 +196,10 @@ const absoluteImage = new URL(image, Astro.site ?? Astro.url).href;
       } else {
         initializePage();
       }
+
+      window.addEventListener("pagehide", destroyAurora, {
+        once: true,
+      });
     </script>
   </body>
 </html>
