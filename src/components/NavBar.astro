@@ -45,6 +45,9 @@ const pathname = Astro.url.pathname;
       type="checkbox"
       id="menu-toggle"
       class="peer sr-only"
+      aria-label="Toggle navigation menu"
+      aria-controls="primary-navigation-links"
+      aria-expanded="false"
     />
 
     <label
@@ -70,6 +73,7 @@ const pathname = Astro.url.pathname;
 
     <!-- Navigation links -->
     <ul
+      id="primary-navigation-links"
       class="absolute inset-x-0 top-full flex max-h-0 w-full flex-col
         overflow-hidden border-b border-transparent
         bg-[rgba(1,9,17,0.94)] p-0 opacity-0 backdrop-blur-xl
@@ -156,7 +160,9 @@ const pathname = Astro.url.pathname;
   };
 
   updateNavbar();
-  window.addEventListener("scroll", updateNavbar, { passive: true });
+  window.addEventListener("scroll", updateNavbar, {
+    passive: true,
+  });
 
   const menuToggle =
     document.querySelector<HTMLInputElement>("#menu-toggle");
@@ -164,11 +170,24 @@ const pathname = Astro.url.pathname;
   const navLinks =
     document.querySelectorAll<HTMLAnchorElement>("header nav a");
 
+  const updateMenuState = () => {
+    if (!menuToggle) return;
+
+    menuToggle.setAttribute(
+      "aria-expanded",
+      String(menuToggle.checked)
+    );
+  };
+
+  menuToggle?.addEventListener("change", updateMenuState);
+  updateMenuState();
+
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      if (menuToggle) {
-        menuToggle.checked = false;
-      }
+      if (!menuToggle) return;
+
+      menuToggle.checked = false;
+      updateMenuState();
     });
   });
 </script>

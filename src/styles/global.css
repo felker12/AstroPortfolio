@@ -20,9 +20,24 @@
   --color-bg: #020b14;
   --color-bg-deep: #01060d;
 
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-sans:
+    "Inter Variable",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  --font-mono:
+    "JetBrains Mono Variable",
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+
+  --font-display:
+    "Space Grotesk Variable",
+    "Inter Variable",
+    system-ui,
+    sans-serif;
 }
 
 @keyframes status-pulse {
