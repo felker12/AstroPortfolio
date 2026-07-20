@@ -1,5 +1,6 @@
 ---
 import { type NavLink } from "@data/navbar/nav.ts";
+import { Icon } from "astro-icon/components";
 
 interface Props {
   href: string;
@@ -53,20 +54,7 @@ const hasChildren = (children?.length ?? 0) > 0;
   {label}
 
   {hasChildren && (
-    <svg
-      class="h-3 w-3 stroke-current transition-transform duration-200
-        group-hover:rotate-180
-        group-focus-within:rotate-180"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="2.5"
-      aria-hidden="true"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="m19.5 8.25-7.5 7.5-7.5-7.5"
-      />
-    </svg>
+    <Icon name="mdi:chevron-down" size={16} color="currentColor" class="transition-transform duration-200 hidden md:block
+        group-hover:rotate-180 group-focus-within:rotate-180"/>
   )}
 </a>
