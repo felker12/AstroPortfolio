@@ -37,7 +37,7 @@ const pathname = Astro.url.pathname;
           max-sm:text-sm"
       >
         Kevin "Anthony" Felker
-      </span> 
+      </span>
     </a>
 
     <!-- Mobile menu toggle -->
@@ -60,15 +60,9 @@ const pathname = Astro.url.pathname;
         peer-checked:[&>span:nth-child(3)]:-translate-y-2
         peer-checked:[&>span:nth-child(3)]:-rotate-45"
     >
-      <span
-        class="h-0.5 w-6 bg-white transition-all duration-300"
-      ></span>
-      <span
-        class="h-0.5 w-6 bg-white transition-all duration-300"
-      ></span>
-      <span
-        class="h-0.5 w-6 bg-white transition-all duration-300"
-      ></span>
+      <span class="h-0.5 w-6 bg-white transition-all duration-300"></span>
+      <span class="h-0.5 w-6 bg-white transition-all duration-300"></span>
+      <span class="h-0.5 w-6 bg-white transition-all duration-300"></span>
     </label>
 
     <!-- Navigation links -->
@@ -104,7 +98,7 @@ const pathname = Astro.url.pathname;
                   aria-label={link.ariaLabel}
                   aria-current={isActive ? "page" : undefined}
                   class:list={[
-                    `relative inline-flex w-full items-center justify-center gap-2
+                    `relative inline-flex items-center justify-center gap-2
                     overflow-hidden rounded-lg border px-4 py-2.5
                     font-mono text-xs tracking-wide no-underline
                     backdrop-blur-md transition-all duration-150
@@ -132,10 +126,7 @@ const pathname = Astro.url.pathname;
                   {link.label}
                 </a>
               ) : (
-                <NavItem
-                  {...link}
-                  isActive={isActive}
-                />
+                <NavItem {...link} isActive={isActive} />
               )}
 
               {hasChildren && (
@@ -164,19 +155,14 @@ const pathname = Astro.url.pathname;
     passive: true,
   });
 
-  const menuToggle =
-    document.querySelector<HTMLInputElement>("#menu-toggle");
+  const menuToggle = document.querySelector<HTMLInputElement>("#menu-toggle");
 
-  const navLinks =
-    document.querySelectorAll<HTMLAnchorElement>("header nav a");
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>("header nav a");
 
   const updateMenuState = () => {
     if (!menuToggle) return;
 
-    menuToggle.setAttribute(
-      "aria-expanded",
-      String(menuToggle.checked)
-    );
+    menuToggle.setAttribute("aria-expanded", String(menuToggle.checked));
   };
 
   menuToggle?.addEventListener("change", updateMenuState);
